@@ -79,7 +79,7 @@ class UserInputRestControllerTest {
         View expectedView = new View();
         expectedView.setOwner("user");
         expectedView.setMessage(askNumber);
-        expectedView.setTasks(tasks);
+        expectedView.setTasksAsList(tasks);
 
         StringBuilder stringBuilder = new StringBuilder();
         for (String s : expectedView.getArrTasks()) {
