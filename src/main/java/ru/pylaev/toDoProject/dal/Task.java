@@ -5,19 +5,69 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
 
-// Anemic or Rich
 @Entity
 public class Task implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
 
-    public String owner;
-    public String text;
-    public String date;
-    public String status;
+    private String owner = null;
+    private String text = null;
+    private String date = null;
+    private String status;
+
+    public Task ( ) {
+    }
+
+    public Task (String owner, String text, Date date, String status) {
+        this.id = 0;
+        this.owner = owner;
+        this.text = text;
+        this.date = String.valueOf(date).substring(0,16);
+        this.status = status;
+    }
+
+    public Task (String id, String owner, String text, String date, String status) {
+        this.id = Integer.parseInt(id);
+        this.owner = owner;
+        this.text = text;
+        this.date = date.substring(0,16);
+        this.status = status;
+    }
+
+    public void setStatus (String status) { this.status = status; }
+
+    public long getId ( ) { return id; }
+
+    public String getStatus ( ) {
+        return status;
+    }
 
     @Override
     public String toString () { return  text + ' ' + date + ' ' + status; }
+
+    @Override
+    public boolean equals (Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        if (!Objects.equals(owner, task.owner)) return false;
+        if (!Objects.equals(text, task.text)) return false;
+        if (!Objects.equals(date, task.date)) return false;
+        return Objects.equals(status, task.status);
+    }
+
+    @Override
+    public int hashCode ( ) {
+        int result = owner != null ? owner.hashCode() : 0;
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
 }
+

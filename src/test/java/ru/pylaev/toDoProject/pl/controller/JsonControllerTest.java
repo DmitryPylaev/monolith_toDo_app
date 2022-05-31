@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(MockitoJUnitRunner.class)
-class UserInputRestControllerTest {
+class JsonControllerTest {
 
     private static final String askNumber = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
 
