@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class TaskRepository {
-    private static final String[] tasksStates = new String[] {
+    private static final String[] TASKS_STATES = new String[] {
             ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("statusWait"),
             ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("statusDone"),
             ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("statusArch")
@@ -42,7 +42,7 @@ public class TaskRepository {
 
     public synchronized int updateTask(String owner, String status, int taskIndex) {
         if (!status.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandBack"))) {
-            if (InputChecker.inputInArray(status, tasksStates)>0) {
+            if (InputChecker.inputInArray(status, TASKS_STATES)>0) {
                 Task task = taskDAO.findById(findByOwner(owner)
                         .get(taskIndex-1)
                         .getId())

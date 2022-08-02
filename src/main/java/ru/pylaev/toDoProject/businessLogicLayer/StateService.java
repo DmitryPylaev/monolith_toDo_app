@@ -34,28 +34,28 @@ public class StateService {
 
     private static String[] getStepResult(String userInput, State state) {
         switch (state.getStep()) {
-            case askNumber -> {
+            case ASK_NUMBER -> {
                 List<Task> tasksList = taskRepository.findByOwner(state.getOwner());
                 int index = validateIndex(userInput, tasksList.size());
                 if (index == 0) {
-                    state.setStep(Step.askNew);
+                    state.setStep(Step.ASK_NEW);
                 }
                 else if (index > 0) {
-                    state.setStep(Step.askStatus);
+                    state.setStep(Step.ASK_STATUS);
                     state.setCurrentTaskIndex(index);
                 }
             }
-            case askNew -> {
+            case ASK_NEW -> {
                 taskRepository.saveNewTask(state.getOwner(), userInput);
-                state.setStep(Step.askNumber);
+                state.setStep(Step.ASK_NUMBER);
             }
-            case askStatus -> {
+            case ASK_STATUS -> {
                 int changeStatusResult = taskRepository.updateTask(state.getOwner(), userInput, state.getCurrentTaskIndex());
                 if (changeStatusResult>0) {
-                    state.setStep(Step.askNumber);
+                    state.setStep(Step.ASK_NUMBER);
                 }
                 else if (changeStatusResult==0) {
-                    state.setStep(Step.askNumber);
+                    state.setStep(Step.ASK_NUMBER);
                 }
             }
         }

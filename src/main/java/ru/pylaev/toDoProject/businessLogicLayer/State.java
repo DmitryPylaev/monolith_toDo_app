@@ -10,9 +10,9 @@ import static ru.pylaev.util.InputChecker.inputInArray;
 @Component
 @Scope("prototype")
 public class State {
-    public static final String[] invalidNameSymbols = new String[] {" ", "\\", "|", "/", ":", "?", "\"", "<", ">"};
+    public static final String[] INVALID_SYMBOLS = new String[] {" ", "\\", "|", "/", ":", "?", "\"", "<", ">"};
 
-    private Step step = Step.askOwner;
+    private Step step = Step.ASK_OWNER;
     private int currentTaskIndex;
     private String owner;
 
@@ -37,14 +37,14 @@ public class State {
     }
 
     public void setCorrectOwner(String input) {
-        if ((step.equals(Step.askOwner)) && (inputInArray(input, invalidNameSymbols) < 0)) {
+        if ((step.equals(Step.ASK_OWNER)) && (inputInArray(input, INVALID_SYMBOLS) < 0)) {
             this.owner = input;
-            step = Step.askNumber;
+            step = Step.ASK_NUMBER;
         }
     }
 
     public void reset() {
-        this.step = Step.askOwner;
+        this.step = Step.ASK_OWNER;
         this.owner = null;
         this.currentTaskIndex = 0;
     }

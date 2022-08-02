@@ -67,7 +67,7 @@ class JsonControllerTest {
         StringBuilder stringBuilder = new StringBuilder();
         Arrays.stream(expectedTasks).forEach(task -> stringBuilder.append(task).append("\n"));
 
-        stringBuilder.append(Step.askNumber);
+        stringBuilder.append(Step.ASK_NUMBER);
 
         this.mvc.perform(post("/sendJson")
                         .contentType(MediaType.APPLICATION_JSON)

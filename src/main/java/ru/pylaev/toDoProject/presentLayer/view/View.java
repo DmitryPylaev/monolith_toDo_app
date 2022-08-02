@@ -12,7 +12,7 @@ import java.util.Objects;
 public class View {
     private String owner;
     private String[] tasks;
-    private String message = Step.askOwner.toString();
+    private String message = Step.ASK_OWNER.toString();
 
     public View() {
     }

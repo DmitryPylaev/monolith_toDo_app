@@ -112,7 +112,7 @@ class StateServiceTest {
         State expectedState = new State();
         expectedState.setCorrectOwner("user");
         expectedState.setCurrentTaskIndex(1);
-        expectedState.setStep(Step.askStatus);
+        expectedState.setStep(Step.ASK_STATUS);
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
 
@@ -155,7 +155,7 @@ class StateServiceTest {
     void processAskNewOk () {
         State state = new State();
         state.setCorrectOwner("user");
-        state.setStep(Step.askNew);
+        state.setStep(Step.ASK_NEW);
 
         Task task = new Task("33", "user", "note4", "Wed Mar 25 16:01", "WAIT");
         tasks.add(task);
@@ -176,7 +176,7 @@ class StateServiceTest {
         State state = new State();
         state.setCorrectOwner("user");
         state.setCurrentTaskIndex(1);
-        state.setStep(Step.askStatus);
+        state.setStep(Step.ASK_STATUS);
 
         State expectedState = new State();
         expectedState.setCorrectOwner("user");
@@ -197,7 +197,7 @@ class StateServiceTest {
         State state = new State();
         state.setCorrectOwner("user");
         state.setCurrentTaskIndex(3);
-        state.setStep(Step.askStatus);
+        state.setStep(Step.ASK_STATUS);
 
         State expectedState = new State();
         expectedState.setCorrectOwner("user");

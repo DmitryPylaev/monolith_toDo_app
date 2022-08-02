@@ -64,7 +64,7 @@ class HtmlControllerTest {
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         View expectedView = new View();
         expectedView.setTasks(expectedTasks);
-        expectedView.setMessage(Step.askNumber.toString());
+        expectedView.setMessage(Step.ASK_NUMBER.toString());
 
         this.mvc.perform(post("/").param("userInput", "user"))
                 .andExpect(status().is(302));
