@@ -36,9 +36,9 @@ public class State {
         return owner;
     }
 
-    public void setCorrectOwner(String input) {
-        if ((step.equals(Step.ASK_OWNER)) && (inputInArray(input, INVALID_SYMBOLS) < 0)) {
-            this.owner = input;
+    public void setCorrectOwner(String owner) {
+        if ((step.equals(Step.ASK_OWNER)) && (inputInArray(owner, INVALID_SYMBOLS) < 0)) {
+            this.owner = owner;
             step = Step.ASK_NUMBER;
         }
     }

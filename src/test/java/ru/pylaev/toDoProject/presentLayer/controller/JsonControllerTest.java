@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.businessLogicLayer.Step;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.util.DBDataSupplier;
+import ru.pylaev.util.SQLRequestExecutor;
 import ru.pylaev.util.HeadlessSpringBootContextLoader;
 import ru.pylaev.util.ListToNumberingArrayConverter;
 
@@ -49,7 +49,7 @@ class JsonControllerTest {
 
     @BeforeEach
     void setUp() throws URISyntaxException, IOException {
-        DBDataSupplier.prepareData("PrepareData.sql");
+        SQLRequestExecutor.executeFromFile("PrepareData.sql");
     }
 
     @Test

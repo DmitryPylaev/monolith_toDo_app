@@ -1,16 +1,17 @@
-package ru.pylaev.toDoProject.presentLayer.runUi;
+package ru.pylaev.toDoProject.presentLayer.runnableUi.console;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.businessLogicLayer.State;
 import ru.pylaev.toDoProject.businessLogicLayer.StateService;
+import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableUI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
 @Component
-public class ConsoleUserInterface extends RunUI {
+public class ConsoleUserInterface extends BaseRunnableUI {
     private final Scanner scanner = new Scanner((System.in)).useDelimiter("\n");
 
     @Autowired

@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.runUi;
+package ru.pylaev.toDoProject.presentLayer.runnableUi.telegram;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -17,7 +17,9 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.getMessage().getChat().getId() == ChatId)  {Input = update.getMessage().getText();}
+        if (update.getMessage().getChat().getId() == ChatId)  {
+            Input = update.getMessage().getText();
+        }
     }
 
     @Override
@@ -32,6 +34,8 @@ public class TelegramBot extends TelegramLongPollingBot {
         sendMessage.setText(message);
         try {
             execute(sendMessage);
-        } catch (TelegramApiException e) { e.printStackTrace(); }
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 }

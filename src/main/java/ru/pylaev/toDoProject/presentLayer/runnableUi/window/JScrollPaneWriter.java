@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.runUi;
+package ru.pylaev.toDoProject.presentLayer.runnableUi.window;
 
 import javax.swing.*;
 import java.util.ArrayList;

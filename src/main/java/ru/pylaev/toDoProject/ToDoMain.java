@@ -3,10 +3,9 @@ package ru.pylaev.toDoProject;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
-import ru.pylaev.toDoProject.presentLayer.runUi.ConsoleUserInterface;
-import ru.pylaev.toDoProject.presentLayer.runUi.TelegramUserInterface;
-import ru.pylaev.toDoProject.presentLayer.runUi.RunUI;
-import ru.pylaev.toDoProject.presentLayer.runUi.WindowUserInterface;
+import ru.pylaev.toDoProject.presentLayer.runnableUi.console.ConsoleUserInterface;
+import ru.pylaev.toDoProject.presentLayer.runnableUi.telegram.TelegramUserInterface;
+import ru.pylaev.toDoProject.presentLayer.runnableUi.window.WindowUserInterface;
 import ru.pylaev.util.CustomProperties;
 
 import java.util.concurrent.ExecutorService;
@@ -25,19 +24,9 @@ public class ToDoMain {
         WindowUserInterface windowUserInterface = applicationContext.getBean("windowUserInterface", WindowUserInterface.class);
 
         ExecutorService executorService = Executors.newCachedThreadPool();
-        executorService.execute(new UserInterfaceRunner(consoleUserInterface));
-        executorService.execute(new UserInterfaceRunner(telegramUserInterface));
-        executorService.execute(new UserInterfaceRunner(windowUserInterface));
-    }
-}
-
-record UserInterfaceRunner(RunUI runUI) implements Runnable {
-    @Override
-    public void run() {
-        runUI.showStartView();
-        while (true) {
-            runUI.processUserInput();
-        }
+        executorService.execute(consoleUserInterface);
+        executorService.execute(telegramUserInterface);
+        executorService.execute(windowUserInterface);
     }
 }
 

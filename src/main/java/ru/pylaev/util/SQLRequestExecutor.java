@@ -11,9 +11,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
-public class DBDataSupplier {
-    public static void prepareData(String request) throws URISyntaxException, IOException {
-        URI sqlPath = Objects.requireNonNull(DBDataSupplier.class.getClassLoader()
+public class SQLRequestExecutor {
+    public static void executeFromFile(String request) throws URISyntaxException, IOException {
+        URI sqlPath = Objects.requireNonNull(SQLRequestExecutor.class.getClassLoader()
                         .getResource(request))
                 .toURI();
         List<String> list = Files.readAllLines(Paths.get(sqlPath));

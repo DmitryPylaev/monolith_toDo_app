@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.runUi;
+package ru.pylaev.toDoProject.presentLayer.runnableUi.telegram;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,13 +8,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import ru.pylaev.toDoProject.businessLogicLayer.State;
 import ru.pylaev.toDoProject.businessLogicLayer.StateService;
+import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableUI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class TelegramUserInterface extends RunUI {
+public class TelegramUserInterface extends BaseRunnableUI {
     private final TelegramBot bot;
 
     @Autowired
