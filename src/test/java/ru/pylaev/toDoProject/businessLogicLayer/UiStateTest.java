@@ -4,18 +4,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StateTest {
-    State state = new State();
+class UiStateTest {
+    UiState uiState = new UiState();
 
     @Test
     void checkOwnerIsOk() {
-        state.setCorrectOwner(("user"));
-        assertEquals("user", state.getOwner());
+        uiState.setCorrectOwner(("user"));
+        assertEquals("user", uiState.getOwner());
     }
 
     @Test
     void checkOwnerIsRejected() {
-        state.setCorrectOwner(":");
-        assertNull(state.getOwner());
+        uiState.setCorrectOwner(":");
+        assertNull(uiState.getOwner());
     }
 }

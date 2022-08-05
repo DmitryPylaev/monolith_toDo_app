@@ -10,56 +10,56 @@ import ru.pylaev.util.ListToNumberingArrayConverter;
 import java.util.List;
 
 @Service
-public class StateService {
+public class UiStateService {
     private static TaskRepository taskRepository;
 
     @Autowired
-    public void setTaskRepository (TaskRepository t) {
+    private void setTaskRepository (TaskRepository t) {
         taskRepository = t;
     }
 
-    public static String[] processUserInput(String userInput, State state) {
+    public static String[] processUserInput(String userInput, UiState uiState) {
         if (userInput==null) {
             return new String[]{};
         }
         else if (userInput.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandExit"))) {
-            state.reset();
+            uiState.reset();
             return new String[]{};
         }
-        if (state.getOwner()==null) {
-            state.setCorrectOwner(userInput);
+        if (uiState.getOwner()==null) {
+            uiState.setCorrectOwner(userInput);
         }
-        return  getStepResult(userInput, state);
+        return  getStepResult(userInput, uiState);
     }
 
-    private static String[] getStepResult(String userInput, State state) {
-        switch (state.getStep()) {
+    private static String[] getStepResult(String userInput, UiState uiState) {
+        switch (uiState.getStep()) {
             case ASK_NUMBER -> {
-                List<Task> tasksList = taskRepository.findByOwner(state.getOwner());
+                List<Task> tasksList = taskRepository.findByOwner(uiState.getOwner());
                 int index = validateIndex(userInput, tasksList.size());
                 if (index == 0) {
-                    state.setStep(Step.ASK_NEW);
+                    uiState.setStep(Step.ASK_NEW);
                 }
                 else if (index > 0) {
-                    state.setStep(Step.ASK_STATUS);
-                    state.setCurrentTaskIndex(index);
+                    uiState.setStep(Step.ASK_STATUS);
+                    uiState.setCurrentTaskIndex(index);
                 }
             }
             case ASK_NEW -> {
-                taskRepository.saveNewTask(state.getOwner(), userInput);
-                state.setStep(Step.ASK_NUMBER);
+                taskRepository.saveNewTask(uiState.getOwner(), userInput);
+                uiState.setStep(Step.ASK_NUMBER);
             }
             case ASK_STATUS -> {
-                int changeStatusResult = taskRepository.updateTask(state.getOwner(), userInput, state.getCurrentTaskIndex());
+                int changeStatusResult = taskRepository.updateTask(uiState.getOwner(), userInput, uiState.getCurrentTaskIndex());
                 if (changeStatusResult>0) {
-                    state.setStep(Step.ASK_NUMBER);
+                    uiState.setStep(Step.ASK_NUMBER);
                 }
                 else if (changeStatusResult==0) {
-                    state.setStep(Step.ASK_NUMBER);
+                    uiState.setStep(Step.ASK_NUMBER);
                 }
             }
         }
-        return ListToNumberingArrayConverter.convert(taskRepository.findByOwner(state.getOwner()));
+        return ListToNumberingArrayConverter.convert(taskRepository.findByOwner(uiState.getOwner()));
     }
 
     private static int validateIndex(String userInput, int size) {

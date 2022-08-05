@@ -2,8 +2,8 @@ package ru.pylaev.toDoProject.presentLayer.runnableUi.window;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.pylaev.toDoProject.businessLogicLayer.State;
-import ru.pylaev.toDoProject.businessLogicLayer.StateService;
+import ru.pylaev.toDoProject.businessLogicLayer.UiState;
+import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
 import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableUI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
@@ -26,8 +26,8 @@ public class WindowUserInterface extends BaseRunnableUI {
     private MainFrame mainFrame;
 
     @Autowired
-    public WindowUserInterface(State state, View view) {
-        super(state, view);
+    public WindowUserInterface(UiState uiState, View view) {
+        super(uiState, view);
     }
 
     @Override
@@ -36,8 +36,8 @@ public class WindowUserInterface extends BaseRunnableUI {
         mainFrame.add(panel);
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.addActionListener(e -> {
-            view.setTasks(StateService.processUserInput(textField.getText(), state));
-            view.setMessage(state.getStep().toString());
+            view.setTasks(UiStateService.processUserInput(textField.getText(), uiState));
+            view.setMessage(uiState.getStep().toString());
             refreshPanel();
             textField.setText("");
         });

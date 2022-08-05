@@ -1,14 +1,14 @@
 package ru.pylaev.toDoProject.presentLayer;
 
-import ru.pylaev.toDoProject.businessLogicLayer.State;
+import ru.pylaev.toDoProject.businessLogicLayer.UiState;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 public abstract class BaseUI {
     protected View view;
-    protected State state;
+    protected UiState uiState;
 
-    public BaseUI(State state, View view) {
-        this.state = state;
+    public BaseUI(UiState uiState, View view) {
+        this.uiState = uiState;
         this.view = view;
     }
 }

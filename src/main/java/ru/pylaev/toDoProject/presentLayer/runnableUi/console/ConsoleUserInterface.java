@@ -2,8 +2,8 @@ package ru.pylaev.toDoProject.presentLayer.runnableUi.console;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.pylaev.toDoProject.businessLogicLayer.State;
-import ru.pylaev.toDoProject.businessLogicLayer.StateService;
+import ru.pylaev.toDoProject.businessLogicLayer.UiState;
+import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
 import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableUI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
@@ -15,8 +15,8 @@ public class ConsoleUserInterface extends BaseRunnableUI {
     private final Scanner scanner = new Scanner((System.in)).useDelimiter("\n");
 
     @Autowired
-    public ConsoleUserInterface(State state, View view) {
-        super(state, view);
+    public ConsoleUserInterface(UiState uiState, View view) {
+        super(uiState, view);
     }
 
     @Override
@@ -26,8 +26,8 @@ public class ConsoleUserInterface extends BaseRunnableUI {
 
     @Override
     public void processUserInput() {
-        view.setTasks(StateService.processUserInput(scanner.next(), state));
-        view.setMessage(state.getStep().toString());
+        view.setTasks(UiStateService.processUserInput(scanner.next(), uiState));
+        view.setMessage(uiState.getStep().toString());
         Arrays.stream(view.getTasks()).forEach(System.out::println);
         System.out.println(view.getMessage());
     }
