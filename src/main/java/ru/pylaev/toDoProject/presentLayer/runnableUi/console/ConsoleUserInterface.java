@@ -25,7 +25,7 @@ public class ConsoleUserInterface extends BaseRunnableUI {
     }
 
     @Override
-    public void processUserInput() {
+    public void respondsToRequests() {
         view.setTasks(UiStateService.processUserInput(scanner.next(), uiState));
         view.setMessage(uiState.getStep().toString());
         Arrays.stream(view.getTasks()).forEach(System.out::println);

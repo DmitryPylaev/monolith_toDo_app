@@ -45,7 +45,7 @@ public class WindowUserInterface extends BaseRunnableUI {
     }
 
     @Override
-    public void processUserInput() {
+    public void respondsToRequests() {
         try {
             TimeUnit.MILLISECONDS.sleep(250);
         }

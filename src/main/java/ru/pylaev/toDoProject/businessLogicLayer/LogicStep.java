@@ -11,7 +11,7 @@ public enum LogicStep {
     ASK_NUMBER(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber")) {
         @Override
         void manageState(String userInput, UiState uiState, TaskRepository taskRepository) {
-            List<Task> tasksList = taskRepository.findByOwner(uiState.getOwner());
+            List<Task> tasksList = taskRepository.getAll(uiState.getOwner());
             int index = validateIndex(userInput, tasksList.size());
             if (index == 0) {
                 uiState.setStep(LogicStep.ASK_NEW);

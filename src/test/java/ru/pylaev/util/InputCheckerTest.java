@@ -44,16 +44,16 @@ class InputCheckerTest {
 
     @Test
     void inputInArrayOk() {
-        assertEquals(1, InputChecker.inputInArray("DONE", new String[] {"ARCH", "WAIT", "DONE"}));
+        assertEquals(1, InputChecker.inputSymbolsInArray("DONE", new String[] {"ARCH", "WAIT", "DONE"}));
     }
 
     @Test
     void inputInArrayNull() {
-        assertEquals(0, InputChecker.inputInArray(null, new String[] {"ARCH", "WAIT", "DONE"}));
+        assertEquals(0, InputChecker.inputSymbolsInArray(null, new String[] {"ARCH", "WAIT", "DONE"}));
     }
 
     @Test
     void inputInArrayReject() {
-        assertEquals(-1, InputChecker.inputInArray("noValid", new String[] {"ARCH", "WAIT", "DONE"}));
+        assertEquals(-1, InputChecker.inputSymbolsInArray("noValid", new String[] {"ARCH", "WAIT", "DONE"}));
     }
 }

@@ -16,7 +16,7 @@ public class ToDoMain {
     public static ApplicationContext applicationContext;
 
     public static void main (String[] args) {
-        applicationContext = new SpringApplicationBuilder(ToDoMain.class).headless(false).run();
+        applicationContext = new SpringApplicationBuilder(ToDoMain.class).headless(false).run(args);
 
         ConsoleUserInterface consoleUserInterface = applicationContext.getBean("consoleUserInterface", ConsoleUserInterface.class);
         WindowUserInterface windowUserInterface = applicationContext.getBean("windowUserInterface", WindowUserInterface.class);

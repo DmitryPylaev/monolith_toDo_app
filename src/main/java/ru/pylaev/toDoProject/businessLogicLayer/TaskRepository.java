@@ -26,7 +26,7 @@ public class TaskRepository {
         this.taskDAO = tasksDAO;
     }
 
-    public synchronized List<Task> findByOwner(String owner) {
+    public synchronized List<Task> getAll(String owner) {
         return (taskDAO.findByOwner(owner)).stream()
                 .filter(task -> !task.getStatus().equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("statusArch")))
                 .collect(Collectors.toList());
@@ -42,8 +42,8 @@ public class TaskRepository {
 
     public synchronized int updateTask(String owner, String status, int taskIndex) {
         if (!status.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandBack"))) {
-            if (InputChecker.inputInArray(status, TASKS_STATES)>0) {
-                Task task = taskDAO.findById(findByOwner(owner)
+            if (InputChecker.inputSymbolsInArray(status, TASKS_STATES)>0) {
+                Task task = taskDAO.findById(getAll(owner)
                         .get(taskIndex-1)
                         .getId())
                         .orElseThrow();

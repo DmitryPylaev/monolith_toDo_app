@@ -19,10 +19,10 @@ import java.util.Optional;
 @SuppressWarnings("ClassCanBeRecord")
 @Component
 //@Primary
-public class FileTasksDAO implements DAO {
+public class FileTaskDAO implements DAO {
     private final String path;
 
-    public FileTasksDAO(@Value("${filePath}") String path) {
+    public FileTaskDAO(@Value("${filePath}") String path) {
         this.path = path;
         try {
             if (!Files.exists(Paths.get(path))) Files.createFile(Paths.get(path));

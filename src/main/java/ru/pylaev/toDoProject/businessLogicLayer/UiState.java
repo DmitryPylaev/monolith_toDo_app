@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
-import static ru.pylaev.util.InputChecker.inputInArray;
+import static ru.pylaev.util.InputChecker.inputSymbolsInArray;
 
 @Component
 @Scope("prototype")
@@ -36,11 +36,15 @@ public class UiState {
         return owner;
     }
 
-    public void setCorrectOwner(String owner) {
-        if ((logicStep.equals(LogicStep.ASK_OWNER)) && (inputInArray(owner, INVALID_SYMBOLS) < 0)) {
+    public void manageOwner(String owner) {
+        if (this.owner==null && (logicStep.equals(LogicStep.ASK_OWNER)) && (inputSymbolsInArray(owner, INVALID_SYMBOLS) < 0)) {
             this.owner = owner;
             logicStep = LogicStep.ASK_NUMBER;
         }
+    }
+
+    public void manageTasks(String userInput, TaskRepository taskRepository) {
+        logicStep.manageState(userInput, this, taskRepository);
     }
 
     public void reset() {
@@ -53,9 +57,7 @@ public class UiState {
     public boolean equals (Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         UiState uiState = (UiState) o;
-
         if (currentTaskIndex != uiState.currentTaskIndex) return false;
         if (!Objects.equals(logicStep, uiState.logicStep)) return false;
         return Objects.equals(owner, uiState.owner);

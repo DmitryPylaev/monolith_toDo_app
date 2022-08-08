@@ -13,11 +13,11 @@ public abstract class BaseRunnableUI extends BaseUI implements Runnable {
     public final void run() {
         this.showStartView();
         while (true) {
-            this.processUserInput();
+            this.respondsToRequests();
         }
     }
 
     public abstract void showStartView();
 
-    public abstract void processUserInput();
+    public abstract void respondsToRequests();
 }

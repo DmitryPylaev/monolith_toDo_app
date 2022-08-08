@@ -9,13 +9,13 @@ class UiStateTest {
 
     @Test
     void checkOwnerIsOk() {
-        uiState.setCorrectOwner(("user"));
+        uiState.manageOwner(("user"));
         assertEquals("user", uiState.getOwner());
     }
 
     @Test
     void checkOwnerIsRejected() {
-        uiState.setCorrectOwner(":");
+        uiState.manageOwner(":");
         assertNull(uiState.getOwner());
     }
 }

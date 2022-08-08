@@ -51,7 +51,7 @@ class TaskRepositoryTest {
 
     @Test
     void getActualTasks() {
-        assertEquals(tasks, taskRepository.findByOwner("user"));
+        assertEquals(tasks, taskRepository.getAll("user"));
     }
 
     @Test

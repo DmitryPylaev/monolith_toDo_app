@@ -21,17 +21,17 @@ public class DataBaseTaskDAO implements DAO {
     }
 
     @Override
-    public List<Task> findByOwner(String owner) {
+    public synchronized List<Task> findByOwner(String owner) {
         return taskSpringRepository.findByOwner(owner);
     }
 
     @Override
-    public void save(Task task) {
+    public synchronized void save(Task task) {
         taskSpringRepository.save(task);
     }
 
     @Override
-    public Optional<Task> findById(long id) {
+    public synchronized Optional<Task> findById(long id) {
         return taskSpringRepository.findById(id);
     }
 }

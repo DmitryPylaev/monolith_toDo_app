@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer;
+package ru.pylaev.toDoProject.businessLogicLayer;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,12 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
-import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
-import ru.pylaev.toDoProject.businessLogicLayer.LogicStep;
-import ru.pylaev.toDoProject.businessLogicLayer.TaskRepository;
 import ru.pylaev.toDoProject.dataAccessLayer.DAO;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.businessLogicLayer.UiState;
 import ru.pylaev.util.HeadlessSpringBootContextLoader;
 
 import java.util.ArrayList;
@@ -72,7 +68,7 @@ class UiStateServiceTest {
         UiState uiState = new UiState();
 
         UiState expectedUiState = new UiState();
-        expectedUiState.setCorrectOwner("user");
+        expectedUiState.manageOwner("user");
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
 
@@ -107,10 +103,10 @@ class UiStateServiceTest {
     @Test
     void processAskNumberOk () {
         UiState uiState = new UiState();
-        uiState.setCorrectOwner("user");
+        uiState.manageOwner("user");
 
         UiState expectedUiState = new UiState();
-        expectedUiState.setCorrectOwner("user");
+        expectedUiState.manageOwner("user");
         expectedUiState.setCurrentTaskIndex(1);
         expectedUiState.setStep(LogicStep.ASK_STATUS);
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
@@ -125,10 +121,10 @@ class UiStateServiceTest {
     @Test
     void processAskNumberOutRange () {
         UiState uiState = new UiState();
-        uiState.setCorrectOwner("user");
+        uiState.manageOwner("user");
 
         UiState expectedUiState = new UiState();
-        expectedUiState.setCorrectOwner("user");
+        expectedUiState.manageOwner("user");
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
 
@@ -141,10 +137,10 @@ class UiStateServiceTest {
     @Test
     void processAskNumberNull () {
         UiState uiState = new UiState();
-        uiState.setCorrectOwner("user");
+        uiState.manageOwner("user");
 
         UiState expectedUiState = new UiState();
-        expectedUiState.setCorrectOwner("user");
+        expectedUiState.manageOwner("user");
 
         UiStateService.processUserInput( null, uiState);
 
@@ -154,14 +150,14 @@ class UiStateServiceTest {
     @Test
     void processAskNewOk () {
         UiState uiState = new UiState();
-        uiState.setCorrectOwner("user");
+        uiState.manageOwner("user");
         uiState.setStep(LogicStep.ASK_NEW);
 
         Task task = new Task("33", "user", "note4", "Wed Mar 25 16:01", "WAIT");
         tasks.add(task);
 
         UiState expectedUiState = new UiState();
-        expectedUiState.setCorrectOwner("user");
+        expectedUiState.manageOwner("user");
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
 
@@ -174,12 +170,12 @@ class UiStateServiceTest {
     @Test
     void processAskStatusDone () {
         UiState uiState = new UiState();
-        uiState.setCorrectOwner("user");
+        uiState.manageOwner("user");
         uiState.setCurrentTaskIndex(1);
         uiState.setStep(LogicStep.ASK_STATUS);
 
         UiState expectedUiState = new UiState();
-        expectedUiState.setCorrectOwner("user");
+        expectedUiState.manageOwner("user");
         expectedUiState.setCurrentTaskIndex(1);
         List <Task> expectList = new ArrayList<>(tasks);
         expectList.set(0, new Task("3", "user", "note3", "Wed Mar 25 16:01", "DONE"));
@@ -195,12 +191,12 @@ class UiStateServiceTest {
     @Test
     void processAskStatusArch () {
         UiState uiState = new UiState();
-        uiState.setCorrectOwner("user");
+        uiState.manageOwner("user");
         uiState.setCurrentTaskIndex(3);
         uiState.setStep(LogicStep.ASK_STATUS);
 
         UiState expectedUiState = new UiState();
-        expectedUiState.setCorrectOwner("user");
+        expectedUiState.manageOwner("user");
         expectedUiState.setCurrentTaskIndex(3);
         List <Task> expectList = new ArrayList<>(tasks);
         expectList.remove(2);
@@ -216,10 +212,10 @@ class UiStateServiceTest {
     @Test
     void processAskStatusInvalid () {
         UiState uiState = new UiState();
-        uiState.setCorrectOwner("user");
+        uiState.manageOwner("user");
 
         UiState expectedUiState = new UiState();
-        expectedUiState.setCorrectOwner("user");
+        expectedUiState.manageOwner("user");
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
 

@@ -21,7 +21,6 @@ public class Task implements Serializable {
     public Task () {}
 
     public Task (String owner, String text, Date date, String status) {
-        this.id = 0;
         this.owner = owner;
         this.text = text;
         this.date = String.valueOf(date).substring(0,16);

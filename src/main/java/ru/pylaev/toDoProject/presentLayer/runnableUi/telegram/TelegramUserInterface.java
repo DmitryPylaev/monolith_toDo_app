@@ -35,7 +35,7 @@ public class TelegramUserInterface extends BaseRunnableUI {
     }
 
     @Override
-    public void processUserInput() {
+    public void respondsToRequests() {
         bot.Input = null;
         try {
             while (bot.Input == null) TimeUnit.MILLISECONDS.sleep(250);

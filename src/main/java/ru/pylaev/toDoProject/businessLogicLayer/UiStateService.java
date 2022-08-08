@@ -15,15 +15,18 @@ public class UiStateService {
     }
 
     public static String[] processUserInput(String userInput, UiState uiState) {
-        if (userInput==null) return new String[]{};
+        if (!checkInputBeforeContinue(userInput, uiState)) return new String[]{};
+        uiState.manageOwner(userInput);
+        uiState.manageTasks(userInput, taskRepository);
+        return ListToNumberingArrayConverter.convert(taskRepository.getAll(uiState.getOwner()));
+    }
+
+    private static boolean checkInputBeforeContinue(String userInput, UiState uiState) {
+        if (userInput==null) return false;
         else if (userInput.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandExit"))) {
             uiState.reset();
-            return new String[]{};
+            return false;
         }
-        if (uiState.getOwner()==null) {
-            uiState.setCorrectOwner(userInput);
-        }
-        uiState.getStep().manageState(userInput, uiState, taskRepository);
-        return ListToNumberingArrayConverter.convert(taskRepository.findByOwner(uiState.getOwner()));
+        return true;
     }
 }
