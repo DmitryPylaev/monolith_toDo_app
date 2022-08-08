@@ -9,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.pylaev.toDoProject.businessLogicLayer.Step;
+import ru.pylaev.toDoProject.businessLogicLayer.LogicStep;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 import ru.pylaev.util.SQLRequestExecutor;
@@ -64,7 +64,7 @@ class HtmlControllerTest {
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         View expectedView = new View();
         expectedView.setTasks(expectedTasks);
-        expectedView.setMessage(Step.ASK_NUMBER.toString());
+        expectedView.setMessage(LogicStep.ASK_NUMBER.toString());
 
         this.mvc.perform(post("/").param("userInput", "user"))
                 .andExpect(status().is(302));

@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
-import ru.pylaev.toDoProject.businessLogicLayer.Step;
+import ru.pylaev.toDoProject.businessLogicLayer.LogicStep;
 import ru.pylaev.toDoProject.businessLogicLayer.TaskRepository;
 import ru.pylaev.toDoProject.dataAccessLayer.DAO;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
@@ -112,7 +112,7 @@ class UiStateServiceTest {
         UiState expectedUiState = new UiState();
         expectedUiState.setCorrectOwner("user");
         expectedUiState.setCurrentTaskIndex(1);
-        expectedUiState.setStep(Step.ASK_STATUS);
+        expectedUiState.setStep(LogicStep.ASK_STATUS);
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
 
@@ -155,7 +155,7 @@ class UiStateServiceTest {
     void processAskNewOk () {
         UiState uiState = new UiState();
         uiState.setCorrectOwner("user");
-        uiState.setStep(Step.ASK_NEW);
+        uiState.setStep(LogicStep.ASK_NEW);
 
         Task task = new Task("33", "user", "note4", "Wed Mar 25 16:01", "WAIT");
         tasks.add(task);
@@ -176,7 +176,7 @@ class UiStateServiceTest {
         UiState uiState = new UiState();
         uiState.setCorrectOwner("user");
         uiState.setCurrentTaskIndex(1);
-        uiState.setStep(Step.ASK_STATUS);
+        uiState.setStep(LogicStep.ASK_STATUS);
 
         UiState expectedUiState = new UiState();
         expectedUiState.setCorrectOwner("user");
@@ -197,7 +197,7 @@ class UiStateServiceTest {
         UiState uiState = new UiState();
         uiState.setCorrectOwner("user");
         uiState.setCurrentTaskIndex(3);
-        uiState.setStep(Step.ASK_STATUS);
+        uiState.setStep(LogicStep.ASK_STATUS);
 
         UiState expectedUiState = new UiState();
         expectedUiState.setCorrectOwner("user");

@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.pylaev.toDoProject.ToDoMain;
-import ru.pylaev.toDoProject.businessLogicLayer.Step;
+import ru.pylaev.toDoProject.businessLogicLayer.LogicStep;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import ru.pylaev.util.SQLRequestExecutor;
 import ru.pylaev.util.HeadlessSpringBootContextLoader;
@@ -67,7 +67,7 @@ class JsonControllerTest {
         StringBuilder stringBuilder = new StringBuilder();
         Arrays.stream(expectedTasks).forEach(task -> stringBuilder.append(task).append("\n"));
 
-        stringBuilder.append(Step.ASK_NUMBER);
+        stringBuilder.append(LogicStep.ASK_NUMBER);
 
         this.mvc.perform(post("/sendJson")
                         .contentType(MediaType.APPLICATION_JSON)

@@ -2,7 +2,7 @@ package ru.pylaev.toDoProject.presentLayer.view;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import ru.pylaev.toDoProject.businessLogicLayer.Step;
+import ru.pylaev.toDoProject.businessLogicLayer.LogicStep;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -12,7 +12,7 @@ import java.util.Objects;
 public class View {
     private String owner;
     private String[] tasks;
-    private String message = Step.ASK_OWNER.toString();
+    private String message = LogicStep.ASK_OWNER.toString();
 
     public View() {
     }

@@ -12,16 +12,16 @@ import static ru.pylaev.util.InputChecker.inputInArray;
 public class UiState {
     public static final String[] INVALID_SYMBOLS = new String[] {" ", "\\", "|", "/", ":", "?", "\"", "<", ">"};
 
-    private Step step = Step.ASK_OWNER;
+    private LogicStep logicStep = LogicStep.ASK_OWNER;
     private int currentTaskIndex;
     private String owner;
 
-    public Step getStep( ) {
-        return step;
+    public LogicStep getStep( ) {
+        return logicStep;
     }
 
-    public void setStep(Step step) {
-        this.step = step;
+    public void setStep(LogicStep logicStep) {
+        this.logicStep = logicStep;
     }
 
     public int getCurrentTaskIndex( ) {
@@ -37,14 +37,14 @@ public class UiState {
     }
 
     public void setCorrectOwner(String owner) {
-        if ((step.equals(Step.ASK_OWNER)) && (inputInArray(owner, INVALID_SYMBOLS) < 0)) {
+        if ((logicStep.equals(LogicStep.ASK_OWNER)) && (inputInArray(owner, INVALID_SYMBOLS) < 0)) {
             this.owner = owner;
-            step = Step.ASK_NUMBER;
+            logicStep = LogicStep.ASK_NUMBER;
         }
     }
 
     public void reset() {
-        this.step = Step.ASK_OWNER;
+        this.logicStep = LogicStep.ASK_OWNER;
         this.owner = null;
         this.currentTaskIndex = 0;
     }
@@ -57,13 +57,13 @@ public class UiState {
         UiState uiState = (UiState) o;
 
         if (currentTaskIndex != uiState.currentTaskIndex) return false;
-        if (!Objects.equals(step, uiState.step)) return false;
+        if (!Objects.equals(logicStep, uiState.logicStep)) return false;
         return Objects.equals(owner, uiState.owner);
     }
 
     @Override
     public int hashCode ( ) {
-        int result = step != null ? step.hashCode() : 0;
+        int result = logicStep != null ? logicStep.hashCode() : 0;
         result = 31 * result + currentTaskIndex;
         result = 31 * result + (owner != null ? owner.hashCode() : 0);
         return result;
