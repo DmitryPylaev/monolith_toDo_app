@@ -9,12 +9,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.businessLogicLayer.LogicStep;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.util.SQLRequestExecutor;
 import ru.pylaev.util.HeadlessSpringBootContextLoader;
 import ru.pylaev.util.ListToNumberingArrayConverter;
+import ru.pylaev.util.SQLRequestExecutor;
 
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
@@ -32,16 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(loader = HeadlessSpringBootContextLoader.class)
 class JsonControllerTest {
-    private static final String askNumber = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
-
-    // 1. Act Arrange Assert
-    // 2. Naming
-    // 3. Unit, integration, API(component), Performance
-    // 4. Mocking
-    // 5. Coverage
-    // 6. Data generators(ready libraries)
-    // 7. Test must not dictate how to write prod code
-    // 8. TDD
     @Autowired
     private MockMvc mvc;
 

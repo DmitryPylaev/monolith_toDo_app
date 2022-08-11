@@ -23,8 +23,9 @@ public class JsonController extends BaseUI {
     @PostMapping("/sendJson")
     public ResponseEntity<String> post(@RequestBody JsonInput jsonInput) {
         try {
-            view.setTasks(UiStateService.processUserInput(jsonInput.getContent(), uiState));
-            view.setMessage(uiState.getStep().toString());
+            String[] tasks = UiStateService.processUserInput(jsonInput.getContent(), uiState);
+            String message = uiState.getStep().toString();
+            view.update(message, tasks);
 
             StringBuilder stringBuilder = new StringBuilder();
             for (String s : view.getTasks()) {

@@ -3,7 +3,6 @@ package ru.pylaev.toDoProject.presentLayer.runnableUi.window;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.businessLogicLayer.UiState;
-import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
 import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableUI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
@@ -12,53 +11,45 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class WindowUserInterface extends BaseRunnableUI {
-    private static class MainFrame extends JFrame {
-        public MainFrame() {
-            setTitle("TODO");
-            setDefaultCloseOperation((WindowConstants.DISPOSE_ON_CLOSE));
-            setBounds(300, 300, 900, 400);
-            setVisible(true);
-        }
-    }
-
     private final JTextField textField = new JTextField(72);
     private final JPanel panel = new JPanel();
-    private MainFrame mainFrame;
+    private final JFrame mainFrame;
+    private String input;
 
     @Autowired
     public WindowUserInterface(UiState uiState, View view) {
         super(uiState, view);
-    }
-
-    @Override
-    public void showStartView() {
-        mainFrame = new MainFrame();
+        mainFrame = new JFrame();
+        mainFrame.setTitle("TODO");
+        mainFrame.setDefaultCloseOperation((WindowConstants.DISPOSE_ON_CLOSE));
+        mainFrame.setBounds(300, 300, 900, 400);
+        mainFrame.setVisible(true);
         mainFrame.add(panel);
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.addActionListener(e -> {
-            view.setTasks(UiStateService.processUserInput(textField.getText(), uiState));
-            view.setMessage(uiState.getStep().toString());
-            refreshPanel();
+            input = textField.getText();
             textField.setText("");
         });
-        refreshPanel();
     }
 
     @Override
-    public void respondsToRequests() {
-        try {
-            TimeUnit.MILLISECONDS.sleep(250);
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void refreshPanel() {
+    public void show() {
         panel.removeAll();
         panel.add(JScrollPaneWriter.write(view.getMessage(), view.getTasks()));
         panel.add(textField);
         panel.repaint();
         mainFrame.setVisible(true);
+        textField.grabFocus();
+    }
+
+    @Override
+    public String get() {
+        input = null;
+        try {
+            while (input == null) TimeUnit.MILLISECONDS.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return input;
     }
 }

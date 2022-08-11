@@ -12,21 +12,24 @@ import java.util.Objects;
 public class View {
     private String[] tasks;
     private String message = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askOwner");
+//    private BaseRunnableUI ui;
+//
+//    public View(BaseRunnableUI ui) {
+//        this.ui = ui;
+//    }
 
     public String[] getTasks() {
         return tasks;
-    }
-
-    public void setTasks(String[] tasks) {
-        this.tasks = tasks;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void update (String message, String[] tasks) {
         this.message = message;
+        this.tasks = tasks;
+//        ui.respondsToRequests();
     }
 
     @Override

@@ -27,8 +27,9 @@ public class HtmlController extends BaseUI {
 
     @PostMapping
     public String post(@RequestParam String userInput) {
-        view.setTasks(UiStateService.processUserInput(userInput, uiState));
-        view.setMessage(uiState.getStep().toString());
+        String[] tasks = UiStateService.processUserInput(userInput, uiState);
+        String message = uiState.getStep().toString();
+        view.update(message, tasks);
         return "redirect:/";
     }
 }

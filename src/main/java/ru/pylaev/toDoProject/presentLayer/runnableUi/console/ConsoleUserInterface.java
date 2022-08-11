@@ -3,7 +3,6 @@ package ru.pylaev.toDoProject.presentLayer.runnableUi.console;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.businessLogicLayer.UiState;
-import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
 import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableUI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
@@ -20,15 +19,15 @@ public class ConsoleUserInterface extends BaseRunnableUI {
     }
 
     @Override
-    public void showStartView() {
+    public void show() {
+        if (view.getTasks()!=null && view.getTasks().length>0) {
+            Arrays.stream(view.getTasks()).forEach(System.out::println);
+        }
         System.out.println(view.getMessage());
     }
 
     @Override
-    public void respondsToRequests() {
-        view.setTasks(UiStateService.processUserInput(scanner.next(), uiState));
-        view.setMessage(uiState.getStep().toString());
-        Arrays.stream(view.getTasks()).forEach(System.out::println);
-        System.out.println(view.getMessage());
+    public String get() {
+        return scanner.next();
     }
 }

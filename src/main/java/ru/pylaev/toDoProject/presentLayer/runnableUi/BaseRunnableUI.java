@@ -1,6 +1,7 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUi;
 
 import ru.pylaev.toDoProject.businessLogicLayer.UiState;
+import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
 import ru.pylaev.toDoProject.presentLayer.BaseUI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
@@ -11,13 +12,18 @@ public abstract class BaseRunnableUI extends BaseUI implements Runnable {
 
     @Override
     public final void run() {
-        this.showStartView();
+        this.show();
         while (true) {
-            this.respondsToRequests();
+            String[] tasks = UiStateService.processUserInput(get(), uiState);
+            String message = uiState.getStep().toString();
+            view.update(message, tasks);
+            show();
         }
     }
 
-    public abstract void showStartView();
+    public abstract void show();
 
-    public abstract void respondsToRequests();
+    public abstract String get();
+
+
 }

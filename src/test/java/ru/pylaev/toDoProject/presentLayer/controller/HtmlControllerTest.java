@@ -63,8 +63,7 @@ class HtmlControllerTest {
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         View expectedView = new View();
-        expectedView.setTasks(expectedTasks);
-        expectedView.setMessage(LogicStep.ASK_NUMBER.toString());
+        expectedView.update(LogicStep.ASK_NUMBER.toString(), expectedTasks);
 
         this.mvc.perform(post("/").param("userInput", "user"))
                 .andExpect(status().is(302));
