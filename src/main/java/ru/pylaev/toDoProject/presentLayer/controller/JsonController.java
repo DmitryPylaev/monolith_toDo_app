@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.businessLogicLayer.UiState;
-import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
 import ru.pylaev.toDoProject.presentLayer.BaseUI;
 import ru.pylaev.toDoProject.presentLayer.view.JsonInput;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 @Controller
 public class JsonController extends BaseUI {
+    private String userInput;
 
     @Autowired
     public JsonController(UiState uiState, View view) {
@@ -23,17 +23,16 @@ public class JsonController extends BaseUI {
     @PostMapping("/sendJson")
     public ResponseEntity<String> post(@RequestBody JsonInput jsonInput) {
         try {
-            String[] tasks = UiStateService.processUserInput(jsonInput.getContent(), uiState);
-            String message = uiState.getStep().toString();
-            view.update(message, tasks);
-
-            StringBuilder stringBuilder = new StringBuilder();
-            for (String s : view.getTasks()) {
-                stringBuilder.append(s).append("\n");
-            }
-            return ResponseEntity.ok(stringBuilder + view.getMessage());
+            userInput = jsonInput.getContent();
+            processRequest();
+            return ResponseEntity.ok(view.show());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("networkError") + " " + e.getMessage());
         }
+    }
+
+    @Override
+    public String getInput() {
+        return userInput;
     }
 }

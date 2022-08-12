@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pylaev.toDoProject.businessLogicLayer.UiState;
-import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
 import ru.pylaev.toDoProject.presentLayer.BaseUI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 @Controller
 public class HtmlController extends BaseUI {
+    private String userInput;
 
     @Autowired
     public HtmlController(UiState uiState, View view) {
@@ -27,9 +27,13 @@ public class HtmlController extends BaseUI {
 
     @PostMapping
     public String post(@RequestParam String userInput) {
-        String[] tasks = UiStateService.processUserInput(userInput, uiState);
-        String message = uiState.getStep().toString();
-        view.update(message, tasks);
+        this.userInput = userInput;
+        processRequest();
         return "redirect:/";
+    }
+
+    @Override
+    public String getInput() {
+        return userInput;
     }
 }

@@ -12,11 +12,6 @@ import java.util.Objects;
 public class View {
     private String[] tasks;
     private String message = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askOwner");
-//    private BaseRunnableUI ui;
-//
-//    public View(BaseRunnableUI ui) {
-//        this.ui = ui;
-//    }
 
     public String[] getTasks() {
         return tasks;
@@ -26,10 +21,9 @@ public class View {
         return message;
     }
 
-    public void update (String message, String[] tasks) {
+    public void set(String message, String[] tasks) {
         this.message = message;
         this.tasks = tasks;
-//        ui.respondsToRequests();
     }
 
     @Override
@@ -45,5 +39,14 @@ public class View {
         int result = Objects.hash(message);
         result = 31 * result + Arrays.hashCode(tasks);
         return result;
+    }
+
+    public String show() {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (tasks != null && tasks.length > 0) {
+            Arrays.stream(tasks).forEach(s -> stringBuilder.append(s).append("\n"));
+        }
+        stringBuilder.append(message);
+        return String.valueOf(stringBuilder);
     }
 }

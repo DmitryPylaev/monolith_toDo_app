@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.businessLogicLayer.UiState;
 import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableUI;
+import ru.pylaev.toDoProject.presentLayer.runnableUi.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 import javax.swing.*;
@@ -30,20 +31,11 @@ public class WindowUserInterface extends BaseRunnableUI {
             input = textField.getText();
             textField.setText("");
         });
+        printer = new WindowPrinter();
     }
 
     @Override
-    public void show() {
-        panel.removeAll();
-        panel.add(JScrollPaneWriter.write(view.getMessage(), view.getTasks()));
-        panel.add(textField);
-        panel.repaint();
-        mainFrame.setVisible(true);
-        textField.grabFocus();
-    }
-
-    @Override
-    public String get() {
+    public String getInput() {
         input = null;
         try {
             while (input == null) TimeUnit.MILLISECONDS.sleep(250);
@@ -51,5 +43,17 @@ public class WindowUserInterface extends BaseRunnableUI {
             e.printStackTrace();
         }
         return input;
+    }
+
+    private class WindowPrinter implements CustomPrinter {
+        @Override
+        public void display(String s) {
+            panel.removeAll();
+            panel.add(JScrollPaneWriter.write(s));
+            panel.add(textField);
+            panel.repaint();
+            mainFrame.setVisible(true);
+            textField.grabFocus();
+        }
     }
 }

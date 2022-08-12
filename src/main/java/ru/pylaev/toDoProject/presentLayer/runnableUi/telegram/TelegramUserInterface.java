@@ -10,7 +10,6 @@ import ru.pylaev.toDoProject.businessLogicLayer.UiState;
 import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableUI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -26,18 +25,11 @@ public class TelegramUserInterface extends BaseRunnableUI {
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+        printer = bot::send;
     }
 
     @Override
-    public void show() {
-        if (view.getTasks()!=null && view.getTasks().length>0) {
-            bot.send(Arrays.toString(view.getTasks()));
-        }
-        bot.send(view.getMessage());
-    }
-
-    @Override
-    public String get() {
+    public String getInput() {
         bot.Input = null;
         try {
             while (bot.Input == null) TimeUnit.MILLISECONDS.sleep(250);

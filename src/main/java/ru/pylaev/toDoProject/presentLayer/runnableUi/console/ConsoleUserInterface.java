@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.businessLogicLayer.UiState;
 import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableUI;
+import ru.pylaev.toDoProject.presentLayer.runnableUi.SimplePrinter;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 @Component
@@ -16,18 +16,11 @@ public class ConsoleUserInterface extends BaseRunnableUI {
     @Autowired
     public ConsoleUserInterface(UiState uiState, View view) {
         super(uiState, view);
+        printer = new SimplePrinter(System.out::println);
     }
 
     @Override
-    public void show() {
-        if (view.getTasks()!=null && view.getTasks().length>0) {
-            Arrays.stream(view.getTasks()).forEach(System.out::println);
-        }
-        System.out.println(view.getMessage());
-    }
-
-    @Override
-    public String get() {
+    public String getInput() {
         return scanner.next();
     }
 }
