@@ -17,15 +17,15 @@ public class TelegramUserInterface extends BaseRunnableUI {
     private final TelegramBot bot;
 
     @Autowired
-    public TelegramUserInterface(UiState uiState, View view, @Value("${botToken}") String token){
-        super(uiState, view);
+    public TelegramUserInterface(View view, UiState uiState, @Value("${botToken}") String token){
+        super(view, uiState);
         bot = new TelegramBot(token, 1249988927);
         try {
             new TelegramBotsApi(DefaultBotSession.class).registerBot(bot);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
-        printer = bot::send;
+        view.setPrinter(bot::send);
     }
 
     @Override

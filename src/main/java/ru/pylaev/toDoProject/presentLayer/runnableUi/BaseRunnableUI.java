@@ -5,17 +5,17 @@ import ru.pylaev.toDoProject.presentLayer.BaseUI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 public abstract class BaseRunnableUI extends BaseUI implements Runnable {
-    public BaseRunnableUI(UiState uiState, View view) {
-        super(uiState, view);
+    public BaseRunnableUI(View view, UiState uiState) {
+        super(view, uiState);
     }
-    protected CustomPrinter printer;
 
     @Override
     public final void run() {
-        printer.display(view.show());
+        view.show();
         while (true) {
-            processRequest();
-            printer.display(view.show());
+            processingRequest(getInput());
         }
     }
+
+    protected abstract String getInput();
 }

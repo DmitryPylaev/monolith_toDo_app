@@ -14,9 +14,9 @@ public class ConsoleUserInterface extends BaseRunnableUI {
     private final Scanner scanner = new Scanner((System.in)).useDelimiter("\n");
 
     @Autowired
-    public ConsoleUserInterface(UiState uiState, View view) {
-        super(uiState, view);
-        printer = new SimplePrinter(System.out::println);
+    public ConsoleUserInterface(View view, UiState uiState) {
+        super(view, uiState);
+        view.setPrinter(new SimplePrinter(System.out::println));
     }
 
     @Override

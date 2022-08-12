@@ -8,32 +8,43 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pylaev.toDoProject.businessLogicLayer.UiState;
 import ru.pylaev.toDoProject.presentLayer.BaseUI;
+import ru.pylaev.toDoProject.presentLayer.runnableUi.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.view.View;
+
+import java.util.Arrays;
 
 @Controller
 public class HtmlController extends BaseUI {
-    private String userInput;
+    private Model model;
 
     @Autowired
-    public HtmlController(UiState uiState, View view) {
-        super(uiState, view);
+    public HtmlController(View view, UiState uiState) {
+        super(view, uiState);
+        view.setPrinter(new HtmlPrinter());
     }
 
     @GetMapping
     public String get(Model model) {
-        model.addAttribute("view", view);
+        this.model = model;
+        view.show();
         return "home";
     }
 
     @PostMapping
     public String post(@RequestParam String userInput) {
-        this.userInput = userInput;
-        processRequest();
+        processingRequest(userInput);
         return "redirect:/";
     }
 
-    @Override
-    public String getInput() {
-        return userInput;
+    private class HtmlPrinter implements CustomPrinter {
+        public void display(String content) {
+            String[] arrStr = content.split("\n");
+            String message = arrStr[arrStr.length-1];
+            String[] tasks = Arrays.copyOfRange(arrStr, 0, arrStr.length-1);
+            model.addAttribute("message", message);
+            model.addAttribute("tasks", tasks);
+        }
     }
 }
+
+

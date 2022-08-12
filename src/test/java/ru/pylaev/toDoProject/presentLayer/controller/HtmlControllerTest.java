@@ -9,11 +9,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.pylaev.toDoProject.businessLogicLayer.LogicStep;
+import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.view.View;
-import ru.pylaev.util.SQLRequestExecutor;
 import ru.pylaev.util.HeadlessSpringBootContextLoader;
+import ru.pylaev.util.SQLRequestExecutor;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -45,8 +44,8 @@ class HtmlControllerTest {
     void show() throws Exception {
         this.mvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("view"))
-                .andExpect(model().attribute("view", new View()));
+                .andExpect(model().attributeExists("message"))
+                .andExpect(model().attribute("message", ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askOwner")));
     }
 
     @Test
@@ -62,15 +61,15 @@ class HtmlControllerTest {
 
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
-        View expectedView = new View();
-        expectedView.set(LogicStep.ASK_NUMBER.toString(), expectedTasks);
 
         this.mvc.perform(post("/").param("userInput", "user"))
                 .andExpect(status().is(302));
 
         this.mvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("view"))
-                .andExpect(model().attribute("view", expectedView));
+                .andExpect(model().attributeExists("message"))
+                .andExpect(model().attribute("message", ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber")))
+                .andExpect(model().attributeExists("tasks"))
+                .andExpect(model().attribute("tasks", expectedTasks));
     }
 }

@@ -15,11 +15,11 @@ public class WindowUserInterface extends BaseRunnableUI {
     private final JTextField textField = new JTextField(72);
     private final JPanel panel = new JPanel();
     private final JFrame mainFrame;
-    private String input;
+    private String userInput;
 
     @Autowired
-    public WindowUserInterface(UiState uiState, View view) {
-        super(uiState, view);
+    public WindowUserInterface(View view, UiState uiState) {
+        super(view, uiState);
         mainFrame = new JFrame();
         mainFrame.setTitle("TODO");
         mainFrame.setDefaultCloseOperation((WindowConstants.DISPOSE_ON_CLOSE));
@@ -28,21 +28,21 @@ public class WindowUserInterface extends BaseRunnableUI {
         mainFrame.add(panel);
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.addActionListener(e -> {
-            input = textField.getText();
+            userInput = textField.getText();
             textField.setText("");
         });
-        printer = new WindowPrinter();
+        view.setPrinter(new WindowPrinter());
     }
 
     @Override
     public String getInput() {
-        input = null;
+        userInput = null;
         try {
-            while (input == null) TimeUnit.MILLISECONDS.sleep(250);
+            while (userInput == null) TimeUnit.MILLISECONDS.sleep(250);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return input;
+        return userInput;
     }
 
     private class WindowPrinter implements CustomPrinter {

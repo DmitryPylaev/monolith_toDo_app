@@ -13,26 +13,18 @@ import ru.pylaev.toDoProject.presentLayer.view.View;
 
 @Controller
 public class JsonController extends BaseUI {
-    private String userInput;
-
     @Autowired
-    public JsonController(UiState uiState, View view) {
-        super(uiState, view);
+    public JsonController(View view, UiState uiState) {
+        super(view, uiState);
     }
 
     @PostMapping("/sendJson")
     public ResponseEntity<String> post(@RequestBody JsonInput jsonInput) {
         try {
-            userInput = jsonInput.getContent();
-            processRequest();
+            processingRequest(jsonInput.getContent());
             return ResponseEntity.ok(view.show());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("networkError") + " " + e.getMessage());
         }
-    }
-
-    @Override
-    public String getInput() {
-        return userInput;
     }
 }
