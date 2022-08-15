@@ -13,11 +13,11 @@ public abstract class BaseUI {
     public BaseUI(View view, UiState uiState) {
         this.view = view;
         this.uiState = uiState;
+        uiState.addObserver(view);
     }
 
     public void processingRequest(String input) {
         String[] tasks = UiStateService.processUserInput(input, uiState);
-        String message = uiState.getStep().toString();
-        view.update(message, tasks);
+        uiState.notifyObservers(tasks);
     }
 }

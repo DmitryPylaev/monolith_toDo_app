@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.businessLogicLayer.UiState;
 import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableUI;
-import ru.pylaev.toDoProject.presentLayer.runnableUi.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 import javax.swing.*;

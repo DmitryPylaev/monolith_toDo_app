@@ -2,23 +2,24 @@ package ru.pylaev.toDoProject.businessLogicLayer;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import ru.pylaev.toDoProject.presentLayer.Observer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static ru.pylaev.util.InputChecker.inputSymbolsInArray;
 
 @Component
 @Scope("prototype")
-public class UiState {
+public class UiState implements Observable{
     public static final String[] INVALID_SYMBOLS = new String[] {" ", "\\", "|", "/", ":", "?", "\"", "<", ">"};
+
+    private final List<Observer> observers = new ArrayList<>();
 
     private LogicStep logicStep = LogicStep.ASK_OWNER;
     private int currentTaskIndex;
     private String owner;
-
-    public LogicStep getStep( ) {
-        return logicStep;
-    }
 
     public void setStep(LogicStep logicStep) {
         this.logicStep = logicStep;
@@ -34,6 +35,16 @@ public class UiState {
 
     public String getOwner ( ) {
         return owner;
+    }
+
+    public void addObserver (Observer observer) {
+        observers.add(observer);
+    }
+
+    public void notifyObservers (String[] tasks) {
+        for (Observer observer:observers) {
+            observer.update(logicStep.toString(), tasks);
+        }
     }
 
     public void manageOwner(String owner) {

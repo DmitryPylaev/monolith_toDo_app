@@ -3,14 +3,15 @@ package ru.pylaev.toDoProject.presentLayer.view;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
-import ru.pylaev.toDoProject.presentLayer.runnableUi.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.Observer;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 @Component
 @Scope("prototype")
-public class View {
+public class View implements Observer {
     private String[] tasks;
     private String message = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askOwner");
     private CustomPrinter printer;
