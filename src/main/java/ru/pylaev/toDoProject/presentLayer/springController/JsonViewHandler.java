@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.controller;
+package ru.pylaev.toDoProject.presentLayer.springController;
 
 import org.springframework.http.ResponseEntity;
 import ru.pylaev.toDoProject.ToDoMain;

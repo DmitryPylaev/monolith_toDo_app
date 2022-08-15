@@ -46,7 +46,6 @@ class TaskRepositoryTest {
         Mockito.when(tasksDAO.findById(3L)).thenReturn(Optional.of(task1));
         Mockito.when(tasksDAO.findById(11L)).thenReturn(Optional.of(task2));
         Mockito.when(tasksDAO.findById(14L)).thenReturn(Optional.of(task3));
-        Mockito.when(tasksDAO.findByOwner("user")).thenReturn(tasks);
     }
 
     @Test

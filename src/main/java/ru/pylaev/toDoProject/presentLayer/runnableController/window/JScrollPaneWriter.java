@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.runnableUi.window;
+package ru.pylaev.toDoProject.presentLayer.runnableController.window;
 
 import javax.swing.*;
 import java.util.List;

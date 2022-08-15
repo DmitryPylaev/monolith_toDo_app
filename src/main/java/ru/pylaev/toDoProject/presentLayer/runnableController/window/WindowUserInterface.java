@@ -1,25 +1,24 @@
-package ru.pylaev.toDoProject.presentLayer.runnableUi.window;
+package ru.pylaev.toDoProject.presentLayer.runnableController.window;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.pylaev.toDoProject.businessLogicLayer.UiState;
-import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableUI;
-import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
+import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
+import ru.pylaev.toDoProject.presentLayer.runnableController.RunnableController;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class WindowUserInterface extends BaseRunnableUI {
+public class WindowUserInterface extends RunnableController {
     private final JTextField textField = new JTextField(72);
     private final JPanel panel = new JPanel();
     private final JFrame mainFrame;
     private String userInput;
 
     @Autowired
-    public WindowUserInterface(View view, UiState uiState) {
-        super(view, uiState);
+    public WindowUserInterface(View view, UiStateModel uiStateModel) {
+        super(view, uiStateModel);
         mainFrame = new JFrame();
         mainFrame.setTitle("TODO");
         mainFrame.setDefaultCloseOperation((WindowConstants.DISPOSE_ON_CLOSE));
@@ -31,7 +30,14 @@ public class WindowUserInterface extends BaseRunnableUI {
             userInput = textField.getText();
             textField.setText("");
         });
-        view.setPrinter(new WindowPrinter());
+        view.setPrinter(content -> {
+            panel.removeAll();
+            panel.add(JScrollPaneWriter.write(content));
+            panel.add(textField);
+            panel.repaint();
+            mainFrame.setVisible(true);
+            textField.grabFocus();
+        });
     }
 
     @Override
@@ -43,17 +49,5 @@ public class WindowUserInterface extends BaseRunnableUI {
             e.printStackTrace();
         }
         return userInput;
-    }
-
-    private class WindowPrinter implements CustomPrinter {
-        @Override
-        public void display(String s) {
-            panel.removeAll();
-            panel.add(JScrollPaneWriter.write(s));
-            panel.add(textField);
-            panel.repaint();
-            mainFrame.setVisible(true);
-            textField.grabFocus();
-        }
     }
 }

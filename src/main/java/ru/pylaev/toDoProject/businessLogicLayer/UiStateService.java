@@ -14,17 +14,17 @@ public class UiStateService {
         taskRepository = t;
     }
 
-    public static String[] processUserInput(String userInput, UiState uiState) {
-        if (!checkInputBeforeContinue(userInput, uiState)) return new String[]{};
-        uiState.manageOwner(userInput);
-        uiState.manageTasks(userInput, taskRepository);
-        return ListToNumberingArrayConverter.convert(taskRepository.getAll(uiState.getOwner()));
+    public static String[] processUserInput(String userInput, UiStateModel uiStateModel) {
+        if (!checkInputBeforeContinue(userInput, uiStateModel)) return new String[]{};
+        uiStateModel.manageOwner(userInput);
+        uiStateModel.manageTasks(userInput, taskRepository);
+        return ListToNumberingArrayConverter.convert(taskRepository.getAll(uiStateModel.getOwner()));
     }
 
-    private static boolean checkInputBeforeContinue(String userInput, UiState uiState) {
+    private static boolean checkInputBeforeContinue(String userInput, UiStateModel uiStateModel) {
         if (userInput==null) return false;
         else if (userInput.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandExit"))) {
-            uiState.reset();
+            uiStateModel.reset();
             return false;
         }
         return true;

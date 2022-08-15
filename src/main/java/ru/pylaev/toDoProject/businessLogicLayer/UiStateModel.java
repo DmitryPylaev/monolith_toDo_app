@@ -12,7 +12,7 @@ import static ru.pylaev.util.InputChecker.inputSymbolsInArray;
 
 @Component
 @Scope("prototype")
-public class UiState implements Observable{
+public class UiStateModel implements Observable{
     public static final String[] INVALID_SYMBOLS = new String[] {" ", "\\", "|", "/", ":", "?", "\"", "<", ">"};
 
     private final List<Observer> observers = new ArrayList<>();
@@ -68,10 +68,10 @@ public class UiState implements Observable{
     public boolean equals (Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UiState uiState = (UiState) o;
-        if (currentTaskIndex != uiState.currentTaskIndex) return false;
-        if (!Objects.equals(logicStep, uiState.logicStep)) return false;
-        return Objects.equals(owner, uiState.owner);
+        UiStateModel uiStateModel = (UiStateModel) o;
+        if (currentTaskIndex != uiStateModel.currentTaskIndex) return false;
+        if (!Objects.equals(logicStep, uiStateModel.logicStep)) return false;
+        return Objects.equals(owner, uiStateModel.owner);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.runnableUi.telegram;
+package ru.pylaev.toDoProject.presentLayer.runnableController.telegram;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

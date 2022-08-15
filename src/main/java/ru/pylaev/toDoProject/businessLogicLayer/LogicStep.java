@@ -10,34 +10,34 @@ public enum LogicStep {
     ASK_OWNER(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askOwner")),
     ASK_NUMBER(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber")) {
         @Override
-        void manageState(String userInput, UiState uiState, TaskRepository taskRepository) {
-            List<Task> tasksList = taskRepository.getAll(uiState.getOwner());
+        void manageState(String userInput, UiStateModel uiStateModel, TaskRepository taskRepository) {
+            List<Task> tasksList = taskRepository.getAll(uiStateModel.getOwner());
             int index = validateIndex(userInput, tasksList.size());
             if (index == 0) {
-                uiState.setStep(LogicStep.ASK_NEW);
+                uiStateModel.setStep(LogicStep.ASK_NEW);
             }
             else if (index > 0) {
-                uiState.setStep(LogicStep.ASK_STATUS);
-                uiState.setCurrentTaskIndex(index);
+                uiStateModel.setStep(LogicStep.ASK_STATUS);
+                uiStateModel.setCurrentTaskIndex(index);
             }
         }
     },
     ASK_NEW(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNew")) {
         @Override
-        void manageState(String userInput, UiState uiState, TaskRepository taskRepository) {
-            taskRepository.saveNewTask(uiState.getOwner(), userInput);
-            uiState.setStep(LogicStep.ASK_NUMBER);
+        void manageState(String userInput, UiStateModel uiStateModel, TaskRepository taskRepository) {
+            taskRepository.saveNewTask(uiStateModel.getOwner(), userInput);
+            uiStateModel.setStep(LogicStep.ASK_NUMBER);
         }
     },
     ASK_STATUS(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askStatus")) {
         @Override
-        void manageState(String userInput, UiState uiState, TaskRepository taskRepository) {
-            int changeStatusResult = taskRepository.updateTask(uiState.getOwner(), userInput, uiState.getCurrentTaskIndex());
+        void manageState(String userInput, UiStateModel uiStateModel, TaskRepository taskRepository) {
+            int changeStatusResult = taskRepository.updateTask(uiStateModel.getOwner(), userInput, uiStateModel.getCurrentTaskIndex());
             if (changeStatusResult>0) {
-                uiState.setStep(LogicStep.ASK_NUMBER);
+                uiStateModel.setStep(LogicStep.ASK_NUMBER);
             }
             else if (changeStatusResult==0) {
-                uiState.setStep(LogicStep.ASK_NUMBER);
+                uiStateModel.setStep(LogicStep.ASK_NUMBER);
             }
         }
     };
@@ -48,7 +48,7 @@ public enum LogicStep {
         this.content = content;
     }
 
-    void manageState (String userInput, UiState uiState, TaskRepository taskRepository) {}
+    void manageState (String userInput, UiStateModel uiStateModel, TaskRepository taskRepository) {}
 
     @Override
     public String toString() {

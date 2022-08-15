@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.runnableUi;
+package ru.pylaev.toDoProject.presentLayer.runnableController;
 
 import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
 
