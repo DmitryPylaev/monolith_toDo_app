@@ -11,33 +11,19 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class WindowUserInterface extends RunnableController {
-    private final JTextField textField = new JTextField(72);
-    private final JPanel panel = new JPanel();
-    private final JFrame mainFrame;
     private String userInput;
 
     @Autowired
     public WindowUserInterface(View view, UiStateModel uiStateModel) {
         super(view, uiStateModel);
-        mainFrame = new JFrame();
-        mainFrame.setTitle("TODO");
-        mainFrame.setDefaultCloseOperation((WindowConstants.DISPOSE_ON_CLOSE));
-        mainFrame.setBounds(300, 300, 900, 400);
-        mainFrame.setVisible(true);
-        mainFrame.add(panel);
-        textField.setHorizontalAlignment(JTextField.CENTER);
+        WindowPrinter windowPrinter = new WindowPrinter();
+        JTextField textField = windowPrinter.getTextField();
         textField.addActionListener(e -> {
             userInput = textField.getText();
+            textField.grabFocus();
             textField.setText("");
         });
-        view.setPrinter(content -> {
-            panel.removeAll();
-            panel.add(JScrollPaneWriter.write(content));
-            panel.add(textField);
-            panel.repaint();
-            mainFrame.setVisible(true);
-            textField.grabFocus();
-        });
+        view.setPrinter(windowPrinter);
     }
 
     @Override
