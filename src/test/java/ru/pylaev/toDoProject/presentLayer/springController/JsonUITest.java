@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(loader = HeadlessSpringBootContextLoader.class)
-class JsonControllerTest {
+class JsonUITest {
     @Autowired
     private MockMvc mvc;
 

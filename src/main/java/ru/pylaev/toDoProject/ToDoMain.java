@@ -3,8 +3,10 @@ package ru.pylaev.toDoProject;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
-import ru.pylaev.toDoProject.presentLayer.runnableController.console.ConsoleUserInterface;
-import ru.pylaev.toDoProject.presentLayer.runnableController.window.WindowUserInterface;
+import ru.pylaev.toDoProject.presentLayer.runnableController.RunnableUI;
+import ru.pylaev.toDoProject.presentLayer.runnableController.console.ConsoleUI;
+import ru.pylaev.toDoProject.presentLayer.runnableController.telegram.TelegramUi;
+import ru.pylaev.toDoProject.presentLayer.runnableController.window.WindowUi;
 import ru.pylaev.util.CustomProperties;
 
 import java.util.concurrent.ExecutorService;
@@ -18,14 +20,16 @@ public class ToDoMain {
     public static void main (String[] args) {
         applicationContext = new SpringApplicationBuilder(ToDoMain.class).headless(false).run(args);
 
-        ConsoleUserInterface consoleUserInterface = applicationContext.getBean("consoleUserInterface", ConsoleUserInterface.class);
-        WindowUserInterface windowUserInterface = applicationContext.getBean("windowUserInterface", WindowUserInterface.class);
-//        TelegramUserInterface telegramUserInterface = applicationContext.getBean("telegramUserInterface", TelegramUserInterface.class);
-
         ExecutorService executorService = Executors.newCachedThreadPool();
-        executorService.execute(consoleUserInterface);
-        executorService.execute(windowUserInterface);
-//        executorService.execute(telegramUserInterface);
+
+        RunnableUI consoleUi = applicationContext.getBean(ConsoleUI.class);
+        executorService.execute(consoleUi);
+
+        RunnableUI windowUi = applicationContext.getBean(WindowUi.class);
+        executorService.execute(windowUi);
+        
+        RunnableUI telegramUi = applicationContext.getBean(TelegramUi.class);
+        executorService.execute(telegramUi);
     }
 }
 

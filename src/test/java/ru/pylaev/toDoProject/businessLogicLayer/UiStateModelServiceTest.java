@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
+import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.DAO;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
+import ru.pylaev.toDoProject.presentLayer.view.View;
 import ru.pylaev.util.HeadlessSpringBootContextLoader;
 
 import java.util.ArrayList;
@@ -66,16 +68,19 @@ class UiStateModelServiceTest {
     @Test
     void processOwnerIsOk () {
         UiStateModel uiStateModel = new UiStateModel();
+        uiStateModel.manageOwner("user");
+        View actualView = new View();
+        uiStateModel.addObserver(actualView);
 
-        UiStateModel expectedUiStateModel = new UiStateModel();
-        expectedUiStateModel.manageOwner("user");
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
+        String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
+        View expectedView = new View();
+        expectedView.update(expectedMessage, expectedTasks);
 
-        String[] actualTasks = UiStateService.processUserInput("user", uiStateModel);
+        UiStateService.processUserInput("user", uiStateModel);
 
-        Assertions.assertArrayEquals(expectedTasks, actualTasks);
-        Assertions.assertEquals(expectedUiStateModel, uiStateModel);
+        Assertions.assertEquals(expectedView, actualView);
     }
 
     @Test
@@ -104,47 +109,53 @@ class UiStateModelServiceTest {
     void processAskNumberOk () {
         UiStateModel uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
+        View actualView = new View();
+        uiStateModel.addObserver(actualView);
 
-        UiStateModel expectedUiStateModel = new UiStateModel();
-        expectedUiStateModel.manageOwner("user");
-        expectedUiStateModel.setCurrentTaskIndex(1);
-        expectedUiStateModel.setStep(LogicStep.ASK_STATUS);
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
+        String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askStatus");
+        View expectedView = new View();
+        expectedView.update(expectedMessage, expectedTasks);
 
-        String[] actualTasks = UiStateService.processUserInput( "1", uiStateModel);
+        UiStateService.processUserInput( "1", uiStateModel);
 
-        Assertions.assertArrayEquals(expectedTasks, actualTasks);
-        Assertions.assertEquals(expectedUiStateModel, uiStateModel);
+        Assertions.assertEquals(expectedView, actualView);
     }
 
     @Test
     void processAskNumberOutRange () {
         UiStateModel uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
+        View actualView = new View();
+        uiStateModel.addObserver(actualView);
 
-        UiStateModel expectedUiStateModel = new UiStateModel();
-        expectedUiStateModel.manageOwner("user");
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
+        String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
+        View expectedView = new View();
+        expectedView.update(expectedMessage, expectedTasks);
 
-        String[] actualTasks = UiStateService.processUserInput( "10", uiStateModel);
+        UiStateService.processUserInput( "10", uiStateModel);
 
-        Assertions.assertArrayEquals(expectedTasks, actualTasks);
-        Assertions.assertEquals(expectedUiStateModel, uiStateModel);
+        Assertions.assertEquals(expectedView, actualView);
     }
 
     @Test
     void processAskNumberNull () {
         UiStateModel uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
+        View actualView = new View();
+        uiStateModel.addObserver(actualView);
 
-        UiStateModel expectedUiStateModel = new UiStateModel();
-        expectedUiStateModel.manageOwner("user");
+        String[] expectedTasks = new String[] {};
+        String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
+        View expectedView = new View();
+        expectedView.update(expectedMessage, expectedTasks);
 
         UiStateService.processUserInput( null, uiStateModel);
 
-        Assertions.assertEquals(expectedUiStateModel, uiStateModel);
+        Assertions.assertEquals(expectedView, actualView);
     }
 
     @Test
@@ -152,19 +163,20 @@ class UiStateModelServiceTest {
         UiStateModel uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
         uiStateModel.setStep(LogicStep.ASK_NEW);
+        View actualView = new View();
+        uiStateModel.addObserver(actualView);
 
         Task task = new Task("33", "user", "note4", "Wed Mar 25 16:01", "WAIT");
         tasks.add(task);
-
-        UiStateModel expectedUiStateModel = new UiStateModel();
-        expectedUiStateModel.manageOwner("user");
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
+        String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
+        View expectedView = new View();
+        expectedView.update(expectedMessage, expectedTasks);
 
-        String[] actualTasks = UiStateService.processUserInput( "note4", uiStateModel);
+        UiStateService.processUserInput( "note4", uiStateModel);
 
-        Assertions.assertArrayEquals(expectedTasks, actualTasks);
-        Assertions.assertEquals(expectedUiStateModel, uiStateModel);
+        Assertions.assertEquals(expectedView, actualView);
     }
 
     @Test
@@ -173,19 +185,20 @@ class UiStateModelServiceTest {
         uiStateModel.manageOwner("user");
         uiStateModel.setCurrentTaskIndex(1);
         uiStateModel.setStep(LogicStep.ASK_STATUS);
+        View actualView = new View();
+        uiStateModel.addObserver(actualView);
 
-        UiStateModel expectedUiStateModel = new UiStateModel();
-        expectedUiStateModel.manageOwner("user");
-        expectedUiStateModel.setCurrentTaskIndex(1);
         List <Task> expectList = new ArrayList<>(tasks);
         expectList.set(0, new Task("3", "user", "note3", "Wed Mar 25 16:01", "DONE"));
         String[] expectedTasks = expectList.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
+        String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
+        View expectedView = new View();
+        expectedView.update(expectedMessage, expectedTasks);
 
-        String[] actualTasks = UiStateService.processUserInput( "DONE", uiStateModel);
+        UiStateService.processUserInput( "DONE", uiStateModel);
 
-        Assertions.assertArrayEquals(expectedTasks, actualTasks);
-        Assertions.assertEquals(expectedUiStateModel, uiStateModel);
+        Assertions.assertEquals(expectedView, actualView);
     }
 
     @Test
@@ -194,34 +207,37 @@ class UiStateModelServiceTest {
         uiStateModel.manageOwner("user");
         uiStateModel.setCurrentTaskIndex(3);
         uiStateModel.setStep(LogicStep.ASK_STATUS);
+        View actualView = new View();
+        uiStateModel.addObserver(actualView);
 
-        UiStateModel expectedUiStateModel = new UiStateModel();
-        expectedUiStateModel.manageOwner("user");
-        expectedUiStateModel.setCurrentTaskIndex(3);
         List <Task> expectList = new ArrayList<>(tasks);
         expectList.remove(2);
         String[] expectedTasks = expectList.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
+        String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
+        View expectedView = new View();
+        expectedView.update(expectedMessage, expectedTasks);
 
-        String[] actualTasks = UiStateService.processUserInput("ARCH", uiStateModel);
+        UiStateService.processUserInput("ARCH", uiStateModel);
 
-        Assertions.assertArrayEquals(expectedTasks, actualTasks);
-        Assertions.assertEquals(expectedUiStateModel, uiStateModel);
+        Assertions.assertEquals(expectedView, actualView);
     }
 
     @Test
     void processAskStatusInvalid () {
         UiStateModel uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
+        View actualView = new View();
+        uiStateModel.addObserver(actualView);
 
-        UiStateModel expectedUiStateModel = new UiStateModel();
-        expectedUiStateModel.manageOwner("user");
         String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
+        String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
+        View expectedView = new View();
+        expectedView.update(expectedMessage, expectedTasks);
 
-        String[] actualTasks = UiStateService.processUserInput( "arc", uiStateModel);
+        UiStateService.processUserInput( "arc", uiStateModel);
 
-        Assertions.assertArrayEquals(expectedTasks, actualTasks);
-        Assertions.assertEquals(expectedUiStateModel, uiStateModel);
+        Assertions.assertEquals(expectedView, actualView);
     }
 }

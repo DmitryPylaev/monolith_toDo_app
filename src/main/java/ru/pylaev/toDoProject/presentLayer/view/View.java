@@ -7,6 +7,7 @@ import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.Observer;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 @Component
 @Scope("prototype")
@@ -35,5 +36,20 @@ public class View implements Observer {
             printer.display(String.valueOf(stringBuilder));
         }
         return String.valueOf(stringBuilder);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof View view)) return false;
+        if (!Arrays.deepEquals(tasks, view.tasks)) return false;
+        return Objects.equals(message, view.message);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Arrays.hashCode(tasks);
+        result = 31 * result + (message != null ? message.hashCode() : 0);
+        return result;
     }
 }

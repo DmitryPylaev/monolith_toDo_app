@@ -14,7 +14,12 @@ public class UiStateService {
         taskRepository = t;
     }
 
-    public static String[] processUserInput(String userInput, UiStateModel uiStateModel) {
+    public static void processUserInput(String userInput, UiStateModel uiStateModel) {
+        String[] tasks = getTasks(userInput, uiStateModel);
+        uiStateModel.notifyObservers(tasks);
+    }
+
+    public static String[] getTasks (String userInput, UiStateModel uiStateModel) {
         if (!checkInputBeforeContinue(userInput, uiStateModel)) return new String[]{};
         uiStateModel.manageOwner(userInput);
         uiStateModel.manageTasks(userInput, taskRepository);

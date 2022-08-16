@@ -6,13 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
-import ru.pylaev.toDoProject.presentLayer.Controller;
+import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
+import ru.pylaev.toDoProject.presentLayer.UI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 @org.springframework.stereotype.Controller
-public class HtmlController extends Controller {
+public class HtmlUI extends UI {
     @Autowired
-    public HtmlController(View view, UiStateModel uiStateModel) {
+    public HtmlUI(View view, UiStateModel uiStateModel) {
         super(view, uiStateModel);
     }
 
@@ -24,7 +25,7 @@ public class HtmlController extends Controller {
 
     @PostMapping
     public String post(@RequestParam String userInput) {
-        processingRequest(userInput);
+        UiStateService.processUserInput(userInput, uiStateModel);
         return "redirect:/";
     }
 }
