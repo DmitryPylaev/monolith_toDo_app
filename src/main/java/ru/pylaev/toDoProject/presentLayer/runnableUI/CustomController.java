@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.runnableController;
+package ru.pylaev.toDoProject.presentLayer.runnableUI;
 
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;

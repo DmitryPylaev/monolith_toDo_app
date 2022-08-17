@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.runnableController.window;
+package ru.pylaev.toDoProject.presentLayer.runnableUI.window;
 
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
@@ -32,5 +32,6 @@ public class WindowPrinter implements CustomPrinter {
         panel.add(textField);
         panel.repaint();
         mainFrame.setVisible(true);
+        textField.grabFocus();
     }
 }

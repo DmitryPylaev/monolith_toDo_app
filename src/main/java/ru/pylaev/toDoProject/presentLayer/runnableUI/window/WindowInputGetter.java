@@ -1,6 +1,6 @@
-package ru.pylaev.toDoProject.presentLayer.runnableController.window;
+package ru.pylaev.toDoProject.presentLayer.runnableUI.window;
 
-import ru.pylaev.toDoProject.presentLayer.runnableController.InputGetter;
+import ru.pylaev.toDoProject.presentLayer.runnableUI.InputGetter;
 
 import javax.swing.*;
 
@@ -10,7 +10,6 @@ public class WindowInputGetter extends InputGetter {
     public WindowInputGetter(JTextField textField) {
         textField.addActionListener(e -> {
             userInput = textField.getText();
-            textField.grabFocus();
             textField.setText("");
         });
     }

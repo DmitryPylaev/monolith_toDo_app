@@ -1,7 +1,7 @@
-package ru.pylaev.toDoProject.presentLayer.runnableController.console;
+package ru.pylaev.toDoProject.presentLayer.runnableUI.console;
 
 import org.springframework.stereotype.Component;
-import ru.pylaev.toDoProject.presentLayer.runnableController.InputGetter;
+import ru.pylaev.toDoProject.presentLayer.runnableUI.InputGetter;
 
 import java.util.Scanner;
 
