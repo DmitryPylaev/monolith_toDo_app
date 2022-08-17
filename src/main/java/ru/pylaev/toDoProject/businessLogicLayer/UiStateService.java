@@ -19,7 +19,7 @@ public class UiStateService {
         uiStateModel.notifyObservers(tasks);
     }
 
-    public static String[] getTasks (String userInput, UiStateModel uiStateModel) {
+    private static String[] getTasks (String userInput, UiStateModel uiStateModel) {
         if (!checkInputBeforeContinue(userInput, uiStateModel)) return new String[]{};
         uiStateModel.manageOwner(userInput);
         uiStateModel.manageTasks(userInput, taskRepository);

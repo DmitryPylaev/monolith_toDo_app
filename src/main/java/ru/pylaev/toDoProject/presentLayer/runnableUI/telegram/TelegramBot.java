@@ -1,5 +1,6 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI.telegram;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -16,6 +17,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     private long chatId;
     private String token;
 
+    @Autowired
     public TelegramBot(@Value("${chatId}") long chatId, @Value("${botToken}") String token){
         try {
             this.chatId = chatId;
