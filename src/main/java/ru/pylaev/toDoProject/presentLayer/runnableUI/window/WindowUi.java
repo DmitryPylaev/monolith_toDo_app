@@ -11,9 +11,10 @@ import ru.pylaev.toDoProject.presentLayer.view.View;
 public class WindowUi extends RunnableUI {
 
     @Autowired
-    public WindowUi(View view, UiStateModel uiStateModel, WindowPrinter windowPrinter) {
+    public WindowUi(View view, UiStateModel uiStateModel, WindowPrinter windowPrinter, WindowInputGetter inputGetter) {
         super(view, uiStateModel);
         view.setPrinter(windowPrinter);
-        setController(new CustomController(new WindowInputGetter(windowPrinter.getTextField())));
+        setController(new CustomController(inputGetter));
+        inputGetter.setTextField(windowPrinter.getTextField());
     }
 }
