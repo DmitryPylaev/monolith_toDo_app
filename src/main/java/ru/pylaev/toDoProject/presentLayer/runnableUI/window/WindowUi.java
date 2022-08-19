@@ -10,8 +10,6 @@ import ru.pylaev.toDoProject.presentLayer.view.View;
 public class WindowUi extends RunnableUI {
     @Autowired
     public WindowUi(View view, UiStateModel uiStateModel, WindowUIFactory factory) {
-        super(view, uiStateModel);
-        view.setPrinter(factory.getPrinter());
-        setController(factory.getController());
+        super(view, uiStateModel, factory);
     }
 }

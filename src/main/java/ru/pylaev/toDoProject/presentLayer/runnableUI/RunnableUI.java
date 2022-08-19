@@ -5,14 +5,12 @@ import ru.pylaev.toDoProject.presentLayer.UI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 public abstract class RunnableUI extends UI implements Runnable {
-    private ControllerInterface controller;
+    private final ControllerInterface controller;
 
-    public RunnableUI(View view, UiStateModel uiStateModel) {
+    public RunnableUI(View view, UiStateModel uiStateModel, UIFactory factory) {
         super(view, uiStateModel);
-    }
-
-    public void setController(ControllerInterface controller) {
-        this.controller = controller;
+        view.setPrinter(factory.getPrinter());
+        controller = factory.getController();
     }
 
     @Override

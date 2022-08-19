@@ -3,7 +3,7 @@ package ru.pylaev.toDoProject.presentLayer.view;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
-import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.Observer;
 
 import java.util.Arrays;

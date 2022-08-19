@@ -10,8 +10,6 @@ import ru.pylaev.toDoProject.presentLayer.view.View;
 public class ConsoleUI extends RunnableUI {
     @Autowired
     public ConsoleUI(View view, UiStateModel uiStateModel, ConsoleUIFactory factory) {
-        super(view, uiStateModel);
-        view.setPrinter(factory.getPrinter());
-        setController(factory.getController());
+        super(view, uiStateModel, factory);
     }
 }

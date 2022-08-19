@@ -3,7 +3,7 @@ package ru.pylaev.toDoProject.presentLayer.runnableUI.window;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
-import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomPrinter;
 
 import javax.swing.*;
 

@@ -10,8 +10,6 @@ import ru.pylaev.toDoProject.presentLayer.view.View;
 public class TelegramUi extends RunnableUI {
     @Autowired
     public TelegramUi(View view, UiStateModel uiStateModel, TelegramUIFactory factory) {
-        super(view, uiStateModel);
-        view.setPrinter(factory.getPrinter());
-        setController(factory.getController());
+        super(view, uiStateModel, factory);
     }
 }
