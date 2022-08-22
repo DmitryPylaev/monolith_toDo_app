@@ -1,5 +1,7 @@
 package ru.pylaev.util;
 
+import ru.pylaev.toDoProject.ToDoMain;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,7 +25,7 @@ public class SQLRequestExecutor {
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sql);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("storageError");
+            System.out.println(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("storageError"));
         }
     }
 }
