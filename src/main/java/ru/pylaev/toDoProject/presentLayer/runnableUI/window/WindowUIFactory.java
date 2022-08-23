@@ -6,6 +6,7 @@ import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.ControllerInterface;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomController;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.UIFactory;
+import ru.pylaev.toDoProject.presentLayer.view.View;
 
 @Component
 public final class WindowUIFactory implements UIFactory {
@@ -28,8 +29,8 @@ public final class WindowUIFactory implements UIFactory {
     }
 
     @Override
-    public ControllerInterface getController() {
+    public ControllerInterface getController(View view) {
         inputGetter.setTextField(windowPrinter.getTextField());
-        return new CustomController(inputGetter);
+        return new CustomController(inputGetter, view);
     }
 }

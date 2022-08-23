@@ -10,7 +10,7 @@ public abstract class RunnableUI extends UI implements Runnable {
     public RunnableUI(View view, UiStateModel uiStateModel, UIFactory factory) {
         super(view, uiStateModel);
         view.setPrinter(factory.getPrinter());
-        controller = factory.getController();
+        controller = factory.getController(view);
     }
 
     @Override

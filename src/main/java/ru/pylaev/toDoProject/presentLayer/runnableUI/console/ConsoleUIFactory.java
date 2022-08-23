@@ -6,6 +6,7 @@ import ru.pylaev.toDoProject.presentLayer.runnableUI.ControllerInterface;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomController;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.SimplePrinter;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.UIFactory;
+import ru.pylaev.toDoProject.presentLayer.view.View;
 
 @Component
 public record ConsoleUIFactory(ConsoleInputGetter inputGetter) implements UIFactory {
@@ -15,7 +16,7 @@ public record ConsoleUIFactory(ConsoleInputGetter inputGetter) implements UIFact
     }
 
     @Override
-    public ControllerInterface getController() {
-        return new CustomController(inputGetter);
+    public ControllerInterface getController(View view) {
+        return new CustomController(inputGetter, view);
     }
 }

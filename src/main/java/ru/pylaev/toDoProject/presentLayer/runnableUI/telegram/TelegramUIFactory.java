@@ -7,6 +7,7 @@ import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomController;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.SimplePrinter;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.UIFactory;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.console.ConsoleInputGetter;
+import ru.pylaev.toDoProject.presentLayer.view.View;
 
 @Component
 public record TelegramUIFactory(ConsoleInputGetter inputGetter, TelegramBot bot) implements UIFactory {
@@ -16,7 +17,7 @@ public record TelegramUIFactory(ConsoleInputGetter inputGetter, TelegramBot bot)
     }
 
     @Override
-    public ControllerInterface getController() {
-        return new CustomController(new TelegramInputGetter(bot));
+    public ControllerInterface getController(View view) {
+        return new CustomController(new TelegramInputGetter(bot), view);
     }
 }

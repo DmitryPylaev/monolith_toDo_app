@@ -41,9 +41,9 @@ public class UiStateModel implements Observable{
         observers.add(observer);
     }
 
-    public void notifyObservers (String[] tasks) {
+    public void notifyObservers (Respond respond) {
         for (Observer observer:observers) {
-            observer.update(logicStep.toString(), tasks);
+            observer.update(logicStep.toString(), respond);
         }
     }
 

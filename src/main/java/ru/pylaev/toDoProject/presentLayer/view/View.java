@@ -3,6 +3,7 @@ package ru.pylaev.toDoProject.presentLayer.view;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
+import ru.pylaev.toDoProject.businessLogicLayer.Respond;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.Observer;
 
@@ -20,9 +21,9 @@ public class View implements Observer {
         this.printer = printer;
     }
 
-    public void update(String message, String[] tasks) {
+    public void update(String message, Respond respond) {
         this.message = message;
-        this.tasks = tasks;
+        tasks = respond.tasks();
         show();
     }
 

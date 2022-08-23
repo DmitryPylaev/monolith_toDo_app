@@ -15,15 +15,15 @@ public class UiStateService {
     }
 
     public static void processUserInput(String userInput, UiStateModel uiStateModel) {
-        String[] tasks = getTasks(userInput, uiStateModel);
-        uiStateModel.notifyObservers(tasks);
+        Respond respond = getTasks(userInput, uiStateModel);
+        uiStateModel.notifyObservers(respond);
     }
 
-    private static String[] getTasks (String userInput, UiStateModel uiStateModel) {
-        if (!checkInputBeforeContinue(userInput, uiStateModel)) return new String[]{};
+    private static Respond getTasks (String userInput, UiStateModel uiStateModel) {
+        if (!checkInputBeforeContinue(userInput, uiStateModel)) return new Respond(new String[]{}, true);
         uiStateModel.manageOwner(userInput);
         uiStateModel.manageTasks(userInput, taskRepository);
-        return ListToNumberingArrayConverter.convert(taskRepository.getAll(uiStateModel.getOwner()));
+        return new Respond(ListToNumberingArrayConverter.convert(taskRepository.getAll(uiStateModel.getOwner())), false);
     }
 
     private static boolean checkInputBeforeContinue(String userInput, UiStateModel uiStateModel) {

@@ -4,5 +4,5 @@ import ru.pylaev.toDoProject.presentLayer.Observer;
 
 public interface Observable {
     void addObserver (Observer observer);
-    void notifyObservers (String[] tasks);
+    void notifyObservers (Respond respond);
 }
