@@ -21,6 +21,7 @@ public class View implements Observer {
         this.printer = printer;
     }
 
+    @Override
     public void update(String message, Respond respond) {
         this.message = message;
         tasks = respond.getTasks();

@@ -15,11 +15,11 @@ public class UiStateService {
     }
 
     public static void processUserInput(String userInput, UiStateModel uiStateModel) {
-        Respond respond = getTasks(userInput, uiStateModel);
+        Respond respond = getRespond(userInput, uiStateModel);
         uiStateModel.notifyObservers(respond);
     }
 
-    private static Respond getTasks (String userInput, UiStateModel uiStateModel) {
+    private static Respond getRespond(String userInput, UiStateModel uiStateModel) {
         if (!checkInputBeforeContinue(userInput, uiStateModel)) return new Respond(new String[]{});
         uiStateModel.manageOwner(userInput);
         uiStateModel.manageTasks(userInput, taskRepository);

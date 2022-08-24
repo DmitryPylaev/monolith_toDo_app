@@ -1,8 +1,7 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI;
 
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
-import ru.pylaev.toDoProject.presentLayer.Observer;
 
-public interface ControllerInterface extends Observer {
+public interface ControllerInterface {
     void processUserInput(UiStateModel uiStateModel);
 }
