@@ -70,7 +70,7 @@ class TaskRepositoryTest {
 
     @Test
     void changeStatusBack() {
-        assertEquals(0, taskRepository.updateTask("user", "BACK", 1));
+        assertEquals(1, taskRepository.updateTask("user", "BACK", 1));
     }
 
     @Test

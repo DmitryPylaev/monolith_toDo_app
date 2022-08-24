@@ -50,20 +50,6 @@ class UiStateModelServiceTest {
         Mockito.when(tasksDAO.findById(14L)).thenReturn(Optional.of(task3));
     }
 
-//    @Test
-//    void getCurrentIndexIsOk() {
-//        assertEquals(validateIndex("3", tasks.size()), 3);
-//    }
-//
-//    @Test
-//    void getCurrentIndexIsNull() {
-//        assertEquals(validateIndex("2", 0), 0);
-//    }
-//
-//    @Test
-//    void getCurrentIndexIsRejected() {
-//        assertEquals(validateIndex("4", tasks.size()), -1);
-//    }
 
     @Test
     void processOwnerIsOk () {
@@ -76,7 +62,7 @@ class UiStateModelServiceTest {
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
         View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks, false);
+        Respond expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput("user", uiStateModel);
@@ -117,7 +103,7 @@ class UiStateModelServiceTest {
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askStatus");
         View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks, false);
+        Respond expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput( "1", uiStateModel);
@@ -136,7 +122,7 @@ class UiStateModelServiceTest {
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
         View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks, false);
+        Respond expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput( "10", uiStateModel);
@@ -154,7 +140,7 @@ class UiStateModelServiceTest {
         String[] expectedTasks = new String[] {};
         String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
         View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks, false);
+        Respond expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput( null, uiStateModel);
@@ -176,7 +162,7 @@ class UiStateModelServiceTest {
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
         View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks, false);
+        Respond expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput( "note4", uiStateModel);
@@ -199,7 +185,7 @@ class UiStateModelServiceTest {
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
         View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks, false);
+        Respond expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput( "DONE", uiStateModel);
@@ -222,7 +208,7 @@ class UiStateModelServiceTest {
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
         View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks, false);
+        Respond expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput("ARCH", uiStateModel);
@@ -241,7 +227,7 @@ class UiStateModelServiceTest {
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber");
         View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks, false);
+        Respond expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput( "arc", uiStateModel);

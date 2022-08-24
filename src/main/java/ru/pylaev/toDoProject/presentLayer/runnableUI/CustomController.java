@@ -3,10 +3,9 @@ package ru.pylaev.toDoProject.presentLayer.runnableUI;
 import ru.pylaev.toDoProject.businessLogicLayer.Respond;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
-import ru.pylaev.toDoProject.presentLayer.Observer;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
-public class CustomController implements ControllerInterface, Observer {
+public class CustomController implements ControllerInterface {
     protected InputGetter inputGetter;
     private View view;
 

@@ -14,18 +14,11 @@
     </div>
 </div>
 
-<p th:text="${message}" align="center"></p>
+<p th:text="${message}" th:style="${color}" align="center"></p>
 
 <form method="post">
     <input type="text" name="userInput" class="form-control">
 </form>
-
-<!--<form th:method="POST" th:action="@{/}" th:object="${state}">-->
-<!--    <label for="inputField">Enter input:</label>-->
-<!--    <input id="inputField" type="text" th:field="${state.answer}"/>-->
-<!--    <br/>-->
-<!--    <input type="submit" value="send"/>-->
-<!--</form>-->
 
 <div th:insert="blocks/footer::footer"></div>
 

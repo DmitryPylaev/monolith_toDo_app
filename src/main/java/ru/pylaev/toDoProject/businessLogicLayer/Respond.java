@@ -1,12 +1,17 @@
 package ru.pylaev.toDoProject.businessLogicLayer;
 
-public record Respond(String[] tasks, boolean emptyRespond) {
+public class Respond {
+    private final String[] tasks;
+
+    public Respond(String[] tasks) {
+        this.tasks = tasks;
+    }
 
     public String[] getTasks() {
         return tasks;
     }
 
-    public boolean isEmptyRespond() {
-        return emptyRespond;
+    public boolean isEmpty() {
+        return tasks.length<1;
     }
 }

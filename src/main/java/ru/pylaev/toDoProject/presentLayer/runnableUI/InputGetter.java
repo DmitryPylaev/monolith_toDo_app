@@ -7,7 +7,7 @@ public abstract class InputGetter {
 
     protected abstract void setNull();
 
-    protected String getInput() {
+    public String getInput() {
         setNull();
         String result = null;
         try {

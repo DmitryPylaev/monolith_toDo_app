@@ -23,7 +23,7 @@ public class View implements Observer {
 
     public void update(String message, Respond respond) {
         this.message = message;
-        tasks = respond.tasks();
+        tasks = respond.getTasks();
         show();
     }
 

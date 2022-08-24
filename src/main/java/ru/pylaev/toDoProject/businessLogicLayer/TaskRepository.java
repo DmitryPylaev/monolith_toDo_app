@@ -41,18 +41,18 @@ public class TaskRepository {
     }
 
     public synchronized int updateTask(String owner, String status, int taskIndex) {
-        if (!status.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandBack"))) {
-            if (InputChecker.inputSymbolsInArray(status, TASKS_STATES)>0) {
-                Task task = taskDAO.findById(getAll(owner)
-                        .get(taskIndex-1)
-                        .getId())
-                        .orElseThrow();
-                task.setStatus(status);
-                taskDAO.save(task);
-                return 1;
-            }
-            return -1;
+        if (status.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandBack")) || getAll(owner).size()==0) return 1;
+
+        if (InputChecker.inputSymbolsInArray(status, TASKS_STATES)>0) {
+            Task task = taskDAO.findById(getAll(owner)
+                    .get(taskIndex-1)
+                    .getId())
+                    .orElseThrow();
+            task.setStatus(status);
+            taskDAO.save(task);
+            return (getAll(owner).size()>0)?1:0;
         }
-        return 0;
+
+        return -1;
     }
 }

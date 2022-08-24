@@ -37,7 +37,7 @@ public enum LogicStep {
                 uiStateModel.setStep(LogicStep.ASK_NUMBER);
             }
             else if (changeStatusResult==0) {
-                uiStateModel.setStep(LogicStep.ASK_NUMBER);
+                uiStateModel.setStep(LogicStep.ASK_NEW);
             }
         }
     };

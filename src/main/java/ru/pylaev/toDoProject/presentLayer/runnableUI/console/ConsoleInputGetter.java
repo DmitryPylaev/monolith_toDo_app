@@ -11,13 +11,13 @@ public class ConsoleInputGetter extends InputGetter {
     private final Scanner scanner = new Scanner((System.in)).useDelimiter("\n");
 
     @Override
-    public String get() {
+    protected String get() {
         userInput = scanner.next();
         return userInput;
     }
 
     @Override
-    public void setNull() {
+    protected void setNull() {
         userInput = null;
     }
 }

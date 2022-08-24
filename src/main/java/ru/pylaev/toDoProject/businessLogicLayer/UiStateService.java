@@ -20,10 +20,10 @@ public class UiStateService {
     }
 
     private static Respond getTasks (String userInput, UiStateModel uiStateModel) {
-        if (!checkInputBeforeContinue(userInput, uiStateModel)) return new Respond(new String[]{}, true);
+        if (!checkInputBeforeContinue(userInput, uiStateModel)) return new Respond(new String[]{});
         uiStateModel.manageOwner(userInput);
         uiStateModel.manageTasks(userInput, taskRepository);
-        return new Respond(ListToNumberingArrayConverter.convert(taskRepository.getAll(uiStateModel.getOwner())), false);
+        return new Respond(ListToNumberingArrayConverter.convert(taskRepository.getAll(uiStateModel.getOwner())));
     }
 
     private static boolean checkInputBeforeContinue(String userInput, UiStateModel uiStateModel) {
