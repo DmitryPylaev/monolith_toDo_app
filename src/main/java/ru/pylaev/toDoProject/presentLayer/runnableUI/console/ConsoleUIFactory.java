@@ -1,7 +1,7 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI.console;
 
 import org.springframework.stereotype.Component;
-import ru.pylaev.toDoProject.presentLayer.SimpleControllerLogic;
+import ru.pylaev.toDoProject.presentLayer.MainControllerLogic;
 import ru.pylaev.toDoProject.presentLayer.ControllerInterface;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.*;
 
@@ -14,6 +14,6 @@ public record ConsoleUIFactory(ConsoleInputGetter inputGetter) implements UIFact
 
     @Override
     public ControllerInterface getController() {
-        return new CustomController(inputGetter, new SimpleControllerLogic());
+        return new CustomController(inputGetter, new MainControllerLogic());
     }
 }

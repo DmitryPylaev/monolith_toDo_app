@@ -4,7 +4,8 @@ import ru.pylaev.toDoProject.businessLogicLayer.Respond;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
 
-public class SimpleControllerLogic {
+public class MainControllerLogic implements ControllerLogicInterface {
+    @Override
     public void processUserInput(String userInput, UiStateModel uiStateModel) {
         Respond respond = getRespond(userInput, uiStateModel);
         uiStateModel.notifyObservers(respond);
