@@ -2,7 +2,8 @@ package ru.pylaev.toDoProject.presentLayer.runnableUI.window;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.pylaev.toDoProject.presentLayer.runnableUI.ControllerInterface;
+import ru.pylaev.toDoProject.presentLayer.SimpleControllerLogic;
+import ru.pylaev.toDoProject.presentLayer.ControllerInterface;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomController;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.UIFactory;
@@ -30,6 +31,6 @@ public final class WindowUIFactory implements UIFactory {
     @Override
     public ControllerInterface getController() {
         inputGetter.setTextField(windowPrinter.getTextField());
-        return new CustomController(inputGetter);
+        return new CustomController(inputGetter, new SimpleControllerLogic());
     }
 }

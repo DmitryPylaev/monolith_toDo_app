@@ -6,15 +6,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
-import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
+import ru.pylaev.toDoProject.presentLayer.SimpleControllerLogic;
 import ru.pylaev.toDoProject.presentLayer.UI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 @org.springframework.stereotype.Controller
 public class HtmlUI extends UI {
+    private final SimpleControllerLogic controllerLogic;
+
     @Autowired
     public HtmlUI(View view, UiStateModel uiStateModel) {
         super(view, uiStateModel);
+        controllerLogic = new SimpleControllerLogic();
     }
 
     @GetMapping
@@ -25,7 +28,7 @@ public class HtmlUI extends UI {
 
     @PostMapping
     public String post(@RequestParam String userInput) {
-        UiStateService.processUserInput(userInput, uiStateModel);
+        controllerLogic.processUserInput(userInput, uiStateModel);
         return "redirect:/";
     }
 }

@@ -27,7 +27,7 @@ public class UiStateService {
         else return getFullRespond(userInput, uiStateModel);
     }
 
-    private static boolean checkInputBeforeContinue(String userInput, UiStateModel uiStateModel) {
+    public static boolean checkInputBeforeContinue(String userInput, UiStateModel uiStateModel) {
         if (userInput==null) return false;
         else if (userInput.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandExit"))) {
             uiStateModel.reset();
@@ -36,11 +36,11 @@ public class UiStateService {
         return true;
     }
 
-    private static Respond getEmptyRespond() {
+    public static Respond getEmptyRespond() {
         return new Respond(new String[]{});
     }
 
-    private static Respond getFullRespond (String userInput, UiStateModel uiStateModel) {
+    public static Respond getFullRespond (String userInput, UiStateModel uiStateModel) {
         uiStateModel.manageOwner(userInput);
         uiStateModel.manageTasks(userInput, taskRepository);
         List<Task> tasks = taskRepository.getAll(uiStateModel.getOwner());
