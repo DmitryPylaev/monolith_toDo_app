@@ -6,28 +6,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
-import ru.pylaev.toDoProject.presentLayer.MainControllerLogic;
 import ru.pylaev.toDoProject.presentLayer.UI;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @org.springframework.stereotype.Controller
 public class HtmlUI extends UI {
-    private final HtmlControllerLogicDecorator controllerLogic;
+    private final HtmlControllerLogic controllerLogic;
 
     @Autowired
-    public HtmlUI(View view, UiStateModel uiStateModel) {
+    public HtmlUI(View view, UiStateModel uiStateModel, HtmlControllerLogic htmlControllerLogic) {
         super(view, uiStateModel);
-        controllerLogic = new HtmlControllerLogicDecorator(new MainControllerLogic());
+        this.controllerLogic = htmlControllerLogic;
     }
 
     @GetMapping
     public String get(Model model) {
-        Map<String, Object> map = controllerLogic.getParam(view);
+        Map<String, Object> map = getParam();
         String color = controllerLogic.getColor(view);
         map.put("color", color);
-        HtmlViewHandler.updateModel(map, model);
+        updateModel(map, model);
         return "home";
     }
 
@@ -35,6 +35,19 @@ public class HtmlUI extends UI {
     public String post(@RequestParam String userInput) {
         controllerLogic.processUserInput(userInput, uiStateModel);
         return "redirect:/";
+    }
+
+    private Map<String, Object> getParam () {
+        Map<String, Object> map = new HashMap<>();
+        map.put("message", view.getMessage());
+        map.put("tasks", view.getTasks());
+        return map;
+    }
+
+    private void updateModel(Map<String, Object> map, Model model) {
+        for (Map.Entry<String, Object> entry:map.entrySet()) {
+            model.addAttribute(entry.getKey(), entry.getValue());
+        }
     }
 }
 

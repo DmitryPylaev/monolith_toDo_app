@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.presentLayer.MainControllerLogic;
 import ru.pylaev.toDoProject.presentLayer.UI;
@@ -23,6 +24,14 @@ public class JsonUI extends UI {
     @PostMapping("/postJson")
     public ResponseEntity<String> post(@RequestBody JsonInput jsonInput) {
         controllerLogic.processUserInput(jsonInput.getContent(), uiStateModel);
-        return JsonViewHandler.prepareResponseEntity(view.show());
+        return prepareResponseEntity(view.show());
+    }
+
+    private ResponseEntity<String> prepareResponseEntity(String content) {
+        try {
+            return ResponseEntity.ok(content);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("networkError") + " " + e.getMessage());
+        }
     }
 }
