@@ -24,10 +24,11 @@ public class HtmlUI extends UI {
 
     @GetMapping
     public String get(Model model) {
-        Map<String, Object> map = getParam();
-        String color = controllerLogic.getColor(view);
-        map.put("color", color);
-        updateModel(map, model);
+        Map<String, Object> map = new HashMap<>();
+        map.put("message", view.getMessage());
+        map.put("tasks", view.getTasks());
+        map.put("color", controllerLogic.getColor(view));
+        model.addAllAttributes(map);
         return "home";
     }
 
@@ -35,19 +36,6 @@ public class HtmlUI extends UI {
     public String post(@RequestParam String userInput) {
         controllerLogic.processUserInput(userInput, uiStateModel);
         return "redirect:/";
-    }
-
-    private Map<String, Object> getParam () {
-        Map<String, Object> map = new HashMap<>();
-        map.put("message", view.getMessage());
-        map.put("tasks", view.getTasks());
-        return map;
-    }
-
-    private void updateModel(Map<String, Object> map, Model model) {
-        for (Map.Entry<String, Object> entry:map.entrySet()) {
-            model.addAttribute(entry.getKey(), entry.getValue());
-        }
     }
 }
 
