@@ -7,6 +7,7 @@ import ru.pylaev.toDoProject.presentLayer.view.View;
 
 public abstract class RunnableUI extends UI implements Runnable {
     private final ControllerInterface controller;
+    public boolean active = true;
 
     public RunnableUI(View view, UiStateModel uiStateModel, UIFactory factory) {
         super(view, uiStateModel);
@@ -17,8 +18,6 @@ public abstract class RunnableUI extends UI implements Runnable {
     @Override
     public final void run() {
         view.show();
-        while (true) {
-            controller.processUserInput(uiStateModel);
-        }
+        while (active) controller.processUserInput(uiStateModel);
     }
 }
