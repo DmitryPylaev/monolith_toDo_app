@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.springController;
+package ru.pylaev.toDoProject.presentLayer.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;

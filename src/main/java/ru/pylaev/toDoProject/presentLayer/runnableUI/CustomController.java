@@ -2,15 +2,15 @@ package ru.pylaev.toDoProject.presentLayer.runnableUI;
 
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.presentLayer.ControllerInterface;
-import ru.pylaev.toDoProject.presentLayer.MainControllerLogic;
+import ru.pylaev.toDoProject.presentLayer.ControllerLogicInterface;
 
 public class CustomController implements ControllerInterface {
     protected InputGetter inputGetter;
-    protected MainControllerLogic controllerLogic;
+    protected ControllerLogicInterface controllerLogic;
 
-    public CustomController(InputGetter inputGetter, MainControllerLogic mainControllerLogic) {
+    public CustomController(InputGetter inputGetter, ControllerLogicInterface controllerLogic) {
         this.inputGetter = inputGetter;
-        this.controllerLogic = mainControllerLogic;
+        this.controllerLogic = controllerLogic;
     }
 
     @Override
