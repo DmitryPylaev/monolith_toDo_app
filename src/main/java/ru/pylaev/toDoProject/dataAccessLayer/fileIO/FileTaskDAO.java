@@ -1,12 +1,13 @@
 package ru.pylaev.toDoProject.dataAccessLayer.fileIO;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.DAO;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 
-import java.io.EOFException;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-//@Primary
+@Primary
 public class FileTaskDAO implements DAO {
     private final String path;
 
@@ -64,14 +65,14 @@ public class FileTaskDAO implements DAO {
 
     private <T> List<Task> findTasks(T target, TaskElector<T> taskElector) {
         var result = new ArrayList<Task>();
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(Files.newInputStream(Paths.get(path)))) {
-            while (true) {
+        try (FileInputStream fileInputStream = new FileInputStream(path)) {
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            while (fileInputStream.available() != 0) {
                 var task = (Task) objectInputStream.readObject();
                 if (taskElector.elect(task, target)) {
                     result.add(task);
                 }
             }
-        } catch (EOFException ignored) {
         }
         catch (IOException | ClassNotFoundException e) {
             System.out.println(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("storageError"));
