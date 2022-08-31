@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
-import ru.pylaev.toDoProject.presentLayer.MainControllerLogic;
+import ru.pylaev.toDoProject.presentLayer.SimpleControllerLogic;
 import ru.pylaev.toDoProject.presentLayer.UI;
 import ru.pylaev.toDoProject.presentLayer.view.JsonInput;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 @org.springframework.stereotype.Controller
 public class JsonUI extends UI {
-    private final MainControllerLogic controllerLogic;
+    private final SimpleControllerLogic controllerLogic;
 
     @Autowired
-    public JsonUI(View view, UiStateModel uiStateModel) {
+    public JsonUI(View view, UiStateModel uiStateModel, SimpleControllerLogic controllerLogic) {
         super(view, uiStateModel);
-        controllerLogic = new MainControllerLogic();
+        this.controllerLogic = controllerLogic;
     }
 
     @PostMapping("/postJson")

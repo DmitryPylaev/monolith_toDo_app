@@ -14,12 +14,12 @@ import java.util.Map;
 
 @org.springframework.stereotype.Controller
 public class HtmlUI extends UI {
-    private final HtmlControllerLogic controllerLogic;
+    private final AlertControllerLogic controllerLogic;
 
     @Autowired
-    public HtmlUI(View view, UiStateModel uiStateModel, HtmlControllerLogic htmlControllerLogic) {
+    public HtmlUI(View view, UiStateModel uiStateModel, AlertControllerLogic alertControllerLogic) {
         super(view, uiStateModel);
-        this.controllerLogic = htmlControllerLogic;
+        this.controllerLogic = alertControllerLogic;
     }
 
     @GetMapping

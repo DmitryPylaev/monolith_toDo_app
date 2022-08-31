@@ -2,11 +2,11 @@ package ru.pylaev.toDoProject.presentLayer.spring;
 
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
-import ru.pylaev.toDoProject.presentLayer.MainControllerLogic;
+import ru.pylaev.toDoProject.presentLayer.SimpleControllerLogic;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 @Component
-public class HtmlControllerLogic extends MainControllerLogic {
+public class AlertControllerLogic extends SimpleControllerLogic {
 
     public String getColor(View view) {
         String[] tasks = view.getTasks();
