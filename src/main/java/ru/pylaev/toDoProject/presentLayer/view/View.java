@@ -14,7 +14,7 @@ import java.util.Objects;
 @Scope("prototype")
 public class View implements Observer {
     private String[] tasks;
-    private String message = ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askOwner");
+    private String message = ToDoMain.PROPERTIES.get("askOwner");
     private CustomPrinter printer;
 
     public void setPrinter(CustomPrinter printer) {

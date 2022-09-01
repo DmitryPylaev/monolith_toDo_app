@@ -31,7 +31,7 @@ public class JsonUI extends UI {
         try {
             return ResponseEntity.ok(content);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("networkError") + " " + e.getMessage());
+            return ResponseEntity.badRequest().body(ToDoMain.PROPERTIES.get("networkError") + " " + e.getMessage());
         }
     }
 }

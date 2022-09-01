@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 
 @SpringBootApplication
 public class ToDoMain {
-    public static final CustomProperties CUSTOM_PROPERTIES = new CustomProperties("customConfig");
+    public static final CustomProperties PROPERTIES = new CustomProperties("customConfig");
     public static ApplicationContext context;
 
     public static void main (String[] args) {

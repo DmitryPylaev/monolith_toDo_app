@@ -45,7 +45,7 @@ class HtmlControllerTest {
         this.mvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("message"))
-                .andExpect(model().attribute("message", ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askOwner")));
+                .andExpect(model().attribute("message", ToDoMain.PROPERTIES.get("askOwner")));
     }
 
     @Test
@@ -68,7 +68,7 @@ class HtmlControllerTest {
         this.mvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("message"))
-                .andExpect(model().attribute("message", ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber")))
+                .andExpect(model().attribute("message", ToDoMain.PROPERTIES.get("askNumber")))
                 .andExpect(model().attributeExists("tasks"))
                 .andExpect(model().attribute("tasks", expectedTasks));
     }

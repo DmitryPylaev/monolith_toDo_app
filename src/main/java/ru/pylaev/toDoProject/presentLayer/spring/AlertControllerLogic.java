@@ -10,9 +10,9 @@ public class AlertControllerLogic extends SimpleControllerLogic {
 
     public String getColor(View view) {
         String[] tasks = view.getTasks();
-        String color = "background:" + ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("mainColor");
+        String color = "background:" + ToDoMain.PROPERTIES.get("mainColor");
         if (tasks == null || tasks.length<1) {
-            color = "background:"+ ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("alertColor");
+            color = "background:"+ ToDoMain.PROPERTIES.get("alertColor");
         }
         return color;
     }

@@ -16,7 +16,7 @@ public class WindowPrinter implements CustomPrinter {
     @Autowired
     public WindowPrinter() {
         mainFrame = new JFrame();
-        mainFrame.setTitle(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("windowTitle"));
+        mainFrame.setTitle(ToDoMain.PROPERTIES.get("windowTitle"));
         mainFrame.setDefaultCloseOperation((WindowConstants.DISPOSE_ON_CLOSE));
         mainFrame.setBounds(300, 300, 900, 400);
         mainFrame.setVisible(true);

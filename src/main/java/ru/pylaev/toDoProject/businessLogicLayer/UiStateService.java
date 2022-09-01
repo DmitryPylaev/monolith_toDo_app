@@ -29,7 +29,7 @@ public class UiStateService {
 
     public static boolean checkInputBeforeContinue(String userInput, UiStateModel uiStateModel) {
         if (userInput==null) return false;
-        else if (userInput.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandExit"))) {
+        else if (userInput.equals(ToDoMain.PROPERTIES.get("commandExit"))) {
             uiStateModel.reset();
             return false;
         }

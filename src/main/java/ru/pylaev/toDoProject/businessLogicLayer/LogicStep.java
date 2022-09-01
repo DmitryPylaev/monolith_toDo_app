@@ -7,8 +7,8 @@ import ru.pylaev.util.InputChecker;
 import java.util.List;
 
 public enum LogicStep {
-    ASK_OWNER(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askOwner")),
-    ASK_NUMBER(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNumber")) {
+    ASK_OWNER(ToDoMain.PROPERTIES.get("askOwner")),
+    ASK_NUMBER(ToDoMain.PROPERTIES.get("askNumber")) {
         @Override
         void manageState(String userInput, UiStateModel uiStateModel, TaskRepository taskRepository) {
             List<Task> tasksList = taskRepository.getAll(uiStateModel.getOwner());
@@ -22,14 +22,14 @@ public enum LogicStep {
             }
         }
     },
-    ASK_NEW(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askNew")) {
+    ASK_NEW(ToDoMain.PROPERTIES.get("askNew")) {
         @Override
         void manageState(String userInput, UiStateModel uiStateModel, TaskRepository taskRepository) {
             taskRepository.saveNewTask(uiStateModel.getOwner(), userInput);
             uiStateModel.setStep(LogicStep.ASK_NUMBER);
         }
     },
-    ASK_STATUS(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("askStatus")) {
+    ASK_STATUS(ToDoMain.PROPERTIES.get("askStatus")) {
         @Override
         void manageState(String userInput, UiStateModel uiStateModel, TaskRepository taskRepository) {
             int changeStatusResult = taskRepository.updateTask(uiStateModel.getOwner(), userInput, uiStateModel.getCurrentTaskIndex());
@@ -56,10 +56,10 @@ public enum LogicStep {
     }
 
     private static int validateIndex(String userInput, int size) {
-        if (size==0 || userInput.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandNew"))) {
+        if (size==0 || userInput.equals(ToDoMain.PROPERTIES.get("commandNew"))) {
             return 0;
         }
-        else if (!userInput.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandBack"))) {
+        else if (!userInput.equals(ToDoMain.PROPERTIES.get("commandBack"))) {
             var taskIndex = InputChecker.isValidIndex(userInput, size);
             if (taskIndex>-1) return taskIndex;
         }

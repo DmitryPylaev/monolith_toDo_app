@@ -25,7 +25,7 @@ public class SQLRequestExecutor {
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sql);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("storageError"));
+            System.out.println(ToDoMain.PROPERTIES.get("storageError"));
         }
     }
 }

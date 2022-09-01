@@ -26,7 +26,7 @@ public class FileTaskDAO implements DAO {
         try {
             if (!Files.exists(Paths.get(path))) Files.createFile(Paths.get(path));
         } catch (IOException e) {
-            System.out.println(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("storageError"));
+            System.out.println(ToDoMain.PROPERTIES.get("storageError"));
         }
     }
 
@@ -58,7 +58,7 @@ public class FileTaskDAO implements DAO {
             task.setId(lastIndex+1);
             objectOutputStream.writeObject(task);
         } catch (IOException e) {
-            System.out.println(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("storageError"));
+            System.out.println(ToDoMain.PROPERTIES.get("storageError"));
         }
     }
 
@@ -74,7 +74,7 @@ public class FileTaskDAO implements DAO {
             }
         }
         catch (IOException | ClassNotFoundException e) {
-            System.out.println(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("storageError"));
+            System.out.println(ToDoMain.PROPERTIES.get("storageError"));
         }
         return result;
     }

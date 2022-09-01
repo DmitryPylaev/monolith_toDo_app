@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 @Repository
 public class TaskRepository {
     private static final String[] TASKS_STATES = new String[] {
-            ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("statusWait"),
-            ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("statusDone"),
-            ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("statusArch")
+            ToDoMain.PROPERTIES.get("statusWait"),
+            ToDoMain.PROPERTIES.get("statusDone"),
+            ToDoMain.PROPERTIES.get("statusArch")
     };
 
     private final DAO taskDAO;
@@ -28,20 +28,20 @@ public class TaskRepository {
 
     public synchronized List<Task> getAll(String owner) {
         return (taskDAO.findByOwner(owner)).stream()
-                .filter(task -> !task.getStatus().equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("statusArch")))
+                .filter(task -> !task.getStatus().equals(ToDoMain.PROPERTIES.get("statusArch")))
                 .collect(Collectors.toList());
     }
 
     public synchronized int saveNewTask(String owner, String taskContent) {
-        if (!taskContent.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandBack"))) {
-            taskDAO.save(new Task(owner, taskContent, new Date(), ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("statusWait")));
+        if (!taskContent.equals(ToDoMain.PROPERTIES.get("commandBack"))) {
+            taskDAO.save(new Task(owner, taskContent, new Date(), ToDoMain.PROPERTIES.get("statusWait")));
             return 1;
         }
         return 0;
     }
 
     public synchronized int updateTask(String owner, String status, int taskIndex) {
-        if (status.equals(ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("commandBack")) || getAll(owner).size()==0) return 1;
+        if (status.equals(ToDoMain.PROPERTIES.get("commandBack")) || getAll(owner).size()==0) return 1;
 
         if (InputChecker.inputSymbolsInArray(status, TASKS_STATES)>0) {
             Task task = taskDAO.findById(getAll(owner)

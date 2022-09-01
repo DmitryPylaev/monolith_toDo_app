@@ -36,7 +36,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     @Override
-    public String getBotUsername() { return ToDoMain.CUSTOM_PROPERTIES.getPropertyContent("botName"); }
+    public String getBotUsername() { return ToDoMain.PROPERTIES.get("botName"); }
 
     @Override
     public String getBotToken() { return token; }
