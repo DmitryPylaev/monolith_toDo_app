@@ -1,10 +1,13 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI;
 
+import ru.pylaev.toDoProject.businessLogicLayer.Observable;
+import ru.pylaev.toDoProject.businessLogicLayer.Respond;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.presentLayer.ControllerInterface;
 import ru.pylaev.toDoProject.presentLayer.ControllerLogicInterface;
+import ru.pylaev.toDoProject.presentLayer.Observer;
 
-public class CustomController implements ControllerInterface {
+public class CustomController implements ControllerInterface, Observable {
     protected InputGetter inputGetter;
     protected ControllerLogicInterface controllerLogic;
 
@@ -17,4 +20,10 @@ public class CustomController implements ControllerInterface {
     public void processUserInput(UiStateModel uiStateModel) {
         controllerLogic.processUserInput(inputGetter.getInput(), uiStateModel);
     }
+
+    @Override
+    public void addObserver(Observer observer) {}
+
+    @Override
+    public void notifyObservers(Respond respond) {}
 }
