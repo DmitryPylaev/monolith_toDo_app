@@ -1,6 +1,5 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI.window;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomPrinter;
@@ -11,11 +10,9 @@ import javax.swing.*;
 public class WindowPrinter implements CustomPrinter {
     private final JTextField textField = new JTextField(72);
     private final JPanel panel = new JPanel();
-    private final JFrame mainFrame;
+    private final JFrame mainFrame = new JFrame();
 
-    @Autowired
-    public WindowPrinter() {
-        mainFrame = new JFrame();
+    {
         mainFrame.setTitle(ToDoMain.PROPERTIES.get("windowTitle"));
         mainFrame.setDefaultCloseOperation((WindowConstants.DISPOSE_ON_CLOSE));
         mainFrame.setBounds(300, 300, 900, 400);
