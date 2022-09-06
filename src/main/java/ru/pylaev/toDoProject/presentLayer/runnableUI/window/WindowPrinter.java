@@ -1,5 +1,6 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI.window;
 
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomPrinter;
@@ -8,7 +9,7 @@ import javax.swing.*;
 
 @Component
 public class WindowPrinter implements CustomPrinter {
-    private final JTextField textField = new JTextField(72);
+    @Getter private final JTextField textField = new JTextField(72);
     private final JPanel panel = new JPanel();
     private final JFrame mainFrame = new JFrame();
 
@@ -19,10 +20,6 @@ public class WindowPrinter implements CustomPrinter {
         mainFrame.setVisible(true);
         mainFrame.add(panel);
         textField.setHorizontalAlignment(JTextField.CENTER);
-    }
-
-    public JTextField getTextField() {
-        return textField;
     }
 
     public void display(String content) {

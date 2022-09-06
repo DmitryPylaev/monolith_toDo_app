@@ -33,9 +33,9 @@ class TaskRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        Task task1 = new Task("3", "user", "note3", "Wed Mar 25 16:01", "WAIT");
-        Task task2 = new Task("11", "user", "note1", "Wed Mar 24 16:01", "WAIT");
-        Task task3 = new Task("14", "user", "note2", "Thu Mar 23 16:01", "DONE");
+        var task1 = new Task(3, "user", "note3", "Wed Mar 25 16:01", "WAIT");
+        var task2 = new Task(11, "user", "note1", "Wed Mar 24 16:01", "WAIT");
+        var task3 = new Task(14, "user", "note2", "Thu Mar 23 16:01", "DONE");
 
         tasks.clear();
         tasks.add(task1);

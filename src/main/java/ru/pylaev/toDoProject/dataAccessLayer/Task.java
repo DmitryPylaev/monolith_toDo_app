@@ -1,5 +1,7 @@
 package ru.pylaev.toDoProject.dataAccessLayer;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,16 +11,17 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Setter private long id;
     private String owner;
     private String text;
     private String date;
-    private String status;
-
-    public Task () {}
+    @Setter private String status;
 
     public Task (String owner, String text, Date date, String status) {
         this.owner = owner;
@@ -26,30 +29,6 @@ public class Task implements Serializable {
         this.date = String.valueOf(date).substring(0,16);
         this.status = status;
     }
-
-    public Task (String id, String owner, String text, String date, String status) {
-        this.id = Integer.parseInt(id);
-        this.owner = owner;
-        this.text = text;
-        this.date = date.substring(0,16);
-        this.status = status;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public long getId ( ) { return id; }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getStatus ( ) {
-        return status;
-    }
-
-    public void setStatus (String status) { this.status = status; }
 
     @Override
     public String toString () { return  text + ' ' + date + ' ' + status; }

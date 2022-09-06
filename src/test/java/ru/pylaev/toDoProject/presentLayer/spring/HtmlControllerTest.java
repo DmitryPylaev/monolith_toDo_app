@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.pylaev.toDoProject.ToDoMain;
+import ru.pylaev.toDoProject.businessLogicLayer.LogicStep;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import ru.pylaev.util.HeadlessSpringBootContextLoader;
 import ru.pylaev.util.SQLRequestExecutor;
@@ -50,16 +51,16 @@ class HtmlControllerTest {
 
     @Test
     void processUserInput() throws Exception {
-        Task task1 = new Task("3", "user", "note3", "Wed Mar 25 16:01", "WAIT");
-        Task task2 = new Task("11", "user", "note1", "Wed Mar 24 16:01", "WAIT");
-        Task task3 = new Task("14", "user", "note2", "Thu Mar 23 16:01", "DONE");
+        var task1 = new Task(3, "user", "note3", "Wed Mar 25 16:01", "WAIT");
+        var task2 = new Task(11, "user", "note1", "Wed Mar 24 16:01", "WAIT");
+        var task3 = new Task(14, "user", "note2", "Thu Mar 23 16:01", "DONE");
 
         tasks.clear();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
 
-        String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
+        var expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
 
         this.mvc.perform(post("/").param("userInput", "user"))
@@ -68,7 +69,7 @@ class HtmlControllerTest {
         this.mvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("message"))
-                .andExpect(model().attribute("message", ToDoMain.PROPERTIES.get("askNumber")))
+                .andExpect(model().attribute("message", LogicStep.ASK_NUMBER.toString()))
                 .andExpect(model().attributeExists("tasks"))
                 .andExpect(model().attribute("tasks", expectedTasks));
     }

@@ -1,17 +1,13 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI.telegram;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.InputGetter;
 
 @Component
+@AllArgsConstructor
 public class TelegramInputGetter extends InputGetter {
     private final TelegramBot bot;
-
-    @Autowired
-    public TelegramInputGetter(TelegramBot bot) {
-        this.bot = bot;
-    }
 
     @Override
     public String get() {

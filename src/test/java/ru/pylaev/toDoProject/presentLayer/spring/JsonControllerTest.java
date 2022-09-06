@@ -43,17 +43,17 @@ class JsonControllerTest {
 
     @Test
     void processUserInput () throws Exception {
-        Task task1 = new Task("3", "user", "note3", "Wed Mar 25 16:01", "WAIT");
-        Task task2 = new Task("11", "user", "note1", "Wed Mar 24 16:01", "WAIT");
-        Task task3 = new Task("14", "user", "note2", "Thu Mar 23 16:01", "DONE");
+        var task1 = new Task(3, "user", "note3", "Wed Mar 25 16:01", "WAIT");
+        var task2 = new Task(11, "user", "note1", "Wed Mar 24 16:01", "WAIT");
+        var task3 = new Task(14, "user", "note2", "Thu Mar 23 16:01", "DONE");
 
         tasks.clear();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
 
-        String[] expectedTasks = ListToNumberingArrayConverter.convert(tasks);
-        StringBuilder stringBuilder = new StringBuilder();
+        var expectedTasks = ListToNumberingArrayConverter.convert(tasks);
+        var stringBuilder = new StringBuilder();
         Arrays.stream(expectedTasks).forEach(task -> stringBuilder.append(task).append("\n"));
 
         stringBuilder.append(LogicStep.ASK_NUMBER);
@@ -62,6 +62,6 @@ class JsonControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"content\": \"user\"}"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(String.valueOf(stringBuilder)));
+                .andExpect(content().string(stringBuilder.toString()));
     }
 }

@@ -1,6 +1,6 @@
 package ru.pylaev.toDoProject.dataAccessLayer.dataBase;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.dataAccessLayer.DAO;
@@ -10,14 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@AllArgsConstructor
 @Primary
 public class DataBaseTaskDAO implements DAO {
     private final TaskSpringRepository taskSpringRepository;
-
-    @Autowired
-    public DataBaseTaskDAO(TaskSpringRepository taskSpringRepository) {
-        this.taskSpringRepository = taskSpringRepository;
-    }
 
     @Override
     public synchronized List<Task> findByOwner(String owner) {

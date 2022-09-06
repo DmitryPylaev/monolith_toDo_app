@@ -1,5 +1,6 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI.telegram;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -15,13 +16,13 @@ import ru.pylaev.toDoProject.ToDoMain;
 public class TelegramBot extends TelegramLongPollingBot {
     public String input;
     private long chatId;
-    private String token;
+    @Getter private String botToken;
 
     @Autowired
-    public TelegramBot(@Value("${chatId}") long chatId, @Value("${botToken}") String token){
+    public TelegramBot(@Value("${chatId}") long chatId, @Value("${botToken}") String botToken){
         try {
             this.chatId = chatId;
-            this.token = token;
+            this.botToken = botToken;
             new TelegramBotsApi(DefaultBotSession.class).registerBot(this);
         } catch (TelegramApiException e) {
             e.printStackTrace();
@@ -38,11 +39,8 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Override
     public String getBotUsername() { return ToDoMain.PROPERTIES.get("botName"); }
 
-    @Override
-    public String getBotToken() { return token; }
-
     public void send(String message) {
-        SendMessage sendMessage = new SendMessage();
+        var sendMessage = new SendMessage();
         sendMessage.setChatId(String.valueOf(chatId));
         sendMessage.setText(message);
         try {

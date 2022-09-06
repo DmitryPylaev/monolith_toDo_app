@@ -1,13 +1,8 @@
 package ru.pylaev.toDoProject.presentLayer.view;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class JsonInput {
-    private String content;
-
-    public String getContent ( ) {
-        return content;
-    }
-
-    public void setContent (String content) {
-        this.content = content;
-    }
+    @Getter @Setter private String content;
 }

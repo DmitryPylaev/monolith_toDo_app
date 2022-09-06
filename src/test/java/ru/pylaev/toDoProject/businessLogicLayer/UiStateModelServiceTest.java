@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
-import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.DAO;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import ru.pylaev.toDoProject.presentLayer.view.View;
@@ -35,9 +34,9 @@ class UiStateModelServiceTest {
 
     @BeforeEach
     void setUp() {
-        Task task1 = new Task("3", "user", "note3", "Wed Mar 25 16:01", "WAIT");
-        Task task2 = new Task("11", "user", "note1", "Wed Mar 24 16:01", "WAIT");
-        Task task3 = new Task("14", "user", "note2", "Thu Mar 23 16:01", "DONE");
+        var task1 = new Task(3, "user", "note3", "Wed Mar 25 16:01", "WAIT");
+        var task2 = new Task(11, "user", "note1", "Wed Mar 24 16:01", "WAIT");
+        var task3 = new Task(14, "user", "note2", "Thu Mar 23 16:01", "DONE");
 
         tasks.clear();
         tasks.add(task1);
@@ -53,16 +52,16 @@ class UiStateModelServiceTest {
 
     @Test
     void processOwnerIsOk () {
-        UiStateModel uiStateModel = new UiStateModel();
+        var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
-        View actualView = new View();
+        var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
+        var expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
-        String expectedMessage = ToDoMain.PROPERTIES.get("askNumber");
-        View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks);
+        String expectedMessage = LogicStep.ASK_NUMBER.toString();
+        var expectedView = new View();
+        var expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput("user", uiStateModel);
@@ -72,38 +71,32 @@ class UiStateModelServiceTest {
 
     @Test
     void processOwnerInvalidSymbol () {
-        UiStateModel uiStateModel = new UiStateModel();
-
-        UiStateModel expectedUiStateModel = new UiStateModel();
-
+        var uiStateModel = new UiStateModel();
+        var expectedUiStateModel = new UiStateModel();
         UiStateService.processUserInput( "???", uiStateModel);
-
         Assertions.assertEquals(expectedUiStateModel, uiStateModel);
     }
 
     @Test
     void processOwnerNull () {
-        UiStateModel uiStateModel = new UiStateModel();
-
-        UiStateModel expectedUiStateModel = new UiStateModel();
-
+        var uiStateModel = new UiStateModel();
+        var expectedUiStateModel = new UiStateModel();
         UiStateService.processUserInput( null, uiStateModel);
-
         Assertions.assertEquals(expectedUiStateModel, uiStateModel);
     }
 
     @Test
     void processAskNumberOk () {
-        UiStateModel uiStateModel = new UiStateModel();
+        var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
-        View actualView = new View();
+        var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
+        var expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
-        String expectedMessage = ToDoMain.PROPERTIES.get("askStatus");
-        View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks);
+        String expectedMessage = LogicStep.ASK_STATUS.toString();
+        var expectedView = new View();
+        var expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput( "1", uiStateModel);
@@ -113,16 +106,16 @@ class UiStateModelServiceTest {
 
     @Test
     void processAskNumberOutRange () {
-        UiStateModel uiStateModel = new UiStateModel();
+        var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
-        View actualView = new View();
+        var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
+        var expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
-        String expectedMessage = ToDoMain.PROPERTIES.get("askNumber");
-        View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks);
+        String expectedMessage = LogicStep.ASK_NUMBER.toString();
+        var expectedView = new View();
+        var expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput( "10", uiStateModel);
@@ -132,15 +125,15 @@ class UiStateModelServiceTest {
 
     @Test
     void processAskNumberNull () {
-        UiStateModel uiStateModel = new UiStateModel();
+        var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
-        View actualView = new View();
+        var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        String[] expectedTasks = new String[] {};
-        String expectedMessage = ToDoMain.PROPERTIES.get("askNumber");
-        View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks);
+        var expectedTasks = new String[] {};
+        String expectedMessage = LogicStep.ASK_NUMBER.toString();
+        var expectedView = new View();
+        var expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput( null, uiStateModel);
@@ -150,19 +143,19 @@ class UiStateModelServiceTest {
 
     @Test
     void processAskNewOk () {
-        UiStateModel uiStateModel = new UiStateModel();
+        var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
-        uiStateModel.setStep(LogicStep.ASK_NEW);
-        View actualView = new View();
+        uiStateModel.setLogicStep(LogicStep.ASK_NEW);
+        var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        Task task = new Task("33", "user", "note4", "Wed Mar 25 16:01", "WAIT");
+        var task = new Task(33, "user", "note4", "Wed Mar 25 16:01", "WAIT");
         tasks.add(task);
-        String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
+        var expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
-        String expectedMessage = ToDoMain.PROPERTIES.get("askNumber");
-        View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks);
+        String expectedMessage = LogicStep.ASK_NUMBER.toString();
+        var expectedView = new View();
+        var expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput( "note4", uiStateModel);
@@ -172,20 +165,20 @@ class UiStateModelServiceTest {
 
     @Test
     void processAskStatusDone () {
-        UiStateModel uiStateModel = new UiStateModel();
+        var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
         uiStateModel.setCurrentTaskIndex(1);
-        uiStateModel.setStep(LogicStep.ASK_STATUS);
-        View actualView = new View();
+        uiStateModel.setLogicStep(LogicStep.ASK_STATUS);
+        var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        List <Task> expectList = new ArrayList<>(tasks);
-        expectList.set(0, new Task("3", "user", "note3", "Wed Mar 25 16:01", "DONE"));
-        String[] expectedTasks = expectList.stream().map(Task::toString).toArray(String[]::new);
+        var expectList = new ArrayList<>(tasks);
+        expectList.set(0, new Task(3, "user", "note3", "Wed Mar 25 16:01", "DONE"));
+        var expectedTasks = expectList.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
-        String expectedMessage = ToDoMain.PROPERTIES.get("askNumber");
-        View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks);
+        String expectedMessage = LogicStep.ASK_NUMBER.toString();
+        var expectedView = new View();
+        var expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput( "DONE", uiStateModel);
@@ -195,20 +188,20 @@ class UiStateModelServiceTest {
 
     @Test
     void processAskStatusArch () {
-        UiStateModel uiStateModel = new UiStateModel();
+        var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
         uiStateModel.setCurrentTaskIndex(3);
-        uiStateModel.setStep(LogicStep.ASK_STATUS);
-        View actualView = new View();
+        uiStateModel.setLogicStep(LogicStep.ASK_STATUS);
+        var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        List <Task> expectList = new ArrayList<>(tasks);
+        var expectList = new ArrayList<>(tasks);
         expectList.remove(2);
-        String[] expectedTasks = expectList.stream().map(Task::toString).toArray(String[]::new);
+        var expectedTasks = expectList.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
-        String expectedMessage = ToDoMain.PROPERTIES.get("askNumber");
-        View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks);
+        String expectedMessage = LogicStep.ASK_NUMBER.toString();
+        var expectedView = new View();
+        var expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput("ARCH", uiStateModel);
@@ -218,16 +211,16 @@ class UiStateModelServiceTest {
 
     @Test
     void processAskStatusInvalid () {
-        UiStateModel uiStateModel = new UiStateModel();
+        var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
-        View actualView = new View();
+        var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        String[] expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
+        var expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
         IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
-        String expectedMessage = ToDoMain.PROPERTIES.get("askNumber");
-        View expectedView = new View();
-        Respond expectedRespond = new Respond(expectedTasks);
+        String expectedMessage = LogicStep.ASK_NUMBER.toString();
+        var expectedView = new View();
+        var expectedRespond = new Respond(expectedTasks);
         expectedView.update(expectedMessage, expectedRespond);
 
         UiStateService.processUserInput( "arc", uiStateModel);

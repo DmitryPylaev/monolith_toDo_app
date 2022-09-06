@@ -2,13 +2,7 @@ package ru.pylaev.toDoProject.presentLayer.runnableUI;
 
 import java.util.function.Consumer;
 
-public class SimplePrinter implements CustomPrinter {
-    protected Consumer<String> consumer;
-
-    public SimplePrinter(Consumer<String> consumer) {
-        this.consumer = consumer;
-    }
-
+public record SimplePrinter(Consumer<String> consumer) implements CustomPrinter {
     public void display(String content) {
         consumer.accept(content);
     }

@@ -1,5 +1,6 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI;
 
+import lombok.AllArgsConstructor;
 import ru.pylaev.toDoProject.businessLogicLayer.Observable;
 import ru.pylaev.toDoProject.businessLogicLayer.Respond;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
@@ -7,14 +8,11 @@ import ru.pylaev.toDoProject.presentLayer.ControllerInterface;
 import ru.pylaev.toDoProject.presentLayer.ControllerLogicInterface;
 import ru.pylaev.toDoProject.presentLayer.Observer;
 
+@SuppressWarnings("ClassCanBeRecord")
+@AllArgsConstructor
 public class CustomController implements ControllerInterface, Observable {
-    protected InputGetter inputGetter;
-    protected ControllerLogicInterface controllerLogic;
-
-    public CustomController(InputGetter inputGetter, ControllerLogicInterface controllerLogic) {
-        this.inputGetter = inputGetter;
-        this.controllerLogic = controllerLogic;
-    }
+    private final InputGetter inputGetter;
+    private final ControllerLogicInterface controllerLogic;
 
     @Override
     public void processUserInput(UiStateModel uiStateModel) {

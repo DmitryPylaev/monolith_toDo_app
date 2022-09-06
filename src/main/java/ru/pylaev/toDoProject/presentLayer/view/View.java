@@ -1,33 +1,25 @@
 package ru.pylaev.toDoProject.presentLayer.view;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.businessLogicLayer.Respond;
-import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.Observer;
+import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomPrinter;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 @Component
 @Scope("prototype")
+@Getter
+@EqualsAndHashCode
 public class View implements Observer {
     private String[] tasks;
     private String message = ToDoMain.PROPERTIES.get("askOwner");
-    private CustomPrinter printer;
-
-    public void setPrinter(CustomPrinter printer) {
-        this.printer = printer;
-    }
-
-    public String[] getTasks() {
-        return tasks;
-    }
-
-    public String getMessage() {
-        return message;
-    }
+    @EqualsAndHashCode.Exclude @Setter private CustomPrinter printer;
 
     @Override
     public void update(String message, Respond respond) {
@@ -37,29 +29,14 @@ public class View implements Observer {
     }
 
     public String show() {
-        StringBuilder stringBuilder = new StringBuilder();
+        var stringBuilder = new StringBuilder();
         if (tasks != null && tasks.length > 0) {
             Arrays.stream(tasks).forEach(s -> stringBuilder.append(s).append("\n"));
         }
         stringBuilder.append(message);
         if (printer != null) {
-            printer.display(String.valueOf(stringBuilder));
+            printer.display(stringBuilder.toString());
         }
-        return String.valueOf(stringBuilder);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof View view)) return false;
-        if (!Arrays.deepEquals(tasks, view.tasks)) return false;
-        return Objects.equals(message, view.message);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Arrays.hashCode(tasks);
-        result = 31 * result + (message != null ? message.hashCode() : 0);
-        return result;
+        return stringBuilder.toString();
     }
 }

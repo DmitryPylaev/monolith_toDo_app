@@ -45,7 +45,7 @@ public class FileTaskDAO implements DAO {
         var tasks = findTasks("addAll", (t1, o1) -> true);
         boolean taskIsFound = false;
         long lastIndex = 0;
-        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(Files.newOutputStream(Paths.get(path)))) {
+        try (var objectOutputStream = new ObjectOutputStream(Files.newOutputStream(Paths.get(path)))) {
             for (var taskItem : tasks) {
                 if (taskItem.getId() == task.getId()) {
                     taskItem.setStatus(task.getStatus());
@@ -64,8 +64,8 @@ public class FileTaskDAO implements DAO {
 
     private <T> List<Task> findTasks(T target, TaskElector<T> taskElector) {
         var result = new ArrayList<Task>();
-        try (FileInputStream fileInputStream = new FileInputStream(path)) {
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        try (var fileInputStream = new FileInputStream(path)) {
+            var objectInputStream = new ObjectInputStream(fileInputStream);
             while (fileInputStream.available() != 0) {
                 var task = (Task) objectInputStream.readObject();
                 if (taskElector.elect(task, target)) {
