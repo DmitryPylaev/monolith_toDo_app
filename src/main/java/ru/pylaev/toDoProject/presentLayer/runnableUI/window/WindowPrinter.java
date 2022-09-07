@@ -17,7 +17,6 @@ public class WindowPrinter implements CustomPrinter {
         mainFrame.setTitle(ToDoMain.PROPERTIES.get("windowTitle"));
         mainFrame.setDefaultCloseOperation((WindowConstants.DISPOSE_ON_CLOSE));
         mainFrame.setBounds(300, 300, 900, 400);
-        mainFrame.setVisible(true);
         mainFrame.add(panel);
         textField.setHorizontalAlignment(JTextField.CENTER);
     }

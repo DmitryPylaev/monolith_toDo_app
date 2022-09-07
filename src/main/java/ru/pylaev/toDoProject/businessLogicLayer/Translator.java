@@ -1,0 +1,32 @@
+package ru.pylaev.toDoProject.businessLogicLayer;
+
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import ru.pylaev.toDoProject.dataAccessLayer.CustomHttpClient;
+
+import java.util.HashMap;
+
+@Component
+@Setter
+public class Translator {
+    private String target = "en";
+    private String source = "ru";
+    @Value("${apiKey}") private String key;
+
+    public String translate(String content) {
+        var params = new HashMap<String, String>();
+        params.put("q", content);
+        params.put("target", target);
+        params.put("source", source);
+
+        var headers = new HashMap<String, String>();
+        headers.put("content-type", "application/x-www-form-urlencoded");
+        headers.put("Accept-Encoding", "application/gzip");
+        headers.put("X-RapidAPI-Key", key);
+        headers.put("X-RapidAPI-Host", "google-translate1.p.rapidapi.com");
+
+        String result = CustomHttpClient.post("https://google-translate1.p.rapidapi.com/language/translate/v2", params, "data", headers);
+        return result.substring(result.lastIndexOf(":")+2, result.lastIndexOf("\""));
+    }
+}
