@@ -29,7 +29,7 @@ public class HtmlUI extends UI {
         map.put("tasks", view.getArrTask());
         map.put("color", controllerLogic.getColor(view));
         model.addAllAttributes(map);
-        return "home";
+        return "index";
     }
 
     @PostMapping

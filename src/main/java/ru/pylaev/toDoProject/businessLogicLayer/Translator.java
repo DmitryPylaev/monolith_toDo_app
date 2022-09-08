@@ -1,6 +1,6 @@
 package ru.pylaev.toDoProject.businessLogicLayer;
 
-import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.dataAccessLayer.CustomHttpClient;
@@ -8,17 +8,18 @@ import ru.pylaev.toDoProject.dataAccessLayer.CustomHttpClient;
 import java.util.HashMap;
 
 @Component
-@Setter
 public class Translator {
-    private String target = "en";
-    private String source = "ru";
-    private String key;
+    public static String target = "en";
+    public static String source = "ru";
 
-    public Translator(@Value("${apiKey}") String key) {
-        this.key = key;
+    private static String key;
+
+    @Autowired
+    public Translator(@Value("${apiKey}") String k) {
+        key = k;
     }
 
-    public String translate(String content) {
+    public static String translate(String content) {
         var params = new HashMap<String, String>();
         params.put("q", content);
         params.put("target", target);
