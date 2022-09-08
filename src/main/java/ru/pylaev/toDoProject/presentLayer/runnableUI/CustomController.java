@@ -2,11 +2,13 @@ package ru.pylaev.toDoProject.presentLayer.runnableUI;
 
 import lombok.AllArgsConstructor;
 import ru.pylaev.toDoProject.businessLogicLayer.Observable;
-import ru.pylaev.toDoProject.businessLogicLayer.Respond;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
+import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import ru.pylaev.toDoProject.presentLayer.ControllerInterface;
 import ru.pylaev.toDoProject.presentLayer.ControllerLogicInterface;
 import ru.pylaev.toDoProject.presentLayer.Observer;
+
+import java.util.List;
 
 @SuppressWarnings("ClassCanBeRecord")
 @AllArgsConstructor
@@ -23,5 +25,5 @@ public class CustomController implements ControllerInterface, Observable {
     public void addObserver(Observer observer) {}
 
     @Override
-    public void notifyObservers(Respond respond) {}
+    public void notifyObservers(List<Task> tasks) {}
 }

@@ -9,7 +9,7 @@ import ru.pylaev.toDoProject.presentLayer.view.View;
 public class AlertControllerLogic extends SimpleControllerLogic {
 
     public String getColor(View view) {
-        var tasks = view.getTasks();
+        var tasks = view.getArrTask();
         String color = "background:" + ToDoMain.PROPERTIES.get("mainColor");
         if (tasks == null || tasks.length<1) {
             color = "background:"+ ToDoMain.PROPERTIES.get("alertColor");

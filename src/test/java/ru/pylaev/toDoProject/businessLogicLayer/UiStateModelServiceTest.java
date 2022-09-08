@@ -12,13 +12,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import ru.pylaev.toDoProject.dataAccessLayer.DAO;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
+import ru.pylaev.toDoProject.presentLayer.SimpleControllerLogic;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 import ru.pylaev.util.HeadlessSpringBootContextLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.IntStream;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
@@ -29,6 +29,9 @@ class UiStateModelServiceTest {
 
     @Autowired
     TaskRepository taskRepository;
+
+    @Autowired
+    SimpleControllerLogic controllerLogic;
 
     List<Task> tasks = new ArrayList<>();
 
@@ -57,14 +60,11 @@ class UiStateModelServiceTest {
         var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        var expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
-        IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
         var expectedView = new View();
-        var expectedRespond = new Respond(expectedTasks);
-        expectedView.update(expectedMessage, expectedRespond);
+        expectedView.update(expectedMessage, tasks);
 
-        UiStateService.processUserInput("user", uiStateModel);
+        controllerLogic.processUserInput("user", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -73,7 +73,7 @@ class UiStateModelServiceTest {
     void processOwnerInvalidSymbol () {
         var uiStateModel = new UiStateModel();
         var expectedUiStateModel = new UiStateModel();
-        UiStateService.processUserInput( "???", uiStateModel);
+        controllerLogic.processUserInput( "???", uiStateModel);
         Assertions.assertEquals(expectedUiStateModel, uiStateModel);
     }
 
@@ -81,7 +81,7 @@ class UiStateModelServiceTest {
     void processOwnerNull () {
         var uiStateModel = new UiStateModel();
         var expectedUiStateModel = new UiStateModel();
-        UiStateService.processUserInput( null, uiStateModel);
+        controllerLogic.processUserInput( null, uiStateModel);
         Assertions.assertEquals(expectedUiStateModel, uiStateModel);
     }
 
@@ -92,14 +92,11 @@ class UiStateModelServiceTest {
         var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        var expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
-        IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = LogicStep.ASK_STATUS.toString();
         var expectedView = new View();
-        var expectedRespond = new Respond(expectedTasks);
-        expectedView.update(expectedMessage, expectedRespond);
+        expectedView.update(expectedMessage, tasks);
 
-        UiStateService.processUserInput( "1", uiStateModel);
+        controllerLogic.processUserInput( "1", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -111,14 +108,11 @@ class UiStateModelServiceTest {
         var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        var expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
-        IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
         var expectedView = new View();
-        var expectedRespond = new Respond(expectedTasks);
-        expectedView.update(expectedMessage, expectedRespond);
+        expectedView.update(expectedMessage, tasks);
 
-        UiStateService.processUserInput( "10", uiStateModel);
+        controllerLogic.processUserInput( "10", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -130,13 +124,11 @@ class UiStateModelServiceTest {
         var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        var expectedTasks = new String[] {};
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
         var expectedView = new View();
-        var expectedRespond = new Respond(expectedTasks);
-        expectedView.update(expectedMessage, expectedRespond);
+        expectedView.update(expectedMessage, new ArrayList<>());
 
-        UiStateService.processUserInput( null, uiStateModel);
+        controllerLogic.processUserInput( null, uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -151,14 +143,11 @@ class UiStateModelServiceTest {
 
         var task = new Task(33, "user", "note4", "Wed Mar 25 16:01", "WAIT");
         tasks.add(task);
-        var expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
-        IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
         var expectedView = new View();
-        var expectedRespond = new Respond(expectedTasks);
-        expectedView.update(expectedMessage, expectedRespond);
+        expectedView.update(expectedMessage, tasks);
 
-        UiStateService.processUserInput( "note4", uiStateModel);
+        controllerLogic.processUserInput( "note4", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -174,14 +163,11 @@ class UiStateModelServiceTest {
 
         var expectList = new ArrayList<>(tasks);
         expectList.set(0, new Task(3, "user", "note3", "Wed Mar 25 16:01", "DONE"));
-        var expectedTasks = expectList.stream().map(Task::toString).toArray(String[]::new);
-        IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
         var expectedView = new View();
-        var expectedRespond = new Respond(expectedTasks);
-        expectedView.update(expectedMessage, expectedRespond);
+        expectedView.update(expectedMessage, expectList);
 
-        UiStateService.processUserInput( "DONE", uiStateModel);
+        controllerLogic.processUserInput( "DONE", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -197,14 +183,11 @@ class UiStateModelServiceTest {
 
         var expectList = new ArrayList<>(tasks);
         expectList.remove(2);
-        var expectedTasks = expectList.stream().map(Task::toString).toArray(String[]::new);
-        IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
         var expectedView = new View();
-        var expectedRespond = new Respond(expectedTasks);
-        expectedView.update(expectedMessage, expectedRespond);
+        expectedView.update(expectedMessage, expectList);
 
-        UiStateService.processUserInput("ARCH", uiStateModel);
+        controllerLogic.processUserInput("ARCH", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -216,14 +199,11 @@ class UiStateModelServiceTest {
         var actualView = new View();
         uiStateModel.addObserver(actualView);
 
-        var expectedTasks = tasks.stream().map(Task::toString).toArray(String[]::new);
-        IntStream.range(0, expectedTasks.length).forEach(i -> expectedTasks[i] = i + 1 + " " + expectedTasks[i]);
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
         var expectedView = new View();
-        var expectedRespond = new Respond(expectedTasks);
-        expectedView.update(expectedMessage, expectedRespond);
+        expectedView.update(expectedMessage, tasks);
 
-        UiStateService.processUserInput( "arc", uiStateModel);
+        controllerLogic.processUserInput( "arc", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }

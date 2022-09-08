@@ -10,6 +10,10 @@ import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
 public class SimpleControllerLogic implements ControllerLogicInterface {
     @Override
     public void processUserInput(String userInput, UiStateModel uiStateModel) {
-        UiStateService.processUserInput(userInput, uiStateModel);
+        if (!UiStateService.checkInputBeforeContinue(userInput, uiStateModel)) {
+            UiStateService.getEmptyRespond(uiStateModel);
+        } else {
+            UiStateService.getFullRespond(userInput, uiStateModel);
+        }
     }
 }

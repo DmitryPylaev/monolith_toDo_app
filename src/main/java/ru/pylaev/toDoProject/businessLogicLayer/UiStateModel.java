@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import ru.pylaev.toDoProject.presentLayer.Observer;
 
 import java.util.ArrayList;
@@ -28,9 +29,9 @@ public class UiStateModel implements Observable{
         observers.add(observer);
     }
 
-    public void notifyObservers (Respond respond) {
+    public void notifyObservers (List<Task> tasks) {
         for (Observer observer:observers) {
-            observer.update(logicStep.toString(), respond);
+            observer.update(logicStep.toString(), tasks);
         }
     }
 
