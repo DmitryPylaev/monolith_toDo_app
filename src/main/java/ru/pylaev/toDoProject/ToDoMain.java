@@ -20,9 +20,6 @@ public class ToDoMain {
 //        executorService.execute(context.getBean(WindowUi.class));
 //        executorService.execute(context.getBean(TelegramUi.class));
 
-//        CurrencyConverter currencyConverter = context.getBean(CurrencyConverter.class);
-//        System.out.println(currencyConverter.getPare());
-
         Translator translator = context.getBean(Translator.class);
         System.out.println(translator.translate("помидоры"));
 

@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.businessLogicLayer;
+package ru.pylaev.util;
 
 import lombok.Setter;
 import org.springframework.stereotype.Component;
