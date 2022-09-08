@@ -24,10 +24,12 @@ public enum LogicStep {
         }
     },
     ASK_NEW(ToDoMain.PROPERTIES.get("askNew")) {
+        @SuppressWarnings("UnnecessaryLocalVariable")
         @Override
         void manageState(String rawUserInput, UiStateModel uiStateModel, TaskRepository taskRepository) {
             String owner = uiStateModel.getOwner();
-            String userInput = rawUserInput + " (" + Translator.translate(rawUserInput) + ") ";
+            String userInput = rawUserInput;
+//            String userInput = rawUserInput + " (" + Translator.translate(rawUserInput) + ") ";
             String data = new Date().toString();
             String status = ToDoMain.PROPERTIES.get("statusWait");
             taskRepository.saveNewTask(owner, userInput, data, status);
