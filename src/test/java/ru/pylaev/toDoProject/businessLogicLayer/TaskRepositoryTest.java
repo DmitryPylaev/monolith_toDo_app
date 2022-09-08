@@ -55,12 +55,12 @@ class TaskRepositoryTest {
 
     @Test
     void saveNewIsOk() {
-        assertEquals(1, taskRepository.saveNewTask("user", "note1"));
+        assertEquals(1, taskRepository.saveNewTask("user", "note1", "Wed Mar 25 16:01", "WAIT"));
     }
 
     @Test
     void saveNewIsRejected() {
-        assertEquals(0, taskRepository.saveNewTask("user", "BACK"));
+        assertEquals(0, taskRepository.saveNewTask("user", "BACK", "Wed Mar 25 16:01", "WAIT"));
     }
 
     @Test

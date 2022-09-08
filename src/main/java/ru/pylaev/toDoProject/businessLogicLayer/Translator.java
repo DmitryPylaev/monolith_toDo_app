@@ -12,7 +12,11 @@ import java.util.HashMap;
 public class Translator {
     private String target = "en";
     private String source = "ru";
-    @Value("${apiKey}") private String key;
+    private String key;
+
+    public Translator(@Value("${apiKey}") String key) {
+        this.key = key;
+    }
 
     public String translate(String content) {
         var params = new HashMap<String, String>();

@@ -1,13 +1,15 @@
 package ru.pylaev.toDoProject.dataAccessLayer;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -23,10 +25,10 @@ public class Task implements Serializable {
     private String date;
     @Setter private String status;
 
-    public Task (String owner, String text, Date date, String status) {
+    public Task (String owner, String text, String date, String status) {
         this.owner = owner;
         this.text = text;
-        this.date = String.valueOf(date).substring(0,16);
+        this.date = date.substring(0,16);
         this.status = status;
     }
 

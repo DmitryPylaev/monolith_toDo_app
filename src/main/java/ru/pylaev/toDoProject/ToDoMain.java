@@ -4,7 +4,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import ru.pylaev.toDoProject.businessLogicLayer.Translator;
+import ru.pylaev.toDoProject.presentLayer.runnableUI.console.ConsoleUI;
+import ru.pylaev.toDoProject.presentLayer.runnableUI.window.WindowUi;
 import ru.pylaev.util.CustomProperties;
+
+import java.util.concurrent.Executors;
 
 @SpringBootApplication
 public class ToDoMain {
@@ -14,10 +18,10 @@ public class ToDoMain {
     public static void main (String[] args){
         context = new SpringApplicationBuilder(ToDoMain.class).headless(false).run(args);
 
-//        var executorService = Executors.newCachedThreadPool();
-//
-//        executorService.execute(context.getBean(ConsoleUI.class));
-//        executorService.execute(context.getBean(WindowUi.class));
+        var executorService = Executors.newCachedThreadPool();
+
+        executorService.execute(context.getBean(ConsoleUI.class));
+        executorService.execute(context.getBean(WindowUi.class));
 //        executorService.execute(context.getBean(TelegramUi.class));
 
         Translator translator = context.getBean(Translator.class);

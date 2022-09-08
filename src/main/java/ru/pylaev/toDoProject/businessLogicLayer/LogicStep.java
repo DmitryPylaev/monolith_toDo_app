@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.util.InputChecker;
 
+import java.util.Date;
+
 @AllArgsConstructor
 public enum LogicStep {
     ASK_OWNER(ToDoMain.PROPERTIES.get("askOwner")),
@@ -24,7 +26,7 @@ public enum LogicStep {
     ASK_NEW(ToDoMain.PROPERTIES.get("askNew")) {
         @Override
         void manageState(String userInput, UiStateModel uiStateModel, TaskRepository taskRepository) {
-            taskRepository.saveNewTask(uiStateModel.getOwner(), userInput);
+            taskRepository.saveNewTask(uiStateModel.getOwner(), userInput, new Date().toString(), ToDoMain.PROPERTIES.get("statusWait"));
             uiStateModel.setLogicStep(LogicStep.ASK_NUMBER);
         }
     },

@@ -7,7 +7,6 @@ import ru.pylaev.toDoProject.dataAccessLayer.DAO;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import ru.pylaev.util.InputChecker;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,9 +27,9 @@ public class TaskRepository {
                 .collect(Collectors.toList());
     }
 
-    public synchronized int saveNewTask(String owner, String taskContent) {
+    public synchronized int saveNewTask(String owner, String taskContent, String date, String status) {
         if (!taskContent.equals(ToDoMain.PROPERTIES.get("commandBack"))) {
-            taskDAO.save(new Task(owner, taskContent, new Date(), ToDoMain.PROPERTIES.get("statusWait")));
+            taskDAO.save(new Task(owner, taskContent, date, status));
             return 1;
         }
         return 0;
