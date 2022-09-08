@@ -43,9 +43,9 @@ class JsonControllerTest {
 
     @Test
     void processUserInput () throws Exception {
-        var task1 = new Task(3, "user", "note3", "Wed Mar 25 16:01", "WAIT");
-        var task2 = new Task(11, "user", "note1", "Wed Mar 24 16:01", "WAIT");
-        var task3 = new Task(14, "user", "note2", "Thu Mar 23 16:01", "DONE");
+        var task1 = new Task(3, "user", "помидоры (tomatoes)", "Wed Mar 25 16:01", "WAIT");
+        var task2 = new Task(11, "user", "гречка (buckwheat)", "Wed Mar 24 16:01", "WAIT");
+        var task3 = new Task(14, "user", "картошка (potatoes)", "Thu Mar 23 16:01", "DONE");
 
         tasks.clear();
         tasks.add(task1);

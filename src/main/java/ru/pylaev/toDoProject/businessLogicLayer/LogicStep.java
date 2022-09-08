@@ -25,8 +25,12 @@ public enum LogicStep {
     },
     ASK_NEW(ToDoMain.PROPERTIES.get("askNew")) {
         @Override
-        void manageState(String userInput, UiStateModel uiStateModel, TaskRepository taskRepository) {
-            taskRepository.saveNewTask(uiStateModel.getOwner(), userInput, new Date().toString(), ToDoMain.PROPERTIES.get("statusWait"));
+        void manageState(String rawUserInput, UiStateModel uiStateModel, TaskRepository taskRepository) {
+            String owner = uiStateModel.getOwner();
+            String userInput = rawUserInput + " (" + Translator.translate(rawUserInput) + ") ";
+            String data = new Date().toString();
+            String status = ToDoMain.PROPERTIES.get("statusWait");
+            taskRepository.saveNewTask(owner, userInput, data, status);
             uiStateModel.setLogicStep(LogicStep.ASK_NUMBER);
         }
     },
