@@ -6,7 +6,7 @@ import ru.pylaev.toDoProject.presentLayer.ControllerInterface;
 import ru.pylaev.toDoProject.presentLayer.ControllerLogicInterface;
 import ru.pylaev.toDoProject.presentLayer.SimpleControllerLogic;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomController;
-import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.UIFactory;
 
 @Component

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.presentLayer.ControllerInterface;
 import ru.pylaev.toDoProject.presentLayer.ControllerLogicInterface;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomController;
-import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.SimplePrinter;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.UIFactory;
 
