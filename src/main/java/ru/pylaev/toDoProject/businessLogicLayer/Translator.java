@@ -2,12 +2,14 @@ package ru.pylaev.toDoProject.businessLogicLayer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.dataAccessLayer.CustomHttpClient;
 
 import java.util.HashMap;
 
+@Component
 public class Translator {
-    public static boolean flag = false;
+    public static boolean flag = true;
     public static String target = "en";
     public static String source = "ru";
 
