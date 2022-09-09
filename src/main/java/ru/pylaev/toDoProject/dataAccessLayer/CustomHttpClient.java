@@ -16,23 +16,19 @@ public class CustomHttpClient {
             else urlResult.append("&");
             urlResult.append(params[i]);
         }
-
-        String result = "";
         try {
             var connection = (HttpURLConnection) new URL(urlResult.toString()).openConnection();
-            result = getRequestString(connection, jsonElementName);
+            return getRequestString(connection, jsonElementName);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(ToDoMain.PROPERTIES.get("networkError"));
+            return "";
         }
-        return result;
     }
 
     public static String post(String urlString, Map<String, String> params, String jsonElementName, Map<String, String> headers) {
-        String result = "";
         try {
             var connection = (HttpURLConnection) new URL(urlString).openConnection();
-
             connection.setRequestMethod("POST");
             headers.forEach(connection::setRequestProperty);
             connection.setDoOutput(true);
@@ -40,13 +36,12 @@ public class CustomHttpClient {
             out.writeBytes(ParameterStringBuilder.getParamsString(params));
             out.flush();
             out.close();
-
-            result = getRequestString(connection, jsonElementName);
+            return getRequestString(connection, jsonElementName);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(ToDoMain.PROPERTIES.get("networkError"));
+            return "";
         }
-        return result;
     }
 
     private static String getRequestString(HttpURLConnection connection, String jsonElementName) throws IOException {

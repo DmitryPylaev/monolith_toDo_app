@@ -31,6 +31,6 @@ public class Translator {
         headers.put("X-RapidAPI-Host", "google-translate1.p.rapidapi.com");
 
         String result = CustomHttpClient.post("https://google-translate1.p.rapidapi.com/language/translate/v2", params, "data", headers);
-        return result.substring(result.lastIndexOf(":")+2, result.lastIndexOf("\""));
+        return (!result.equals(""))?" (" + result.substring(result.lastIndexOf(":")+2, result.lastIndexOf("\"")) + ") ":"";
     }
 }
