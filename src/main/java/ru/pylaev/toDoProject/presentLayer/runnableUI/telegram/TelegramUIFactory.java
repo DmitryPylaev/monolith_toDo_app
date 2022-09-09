@@ -7,10 +7,9 @@ import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomController;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.SimplePrinter;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.UIFactory;
-import ru.pylaev.toDoProject.presentLayer.runnableUI.console.ConsoleInputGetter;
 
 @Component
-public record TelegramUIFactory(ConsoleInputGetter inputGetter, ControllerLogicInterface controllerLogic, TelegramBot bot) implements UIFactory {
+public record TelegramUIFactory(ControllerLogicInterface controllerLogic, TelegramBot bot) implements UIFactory {
     @Override
     public CustomPrinter getPrinter() {
         return new SimplePrinter(bot::send);
