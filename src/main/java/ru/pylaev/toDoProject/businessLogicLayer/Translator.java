@@ -2,12 +2,14 @@ package ru.pylaev.toDoProject.businessLogicLayer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.dataAccessLayer.CustomHttpClient;
 
 import java.util.HashMap;
 
-//@Component
+@Component
 public class Translator {
+    public static boolean flag = true;
     public static String target = "en";
     public static String source = "ru";
 
@@ -30,7 +32,7 @@ public class Translator {
         headers.put("X-RapidAPI-Key", key);
         headers.put("X-RapidAPI-Host", "google-translate1.p.rapidapi.com");
 
-        String result = CustomHttpClient.post("https://google-translate1.p.rapidapi.com/language/translate/v2", params, "data", headers);
+        String result = (flag)?CustomHttpClient.post("https://google-translate1.p.rapidapi.com/language/translate/v2", params, "data", headers):"";
         return (!result.equals(""))?" (" + result.substring(result.lastIndexOf(":")+2, result.lastIndexOf("\"")) + ") ":"";
     }
 }
