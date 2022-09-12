@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 @Component
 public class Translator {
-    public static boolean flag = true;
+    public static boolean flag = false;
     public static String target = "en";
     public static String source = "ru";
 
