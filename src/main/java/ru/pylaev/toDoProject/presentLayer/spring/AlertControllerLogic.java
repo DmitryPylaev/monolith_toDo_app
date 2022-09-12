@@ -8,12 +8,12 @@ import ru.pylaev.toDoProject.presentLayer.view.View;
 @Component
 public class AlertControllerLogic extends SimpleControllerLogic {
 
-    public String getColor(View view) {
+    public String getStyle(View view) {
         var tasks = view.getArrTask();
-        String color = "background:" + ToDoMain.PROPERTIES.get("mainColor");
+        String style = "margin-left:120px; width:1295px; background:" + ToDoMain.PROPERTIES.get("mainColor");
         if (tasks == null || tasks.length<1) {
-            color = "background:"+ ToDoMain.PROPERTIES.get("alertColor");
+            style = "margin-left:120px; width:1295px; background:"+ ToDoMain.PROPERTIES.get("alertColor");
         }
-        return color;
+        return style;
     }
 }
