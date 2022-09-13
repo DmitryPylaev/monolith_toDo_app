@@ -27,7 +27,7 @@ public class HtmlUI extends UI {
         Map<String, Object> map = new HashMap<>();
         map.put("message", view.getMessage());
         map.put("tasks", view.getArrTask());
-        map.put("color", controllerLogic.getStyle(view));
+        map.put("style", controllerLogic.getStyle(view.getArrTask()));
         model.addAllAttributes(map);
         return "index";
     }
