@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.dataAccessLayer;
+package ru.pylaev.toDoProject.dataAccessLayer.network;
 
 import com.google.gson.JsonParser;
 import ru.pylaev.toDoProject.ToDoMain;

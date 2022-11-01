@@ -1,12 +1,12 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI;
 
 import lombok.AllArgsConstructor;
-import ru.pylaev.toDoProject.businessLogicLayer.Observable;
+import ru.pylaev.toDoProject.presentLayer.abstractions.Observable;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.ControllerInterface;
-import ru.pylaev.toDoProject.presentLayer.ControllerLogicInterface;
-import ru.pylaev.toDoProject.presentLayer.Observer;
+import ru.pylaev.toDoProject.presentLayer.abstractions.ControllerInterface;
+import ru.pylaev.toDoProject.presentLayer.abstractions.ControllerLogicInterface;
+import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
 
 import java.util.List;
 

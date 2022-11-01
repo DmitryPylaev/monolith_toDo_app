@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.dataAccessLayer;
+package ru.pylaev.toDoProject.dataAccessLayer.network;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

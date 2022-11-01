@@ -3,7 +3,7 @@ package ru.pylaev.toDoProject.presentLayer.runnableUI.window;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
-import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.abstractions.CustomPrinter;
 
 import javax.swing.*;
 

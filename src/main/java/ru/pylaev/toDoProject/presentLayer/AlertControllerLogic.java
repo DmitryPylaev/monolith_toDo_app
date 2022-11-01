@@ -1,8 +1,7 @@
-package ru.pylaev.toDoProject.presentLayer.spring;
+package ru.pylaev.toDoProject.presentLayer;
 
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
-import ru.pylaev.toDoProject.presentLayer.SimpleControllerLogic;
 
 @Component
 public class AlertControllerLogic extends SimpleControllerLogic {

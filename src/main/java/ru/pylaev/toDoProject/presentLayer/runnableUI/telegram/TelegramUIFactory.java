@@ -1,12 +1,12 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI.telegram;
 
 import org.springframework.stereotype.Component;
-import ru.pylaev.toDoProject.presentLayer.ControllerInterface;
-import ru.pylaev.toDoProject.presentLayer.ControllerLogicInterface;
+import ru.pylaev.toDoProject.presentLayer.abstractions.ControllerInterface;
+import ru.pylaev.toDoProject.presentLayer.abstractions.ControllerLogicInterface;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomController;
-import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.abstractions.CustomPrinter;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.SimplePrinter;
-import ru.pylaev.toDoProject.presentLayer.runnableUI.UIFactory;
+import ru.pylaev.toDoProject.presentLayer.abstractions.UIFactory;
 
 @Component
 public record TelegramUIFactory(ControllerLogicInterface controllerLogic, TelegramBot bot) implements UIFactory {

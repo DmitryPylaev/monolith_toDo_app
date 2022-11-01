@@ -3,7 +3,7 @@ package ru.pylaev.toDoProject.businessLogicLayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import ru.pylaev.toDoProject.dataAccessLayer.CustomHttpClient;
+import ru.pylaev.toDoProject.dataAccessLayer.network.CustomHttpClient;
 
 import java.util.HashMap;
 

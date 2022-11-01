@@ -2,12 +2,12 @@ package ru.pylaev.toDoProject.presentLayer.runnableUI.window;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.pylaev.toDoProject.presentLayer.ControllerInterface;
-import ru.pylaev.toDoProject.presentLayer.ControllerLogicInterface;
+import ru.pylaev.toDoProject.presentLayer.abstractions.ControllerInterface;
+import ru.pylaev.toDoProject.presentLayer.abstractions.ControllerLogicInterface;
 import ru.pylaev.toDoProject.presentLayer.SimpleControllerLogic;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomController;
-import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
-import ru.pylaev.toDoProject.presentLayer.runnableUI.UIFactory;
+import ru.pylaev.toDoProject.presentLayer.abstractions.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.abstractions.UIFactory;
 
 @Component
 public final class WindowUIFactory implements UIFactory {

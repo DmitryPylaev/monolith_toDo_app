@@ -6,7 +6,8 @@ import lombok.Setter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.Observer;
+import ru.pylaev.toDoProject.presentLayer.abstractions.Observable;
+import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import static ru.pylaev.util.InputChecker.inputSymbolsInArray;
 @Scope("prototype")
 @Getter
 @EqualsAndHashCode
-public class UiStateModel implements Observable{
+public class UiStateModel implements Observable {
     public static final String[] INVALID_SYMBOLS = new String[] {" ", "\\", "|", "/", ":", "?", "\"", "<", ">"};
 
     @EqualsAndHashCode.Exclude private final List<Observer> observers = new ArrayList<>();

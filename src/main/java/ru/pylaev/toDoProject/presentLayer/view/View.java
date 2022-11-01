@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.Observer;
-import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
+import ru.pylaev.toDoProject.presentLayer.abstractions.CustomPrinter;
 import ru.pylaev.util.ListToNumberingArrayConverter;
 
 import java.util.Arrays;

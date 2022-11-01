@@ -1,6 +1,6 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI;
 
-import ru.pylaev.toDoProject.presentLayer.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.abstractions.CustomPrinter;
 
 import java.util.function.Consumer;
 

@@ -1,7 +1,6 @@
-package ru.pylaev.toDoProject.businessLogicLayer;
+package ru.pylaev.toDoProject.presentLayer.abstractions;
 
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.Observer;
 
 import java.util.List;
 
