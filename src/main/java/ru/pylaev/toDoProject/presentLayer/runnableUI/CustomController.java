@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import ru.pylaev.toDoProject.presentLayer.abstractions.Observable;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.abstractions.ControllerInterface;
-import ru.pylaev.toDoProject.presentLayer.abstractions.ControllerLogicInterface;
+import ru.pylaev.toDoProject.presentLayer.abstractions.IController;
+import ru.pylaev.toDoProject.presentLayer.abstractions.IUserInputProcess;
 import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
 
 import java.util.List;
 
 @SuppressWarnings("ClassCanBeRecord")
 @AllArgsConstructor
-public class CustomController implements ControllerInterface, Observable {
+public class CustomController implements IController, Observable {
     private final InputGetter inputGetter;
-    private final ControllerLogicInterface controllerLogic;
+    private final IUserInputProcess controllerLogic;
 
     @Override
     public void processUserInput(UiStateModel uiStateModel) {

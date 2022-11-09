@@ -3,12 +3,11 @@ package ru.pylaev.toDoProject.presentLayer.runnableUI.window;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
-import ru.pylaev.toDoProject.presentLayer.abstractions.CustomPrinter;
 
 import javax.swing.*;
 
 @Component
-public class WindowPrinter implements CustomPrinter {
+public class Window {
     @Getter private final JTextField textField = new JTextField(72);
     private final JPanel panel = new JPanel();
     private final JFrame mainFrame = new JFrame();

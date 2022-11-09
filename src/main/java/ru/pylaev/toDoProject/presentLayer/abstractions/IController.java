@@ -2,6 +2,6 @@ package ru.pylaev.toDoProject.presentLayer.abstractions;
 
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 
-public interface ControllerLogicInterface {
-    void processUserInput(String userInput, UiStateModel uiStateModel);
+public interface IController {
+    void processUserInput(UiStateModel uiStateModel);
 }

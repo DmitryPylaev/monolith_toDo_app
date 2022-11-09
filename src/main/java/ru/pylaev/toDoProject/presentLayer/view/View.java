@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
-import ru.pylaev.toDoProject.presentLayer.abstractions.CustomPrinter;
+import ru.pylaev.toDoProject.presentLayer.runnableUI.Printer;
 import ru.pylaev.util.ListToNumberingArrayConverter;
 
 import java.util.Arrays;
@@ -21,7 +21,7 @@ import java.util.List;
 public class View implements Observer {
     private String[] arrTask;
     private String message = ToDoMain.PROPERTIES.get("askOwner");
-    @EqualsAndHashCode.Exclude @Setter private CustomPrinter printer;
+    @EqualsAndHashCode.Exclude @Setter private Printer printer;
 
     @Override
     public void update(String message, List<Task> tasks) {

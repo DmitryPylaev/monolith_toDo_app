@@ -1,6 +1,8 @@
 package ru.pylaev.toDoProject.presentLayer.abstractions;
 
+import ru.pylaev.toDoProject.presentLayer.runnableUI.Printer;
+
 public interface UIFactory {
-    CustomPrinter getPrinter();
-    ControllerInterface getController();
+    Printer getPrinter();
+    IController getController();
 }

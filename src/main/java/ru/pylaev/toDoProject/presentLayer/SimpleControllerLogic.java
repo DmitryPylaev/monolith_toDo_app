@@ -4,11 +4,11 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateService;
-import ru.pylaev.toDoProject.presentLayer.abstractions.ControllerLogicInterface;
+import ru.pylaev.toDoProject.presentLayer.abstractions.IUserInputProcess;
 
 @Component
 @Primary
-public class SimpleControllerLogic implements ControllerLogicInterface {
+public class SimpleControllerLogic implements IUserInputProcess {
     @Override
     public void processUserInput(String userInput, UiStateModel uiStateModel) {
         if (!UiStateService.checkInputBeforeContinue(userInput, uiStateModel)) {
