@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
 
 import javax.swing.*;
+import java.util.List;
 
 @Component
 public class Window {
@@ -22,10 +23,18 @@ public class Window {
 
     public void display(String content) {
         panel.removeAll();
-        panel.add(JScrollPaneWriter.write(content));
+        panel.add(stringToJScrollPane(content));
         panel.add(textField);
         panel.repaint();
         mainFrame.setVisible(true);
         textField.grabFocus();
+    }
+
+    private static JScrollPane stringToJScrollPane(String content) {
+        DefaultListModel<String> dlm = new DefaultListModel<>();
+        dlm.addAll(List.of(content.split("\n")));
+        JList<String> jList = new JList<>(dlm);
+        jList.setFixedCellWidth(790);
+        return new JScrollPane(jList);
     }
 }

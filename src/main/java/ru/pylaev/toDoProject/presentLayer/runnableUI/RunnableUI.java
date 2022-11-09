@@ -3,14 +3,14 @@ package ru.pylaev.toDoProject.presentLayer.runnableUI;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IController;
 import ru.pylaev.toDoProject.presentLayer.UI;
-import ru.pylaev.toDoProject.presentLayer.abstractions.UIFactory;
+import ru.pylaev.toDoProject.presentLayer.abstractions.RunnableUIFactory;
 import ru.pylaev.toDoProject.presentLayer.view.View;
 
 public abstract class RunnableUI extends UI implements Runnable {
     private final IController controller;
     public boolean active = true;
 
-    public RunnableUI(View view, UiStateModel uiStateModel, UIFactory factory) {
+    public RunnableUI(View view, UiStateModel uiStateModel, RunnableUIFactory factory) {
         super(view, uiStateModel);
         view.setPrinter(factory.getPrinter());
         controller = factory.getController();

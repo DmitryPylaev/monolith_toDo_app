@@ -1,35 +1,21 @@
 package ru.pylaev.toDoProject.presentLayer.runnableUI.window;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IController;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IUserInputProcess;
-import ru.pylaev.toDoProject.presentLayer.SimpleControllerLogic;
+import ru.pylaev.toDoProject.presentLayer.abstractions.RunnableUIFactory;
 import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomController;
-import ru.pylaev.toDoProject.presentLayer.abstractions.UIFactory;
-import ru.pylaev.toDoProject.presentLayer.runnableUI.Printer;
+
+import java.util.function.Consumer;
 
 @Component
-public final class WindowUIFactory implements UIFactory {
-    private final WindowInputGetter inputGetter;
-    private final Window window;
-    private final IUserInputProcess controllerLogic;
-
-    @Autowired
-    public WindowUIFactory(WindowInputGetter inputGetter, Window window, SimpleControllerLogic controllerLogic) {
-        this.inputGetter = inputGetter;
-        this.window = window;
-        this.controllerLogic = controllerLogic;
-        inputGetter.setTextField(window.getTextField());
-    }
-
+public record WindowUIFactory (WindowInputGetter inputGetter, Window window, IUserInputProcess controllerLogic) implements RunnableUIFactory {
     @Override
-    public Printer getPrinter() {
-        return new Printer(window::display);
-    }
+    public Consumer<String> getPrinter() {return window::display;}
 
     @Override
     public IController getController() {
+        inputGetter.setTextField(window.getTextField());
         return new CustomController(inputGetter, controllerLogic);
     }
 }

@@ -10,20 +10,19 @@ import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
 
 import java.util.List;
 
-@SuppressWarnings("ClassCanBeRecord")
 @AllArgsConstructor
-public class CustomController implements IController, Observable {
-    private final InputGetter inputGetter;
-    private final IUserInputProcess controllerLogic;
-
+public record CustomController(InputGetter inputGetter,
+                               IUserInputProcess controllerLogic) implements IController, Observable {
     @Override
     public void processUserInput(UiStateModel uiStateModel) {
         controllerLogic.processUserInput(inputGetter.getInput(), uiStateModel);
     }
 
     @Override
-    public void addObserver(Observer observer) {}
+    public void addObserver(Observer observer) {
+    }
 
     @Override
-    public void notifyObservers(List<Task> tasks) {}
+    public void notifyObservers(List<Task> tasks) {
+    }
 }
