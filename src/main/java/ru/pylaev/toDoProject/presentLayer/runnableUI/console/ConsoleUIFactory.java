@@ -4,17 +4,19 @@ import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IController;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IUserInputProcess;
 import ru.pylaev.toDoProject.presentLayer.abstractions.RunnableUIFactory;
-import ru.pylaev.toDoProject.presentLayer.runnableUI.CustomController;
+import ru.pylaev.toDoProject.presentLayer.runnableUI.Controller;
 
 import java.util.function.Consumer;
 
 @Component
-public record ConsoleUIFactory(IUserInputProcess controllerLogic, ConsoleInputGetter inputGetter) implements RunnableUIFactory {
+public record ConsoleUIFactory(IUserInputProcess controllerLogic) implements RunnableUIFactory {
     @Override
-    public Consumer<String> getPrinter() {return System.out::println;}
+    public Consumer<String> getPrinter() {
+        return System.out::println;
+    }
 
     @Override
     public IController getController() {
-        return new CustomController(inputGetter, controllerLogic);
+        return new Controller(new ConsoleInputGetter(), controllerLogic);
     }
 }

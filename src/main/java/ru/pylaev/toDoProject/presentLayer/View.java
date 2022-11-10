@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.view;
+package ru.pylaev.toDoProject.presentLayer;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

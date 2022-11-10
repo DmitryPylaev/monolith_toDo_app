@@ -1,12 +1,11 @@
-package ru.pylaev.toDoProject.presentLayer.runnableUI;
+package ru.pylaev.toDoProject.presentLayer.ui;
 
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
+import ru.pylaev.toDoProject.presentLayer.View;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IController;
-import ru.pylaev.toDoProject.presentLayer.UI;
 import ru.pylaev.toDoProject.presentLayer.abstractions.RunnableUIFactory;
-import ru.pylaev.toDoProject.presentLayer.view.View;
 
-public abstract class RunnableUI extends UI implements Runnable {
+public class RunnableUI extends BaseUI implements Runnable {
     private final IController controller;
     public boolean active = true;
 

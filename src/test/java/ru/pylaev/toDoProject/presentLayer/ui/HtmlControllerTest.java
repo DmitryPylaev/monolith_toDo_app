@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.spring;
+package ru.pylaev.toDoProject.presentLayer.ui;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer;
+package ru.pylaev.toDoProject.presentLayer.controllerLogic;
 
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;

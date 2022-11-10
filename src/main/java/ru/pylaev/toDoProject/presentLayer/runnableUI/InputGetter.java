@@ -3,16 +3,16 @@ package ru.pylaev.toDoProject.presentLayer.runnableUI;
 import java.util.concurrent.TimeUnit;
 
 public abstract class InputGetter {
-    protected abstract String get ();
+    protected abstract String getUserInput ();
 
     protected abstract void setNull();
 
-    public String getInput() {
+    public String getNotEmptyInput() {
         setNull();
         String result = null;
         try {
             while (result == null) {
-                result = get();
+                result = getUserInput();
                 TimeUnit.MILLISECONDS.sleep(250);
             }
         } catch (InterruptedException e) {
