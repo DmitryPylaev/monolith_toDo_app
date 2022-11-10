@@ -1,18 +1,17 @@
 package ru.pylaev.toDoProject.presentLayer.ui;
 
-import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
-import ru.pylaev.toDoProject.presentLayer.View;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IController;
 import ru.pylaev.toDoProject.presentLayer.abstractions.RunnableUIFactory;
 
-public class RunnableUI extends BaseUI implements Runnable {
+public class RunnableUI extends PlainUI implements Runnable {
     private final IController controller;
     public boolean active = true;
 
-    public RunnableUI(View view, UiStateModel uiStateModel, RunnableUIFactory factory) {
-        super(view, uiStateModel);
+    public RunnableUI(RunnableUIFactory factory) {
+        super(factory.getSimpleUiFactory());
         view.setPrinter(factory.getPrinter());
-        controller = factory.getController();
+        this.controller = factory.getController();
+        uiStateModel.addObserver(controller);
     }
 
     @Override

@@ -5,11 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
 import ru.pylaev.toDoProject.presentLayer.controllerLogic.AlertControllerLogic;
-import ru.pylaev.toDoProject.presentLayer.View;
 import ru.pylaev.toDoProject.presentLayer.controllerLogic.SimpleControllerLogic;
 
 import java.util.HashMap;
@@ -17,13 +15,13 @@ import java.util.List;
 import java.util.Map;
 
 @org.springframework.stereotype.Controller
-public class HtmlUI extends BaseUI implements Observer {
+public class HtmlUI extends PlainUI implements Observer {
     private String alertStyle;
 
     @Autowired
-    public HtmlUI(View view, UiStateModel uiStateModel) {
-        super(view, uiStateModel);
-        uiStateModel.addObserver(this);
+    public HtmlUI(PlainUiFactory factory) {
+        super(factory);
+        factory.getUiStateModel().addObserver(this);
     }
 
     @GetMapping

@@ -7,19 +7,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import ru.pylaev.toDoProject.ToDoMain;
-import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
 import ru.pylaev.toDoProject.presentLayer.controllerLogic.SimpleControllerLogic;
-import ru.pylaev.toDoProject.presentLayer.View;
 
 import java.util.List;
 
 @org.springframework.stereotype.Controller
-public class JsonUI extends BaseUI implements Observer {
+public class JsonUI extends PlainUI implements Observer {
     @Autowired
-    public JsonUI(View view, UiStateModel uiStateModel) {
-        super(view, uiStateModel);
+    public JsonUI(PlainUiFactory factory) {
+        super(factory);
     }
 
     @PostMapping("/postJson")
