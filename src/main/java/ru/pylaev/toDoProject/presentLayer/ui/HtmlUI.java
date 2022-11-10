@@ -6,20 +6,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
+import ru.pylaev.toDoProject.dataAccessLayer.Task;
+import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
 import ru.pylaev.toDoProject.presentLayer.controllerLogic.AlertControllerLogic;
 import ru.pylaev.toDoProject.presentLayer.View;
+import ru.pylaev.toDoProject.presentLayer.controllerLogic.SimpleControllerLogic;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @org.springframework.stereotype.Controller
-public class HtmlUI extends BaseUI {
-    private final AlertControllerLogic controllerLogic;
+public class HtmlUI extends BaseUI implements Observer {
+    private String alertStyle;
 
     @Autowired
-    public HtmlUI(View view, UiStateModel uiStateModel, AlertControllerLogic alertControllerLogic) {
+    public HtmlUI(View view, UiStateModel uiStateModel) {
         super(view, uiStateModel);
-        this.controllerLogic = alertControllerLogic;
+        uiStateModel.addObserver(this);
     }
 
     @GetMapping
@@ -27,15 +31,20 @@ public class HtmlUI extends BaseUI {
         Map<String, Object> map = new HashMap<>();
         map.put("message", view.getMessage());
         map.put("tasks", view.getArrTask());
-        map.put("style", controllerLogic.getStyle(view.getArrTask()));
+        map.put("style", alertStyle);
         model.addAllAttributes(map);
         return "index";
     }
 
     @PostMapping
     public String post(@RequestParam String userInput) {
-        controllerLogic.processUserInput(userInput, uiStateModel);
+        SimpleControllerLogic.getRespond(userInput, uiStateModel);
         return "redirect:/";
+    }
+
+    @Override
+    public void update(String message, List<Task> tasks) {
+        alertStyle = AlertControllerLogic.getAlertStyle(view.getArrTask());
     }
 }
 

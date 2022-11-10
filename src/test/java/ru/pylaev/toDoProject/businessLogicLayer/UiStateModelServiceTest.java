@@ -64,7 +64,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, tasks);
 
-        controllerLogic.processUserInput("user", uiStateModel);
+        controllerLogic.getRespond("user", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -73,7 +73,7 @@ class UiStateModelServiceTest {
     void processOwnerInvalidSymbol () {
         var uiStateModel = new UiStateModel();
         var expectedUiStateModel = new UiStateModel();
-        controllerLogic.processUserInput( "???", uiStateModel);
+        controllerLogic.getRespond( "???", uiStateModel);
         Assertions.assertEquals(expectedUiStateModel, uiStateModel);
     }
 
@@ -81,7 +81,7 @@ class UiStateModelServiceTest {
     void processOwnerNull () {
         var uiStateModel = new UiStateModel();
         var expectedUiStateModel = new UiStateModel();
-        controllerLogic.processUserInput( null, uiStateModel);
+        controllerLogic.getRespond( null, uiStateModel);
         Assertions.assertEquals(expectedUiStateModel, uiStateModel);
     }
 
@@ -96,7 +96,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, tasks);
 
-        controllerLogic.processUserInput( "1", uiStateModel);
+        controllerLogic.getRespond( "1", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -112,7 +112,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, tasks);
 
-        controllerLogic.processUserInput( "10", uiStateModel);
+        controllerLogic.getRespond( "10", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -128,7 +128,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, new ArrayList<>());
 
-        controllerLogic.processUserInput( null, uiStateModel);
+        controllerLogic.getRespond( null, uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -147,7 +147,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, tasks);
 
-        controllerLogic.processUserInput( "печень и икра минтая (pollock liver and caviar)", uiStateModel);
+        controllerLogic.getRespond( "печень и икра минтая (pollock liver and caviar)", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -167,7 +167,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, expectList);
 
-        controllerLogic.processUserInput( "DONE", uiStateModel);
+        controllerLogic.getRespond( "DONE", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -187,7 +187,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, expectList);
 
-        controllerLogic.processUserInput("ARCH", uiStateModel);
+        controllerLogic.getRespond("ARCH", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -203,7 +203,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, tasks);
 
-        controllerLogic.processUserInput( "arc", uiStateModel);
+        controllerLogic.getRespond( "arc", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
