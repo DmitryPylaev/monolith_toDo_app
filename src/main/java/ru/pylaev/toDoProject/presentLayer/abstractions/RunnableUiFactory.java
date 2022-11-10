@@ -2,10 +2,7 @@ package ru.pylaev.toDoProject.presentLayer.abstractions;
 
 import ru.pylaev.toDoProject.presentLayer.ui.PlainUiFactory;
 
-import java.util.function.Consumer;
-
-public interface RunnableUIFactory {
-    Consumer<String> getPrinter();
+public interface RunnableUiFactory {
     IController getController();
-    PlainUiFactory getSimpleUiFactory();
+    PlainUiFactory getPlainUiFactory();
 }

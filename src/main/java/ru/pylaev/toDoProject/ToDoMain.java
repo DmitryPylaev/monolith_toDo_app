@@ -3,8 +3,8 @@ package ru.pylaev.toDoProject;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
-import ru.pylaev.toDoProject.presentLayer.runnableUI.console.ConsoleUIFactory;
-import ru.pylaev.toDoProject.presentLayer.runnableUI.window.WindowUIFactory;
+import ru.pylaev.toDoProject.presentLayer.runnableUI.console.ConsoleUiFactory;
+import ru.pylaev.toDoProject.presentLayer.runnableUI.window.WindowUiFactory;
 import ru.pylaev.toDoProject.presentLayer.ui.RunnableUI;
 import ru.pylaev.util.CustomProperties;
 
@@ -19,8 +19,8 @@ public class ToDoMain {
 
         var executorService = Executors.newCachedThreadPool();
 
-        executorService.execute(new RunnableUI(context.getBean(ConsoleUIFactory.class)));
-        executorService.execute(new RunnableUI(context.getBean(WindowUIFactory.class)));
+        executorService.execute(new RunnableUI(context.getBean(ConsoleUiFactory.class)));
+        executorService.execute(new RunnableUI(context.getBean(WindowUiFactory.class)));
 //        executorService.execute(new RunnableUI(context.getBean(TelegramUIFactory.class)));
     }
 }
