@@ -9,20 +9,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
-import ru.pylaev.toDoProject.presentLayer.controllerLogic.SimpleControllerLogic;
+import ru.pylaev.toDoProject.presentLayer.abstractions.IControllerLogic;
 
 import java.util.List;
 
 @org.springframework.stereotype.Controller
 public class JsonUI extends PlainUI implements Observer {
+    private final IControllerLogic respondControllerLogic;
+
     @Autowired
-    public JsonUI(PlainUiFactory factory) {
+    public JsonUI(PlainUiFactory factory, IControllerLogic respondControllerLogic) {
         super(factory);
+        this.respondControllerLogic = respondControllerLogic;
     }
 
     @PostMapping("/postJson")
     public ResponseEntity<String> post(@RequestBody JsonInput jsonInput) {
-        SimpleControllerLogic.getRespond(jsonInput.getContent(), uiStateModel);
+        respondControllerLogic.getRespond(jsonInput.getContent(), uiStateModel);
         return prepareResponseEntity(view.show());
     }
 

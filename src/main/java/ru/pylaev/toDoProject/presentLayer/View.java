@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 public class View implements Observer {
     private String[] arrTask;
     private String message = ToDoMain.PROPERTIES.get("askOwner");
-    @EqualsAndHashCode.Exclude @Setter private Consumer<String> printer;
+    @EqualsAndHashCode.Exclude @Setter private Consumer<String> painter;
 
     @Override
     public void update(String message, List<Task> tasks) {
@@ -36,8 +36,8 @@ public class View implements Observer {
             Arrays.stream(arrTask).forEach(s -> stringBuilder.append(s).append("\n"));
         }
         stringBuilder.append(message);
-        if (printer != null) {
-            printer.accept(stringBuilder.toString());
+        if (painter != null) {
+            painter.accept(stringBuilder.toString());
         }
         return stringBuilder.toString();
     }
