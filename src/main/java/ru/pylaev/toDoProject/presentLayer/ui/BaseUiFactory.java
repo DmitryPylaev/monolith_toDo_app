@@ -6,17 +6,16 @@ import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.presentLayer.View;
 
-@Component
+@Component("baseUiFactory")
 @Scope("prototype")
-public final class PlainUiFactory {
+public class BaseUiFactory {
     private final View view;
     private final UiStateModel uiStateModel;
 
     @Autowired
-    public PlainUiFactory(View view, UiStateModel uiStateModel) {
+    public BaseUiFactory(View view, UiStateModel uiStateModel) {
         this.view = view;
         this.uiStateModel = uiStateModel;
-        uiStateModel.addObserver(view);
     }
 
     public View getView() {

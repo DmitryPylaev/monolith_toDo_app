@@ -1,30 +1,31 @@
 package ru.pylaev.toDoProject.presentLayer.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IControllerLogic;
+import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @org.springframework.stereotype.Controller
-public class HtmlUI extends PlainUI implements Observer {
+public class HtmlUI extends BaseUI implements Observer {
     public final static String MAIN_STYLE = "margin-left:120px;width:1295px;";
     private String alertStyle;
     private final IControllerLogic respondControllerLogic;
 
     @Autowired
-    public HtmlUI(PlainUiFactory factory, IControllerLogic respondControllerLogic) {
-        super(factory);
+    public HtmlUI(@Qualifier("baseUiFactory") BaseUiFactory factory, IControllerLogic respondControllerLogic) {
+        super(factory.getView(), factory.getUiStateModel());
         this.respondControllerLogic = respondControllerLogic;
-        factory.getUiStateModel().addObserver(this);
+        uiStateModel.addObserver(this);
     }
 
     @GetMapping

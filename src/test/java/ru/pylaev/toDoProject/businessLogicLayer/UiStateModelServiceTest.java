@@ -12,7 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import ru.pylaev.toDoProject.dataAccessLayer.DAO;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.ControllerLogic;
+import ru.pylaev.toDoProject.presentLayer.MainControllerLogic;
 import ru.pylaev.toDoProject.presentLayer.View;
 import ru.pylaev.util.HeadlessSpringBootContextLoader;
 
@@ -31,7 +31,7 @@ class UiStateModelServiceTest {
     TaskRepository taskRepository;
 
     @Autowired
-    ControllerLogic respondControllerLogic;
+    MainControllerLogic respondMainControllerLogic;
 
     List<Task> tasks = new ArrayList<>();
 
@@ -64,7 +64,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, tasks);
 
-        respondControllerLogic.getRespond("user", uiStateModel);
+        respondMainControllerLogic.getRespond("user", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -73,7 +73,7 @@ class UiStateModelServiceTest {
     void processOwnerInvalidSymbol () {
         var uiStateModel = new UiStateModel();
         var expectedUiStateModel = new UiStateModel();
-        respondControllerLogic.getRespond( "???", uiStateModel);
+        respondMainControllerLogic.getRespond( "???", uiStateModel);
         Assertions.assertEquals(expectedUiStateModel, uiStateModel);
     }
 
@@ -81,7 +81,7 @@ class UiStateModelServiceTest {
     void processOwnerNull () {
         var uiStateModel = new UiStateModel();
         var expectedUiStateModel = new UiStateModel();
-        respondControllerLogic.getRespond( null, uiStateModel);
+        respondMainControllerLogic.getRespond( null, uiStateModel);
         Assertions.assertEquals(expectedUiStateModel, uiStateModel);
     }
 
@@ -96,7 +96,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, tasks);
 
-        respondControllerLogic.getRespond( "1", uiStateModel);
+        respondMainControllerLogic.getRespond( "1", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -112,7 +112,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, tasks);
 
-        respondControllerLogic.getRespond( "10", uiStateModel);
+        respondMainControllerLogic.getRespond( "10", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -128,7 +128,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, new ArrayList<>());
 
-        respondControllerLogic.getRespond( null, uiStateModel);
+        respondMainControllerLogic.getRespond( null, uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -147,7 +147,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, tasks);
 
-        respondControllerLogic.getRespond( "печень и икра минтая (pollock liver and caviar)", uiStateModel);
+        respondMainControllerLogic.getRespond( "печень и икра минтая (pollock liver and caviar)", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -167,7 +167,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, expectList);
 
-        respondControllerLogic.getRespond( "DONE", uiStateModel);
+        respondMainControllerLogic.getRespond( "DONE", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -187,7 +187,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, expectList);
 
-        respondControllerLogic.getRespond("ARCH", uiStateModel);
+        respondMainControllerLogic.getRespond("ARCH", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }
@@ -203,7 +203,7 @@ class UiStateModelServiceTest {
         var expectedView = new View();
         expectedView.update(expectedMessage, tasks);
 
-        respondControllerLogic.getRespond( "arc", uiStateModel);
+        respondMainControllerLogic.getRespond( "arc", uiStateModel);
 
         Assertions.assertEquals(expectedView, actualView);
     }

@@ -3,12 +3,13 @@ package ru.pylaev.toDoProject.presentLayer.ui;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.presentLayer.View;
 
-public abstract class PlainUI {
+public abstract class BaseUI {
     protected View view;
     protected UiStateModel uiStateModel;
 
-    public PlainUI(PlainUiFactory factory) {
-        this.view = factory.getView();
-        this.uiStateModel = factory.getUiStateModel();
+    public BaseUI(View view, UiStateModel uiStateModel) {
+        this.view = view;
+        this.uiStateModel = uiStateModel;
+        uiStateModel.addObserver(view);
     }
 }
