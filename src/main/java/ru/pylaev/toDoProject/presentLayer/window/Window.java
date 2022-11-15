@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.runnableUI.window;
+package ru.pylaev.toDoProject.presentLayer.window;
 
 import lombok.Getter;
 import org.springframework.stereotype.Component;

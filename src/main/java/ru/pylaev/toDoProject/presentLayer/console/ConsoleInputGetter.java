@@ -1,10 +1,10 @@
-package ru.pylaev.toDoProject.presentLayer.runnableUI.console;
+package ru.pylaev.toDoProject.presentLayer.console;
 
-import ru.pylaev.toDoProject.presentLayer.runnableUI.InputGetter;
+import ru.pylaev.toDoProject.presentLayer.BaseInputGetter;
 
 import java.util.Scanner;
 
-public class ConsoleInputGetter extends InputGetter {
+public class ConsoleInputGetter extends BaseInputGetter {
     private String userInput;
     private final Scanner scanner = new Scanner((System.in)).useDelimiter("\n");
 

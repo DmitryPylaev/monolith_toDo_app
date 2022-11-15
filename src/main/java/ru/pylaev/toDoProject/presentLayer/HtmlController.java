@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.ui;
+package ru.pylaev.toDoProject.presentLayer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,21 +8,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
+import ru.pylaev.toDoProject.presentLayer.abstractions.IBaseControllerFactory;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @org.springframework.stereotype.Controller
-public class HtmlUI extends BaseUI implements Observer {
+public class HtmlController extends BaseController {
     public final static String MAIN_STYLE = "margin-left:120px;width:1295px;";
     private String alertStyle;
 
     @Autowired
-    public HtmlUI(@Qualifier("baseUiFactory") BaseUiFactory factory) {
-        super(factory.getView(), factory.getUiStateModel(), factory.getRespondControllerLogic());
-        uiStateModel.addObserver(this);
+    public HtmlController(@Qualifier("baseControllerFactory") IBaseControllerFactory factory) {
+        super(factory);
     }
 
     @GetMapping

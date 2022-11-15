@@ -1,8 +1,8 @@
-package ru.pylaev.toDoProject.presentLayer.runnableUI;
+package ru.pylaev.toDoProject.presentLayer;
 
 import java.util.concurrent.TimeUnit;
 
-public abstract class InputGetter {
+public abstract class BaseInputGetter {
     protected abstract String getUserInput ();
 
     protected abstract void setNull();

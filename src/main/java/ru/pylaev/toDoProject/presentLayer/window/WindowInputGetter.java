@@ -1,11 +1,11 @@
-package ru.pylaev.toDoProject.presentLayer.runnableUI.window;
+package ru.pylaev.toDoProject.presentLayer.window;
 
 import lombok.Getter;
-import ru.pylaev.toDoProject.presentLayer.runnableUI.InputGetter;
+import ru.pylaev.toDoProject.presentLayer.BaseInputGetter;
 
 import javax.swing.*;
 
-public class WindowInputGetter extends InputGetter {
+public class WindowInputGetter extends BaseInputGetter {
     @Getter private String userInput;
 
     WindowInputGetter (JTextField textField) {

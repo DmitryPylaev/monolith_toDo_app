@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.ui;
+package ru.pylaev.toDoProject.presentLayer;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,16 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
+import ru.pylaev.toDoProject.presentLayer.abstractions.IBaseControllerFactory;
 
 import java.util.List;
 
 @org.springframework.stereotype.Controller
-public class JsonUI extends BaseUI implements Observer {
+public class JsonController extends BaseController {
     @Autowired
-    public JsonUI(@Qualifier("baseUiFactory") BaseUiFactory factory) {
-        super(factory.getView(), factory.getUiStateModel(), factory.getRespondControllerLogic());
-        uiStateModel.addObserver(this);
+    public JsonController(@Qualifier("baseControllerFactory") IBaseControllerFactory factory) {
+        super(factory);
     }
 
     @PostMapping("/postJson")

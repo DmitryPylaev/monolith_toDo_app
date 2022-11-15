@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.runnableUI.telegram;
+package ru.pylaev.toDoProject.presentLayer.telegram;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
