@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.presentLayer.View;
+import ru.pylaev.toDoProject.presentLayer.abstractions.IControllerLogic;
 
 @Component("baseUiFactory")
 @Scope("prototype")
@@ -14,4 +15,5 @@ import ru.pylaev.toDoProject.presentLayer.View;
 public class BaseUiFactory {
     private final View view;
     private final UiStateModel uiStateModel;
+    private final IControllerLogic respondControllerLogic;
 }

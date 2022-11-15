@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.abstractions.IControllerLogic;
 import ru.pylaev.toDoProject.presentLayer.abstractions.Observer;
 
 import java.util.HashMap;
@@ -19,12 +18,10 @@ import java.util.Map;
 public class HtmlUI extends BaseUI implements Observer {
     public final static String MAIN_STYLE = "margin-left:120px;width:1295px;";
     private String alertStyle;
-    private final IControllerLogic respondControllerLogic;
 
     @Autowired
-    public HtmlUI(@Qualifier("baseUiFactory") BaseUiFactory factory, IControllerLogic respondControllerLogic) {
-        super(factory.getView(), factory.getUiStateModel());
-        this.respondControllerLogic = respondControllerLogic;
+    public HtmlUI(@Qualifier("baseUiFactory") BaseUiFactory factory) {
+        super(factory.getView(), factory.getUiStateModel(), factory.getRespondControllerLogic());
         uiStateModel.addObserver(this);
     }
 
