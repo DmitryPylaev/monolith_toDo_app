@@ -13,7 +13,7 @@ public class BaseRunnableController extends BaseController implements IRunnableC
 
     public BaseRunnableController(IRunnableControllerFactory factory) {
         super(factory);
-        this.inputGetter = factory.getInputGetter();
+        this.inputGetter = factory.getRequestSupplier();
     }
 
     @Override
@@ -23,7 +23,7 @@ public class BaseRunnableController extends BaseController implements IRunnableC
 
     @Override
     public final void run() {
-        view.show();
+        viewHandler.show();
         while (active) processUserInput(uiStateModel);
     }
 }

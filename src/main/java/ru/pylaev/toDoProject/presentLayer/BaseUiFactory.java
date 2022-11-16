@@ -6,14 +6,14 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IBaseControllerFactory;
-import ru.pylaev.toDoProject.presentLayer.abstractions.IControllerLogic;
+import ru.pylaev.toDoProject.presentLayer.abstractions.IRespondLogic;
 
 @Component("baseControllerFactory")
 @Scope("prototype")
 @AllArgsConstructor
 @Getter
-public class BaseControllerFactory implements IBaseControllerFactory {
-    private final View view;
+public class BaseUiFactory implements IBaseControllerFactory {
+    private final ViewHandler viewHandler;
     private final UiStateModel uiStateModel;
-    private final IControllerLogic respondControllerLogic;
+    private final IRespondLogic respondControllerLogic;
 }

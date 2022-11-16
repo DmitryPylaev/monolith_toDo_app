@@ -24,7 +24,7 @@ public class JsonController extends BaseController {
     @PostMapping("/postJson")
     public ResponseEntity<String> post(@RequestBody JsonInput jsonInput) {
         respondControllerLogic.getRespond(jsonInput.getContent(), uiStateModel);
-        return prepareResponseEntity(view.show());
+        return prepareResponseEntity(viewHandler.show());
     }
 
     private ResponseEntity<String> prepareResponseEntity(String content) {

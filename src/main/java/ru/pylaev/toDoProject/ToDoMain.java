@@ -4,9 +4,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableController;
-import ru.pylaev.toDoProject.presentLayer.runnableUi.console.ConsoleControllerFactory;
-import ru.pylaev.toDoProject.presentLayer.runnableUi.console.ConsoleRunnableController;
-import ru.pylaev.toDoProject.presentLayer.runnableUi.window.WindowControllerFactory;
+import ru.pylaev.toDoProject.presentLayer.runnableUi.console.ConsoleUiFactory;
+import ru.pylaev.toDoProject.presentLayer.runnableUi.console.ConsoleController;
+import ru.pylaev.toDoProject.presentLayer.runnableUi.window.WindowUiFactory;
 import ru.pylaev.util.CustomProperties;
 
 import java.util.concurrent.Executors;
@@ -20,8 +20,8 @@ public class ToDoMain {
 
         var executorService = Executors.newCachedThreadPool();
 
-        executorService.execute(new ConsoleRunnableController(context.getBean(ConsoleControllerFactory.class)));
-        executorService.execute(new BaseRunnableController(context.getBean(WindowControllerFactory.class)));
+        executorService.execute(new ConsoleController(context.getBean(ConsoleUiFactory.class)));
+        executorService.execute(new BaseRunnableController(context.getBean(WindowUiFactory.class)));
 //        executorService.execute(new BaseRunnableController(context.getBean(TelegramControllerFactory.class)));
     }
 }

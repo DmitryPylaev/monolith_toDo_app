@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.util.List;
 
 @Component
-public class Window implements IRunnableUi {
+public class WindowView implements IRunnableUi {
     @Getter private final JTextField textField = new JTextField(72);
     private final JPanel panel = new JPanel();
     private final JFrame mainFrame = new JFrame();

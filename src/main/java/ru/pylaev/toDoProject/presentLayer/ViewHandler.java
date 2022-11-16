@@ -18,7 +18,7 @@ import java.util.function.Consumer;
 @Scope("prototype")
 @Getter
 @EqualsAndHashCode
-public class View implements Observer {
+public class ViewHandler implements Observer {
     private String[] arrTask;
     private String message = ToDoMain.PROPERTIES.get("askOwner");
     @EqualsAndHashCode.Exclude @Setter private Consumer<String> painter;

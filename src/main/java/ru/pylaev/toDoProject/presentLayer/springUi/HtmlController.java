@@ -28,8 +28,8 @@ public class HtmlController extends BaseController {
     @GetMapping
     public String get(Model model) {
         Map<String, Object> map = new HashMap<>();
-        map.put("message", view.getMessage());
-        map.put("tasks", view.getArrTask());
+        map.put("message", viewHandler.getMessage());
+        map.put("tasks", viewHandler.getArrTask());
         map.put("style", alertStyle);
         model.addAllAttributes(map);
         return "index";
@@ -43,7 +43,7 @@ public class HtmlController extends BaseController {
 
     @Override
     public void update(String message, List<Task> tasks) {
-        alertStyle = getAlertStyle(view.getArrTask());
+        alertStyle = getAlertStyle(viewHandler.getArrTask());
     }
 
     public static String getAlertStyle(String[] tasks) {

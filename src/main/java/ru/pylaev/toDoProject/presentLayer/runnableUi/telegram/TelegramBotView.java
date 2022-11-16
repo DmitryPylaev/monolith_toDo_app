@@ -15,13 +15,13 @@ import ru.pylaev.toDoProject.presentLayer.runnableUi.CyclicPolling;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IRunnableUi;
 
 @Component
-public class TelegramBot extends TelegramLongPollingBot implements IRunnableUi {
+public class TelegramBotView extends TelegramLongPollingBot implements IRunnableUi {
     @Getter public String userInput;
     private long chatId;
     @Getter private String botToken;
 
     @Autowired
-    public TelegramBot(@Value("${chatId}") long chatId, @Value("${botToken}") String botToken){
+    public TelegramBotView(@Value("${chatId}") long chatId, @Value("${botToken}") String botToken){
         try {
             this.chatId = chatId;
             this.botToken = botToken;
@@ -41,7 +41,7 @@ public class TelegramBot extends TelegramLongPollingBot implements IRunnableUi {
     @Override
     public String getBotUsername() { return ToDoMain.PROPERTIES.get("botName"); }
 
-    public void send(String message) {
+    public void display(String message) {
         var sendMessage = new SendMessage();
         sendMessage.setChatId(String.valueOf(chatId));
         sendMessage.setText(message);

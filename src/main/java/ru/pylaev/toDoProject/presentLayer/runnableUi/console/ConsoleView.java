@@ -7,7 +7,7 @@ import ru.pylaev.toDoProject.presentLayer.abstractions.IRunnableUi;
 import java.util.Scanner;
 
 @Component
-public class ConsoleInputGetter implements IRunnableUi {
+public class ConsoleView implements IRunnableUi {
     private String userInput;
     private final Scanner scanner = new Scanner((System.in)).useDelimiter("\n");
 
@@ -24,5 +24,10 @@ public class ConsoleInputGetter implements IRunnableUi {
 
     public String getNotEmptyInput() {
         return CyclicPolling.getNotEmptyInput(this);
+    }
+
+    @Override
+    public void display(String content) {
+        System.out.println(content);
     }
 }
