@@ -1,12 +1,15 @@
-package ru.pylaev.toDoProject.presentLayer;
+package ru.pylaev.toDoProject.presentLayer.runnableUi;
 
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
+import ru.pylaev.toDoProject.presentLayer.BaseController;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IRunnableController;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IRunnableControllerFactory;
 
+import java.util.function.Supplier;
+
 public class BaseRunnableController extends BaseController implements IRunnableController {
     public boolean active = true;
-    private final BaseInputGetter inputGetter;
+    private final Supplier<String> inputGetter;
 
     public BaseRunnableController(IRunnableControllerFactory factory) {
         super(factory);
@@ -15,7 +18,7 @@ public class BaseRunnableController extends BaseController implements IRunnableC
 
     @Override
     public void processUserInput(UiStateModel uiStateModel) {
-        respondControllerLogic.getRespond(inputGetter.getNotEmptyInput(), uiStateModel);
+        respondControllerLogic.getRespond(inputGetter.get(), uiStateModel);
     }
 
     @Override

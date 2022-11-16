@@ -1,9 +1,9 @@
-package ru.pylaev.toDoProject.presentLayer.console;
+package ru.pylaev.toDoProject.presentLayer.runnableUi.console;
 
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
+import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableController;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IRunnableController;
 import ru.pylaev.toDoProject.presentLayer.abstractions.IRunnableControllerFactory;
-import ru.pylaev.toDoProject.presentLayer.BaseRunnableController;
 
 import java.util.List;
 

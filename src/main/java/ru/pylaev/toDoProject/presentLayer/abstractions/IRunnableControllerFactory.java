@@ -1,7 +1,7 @@
 package ru.pylaev.toDoProject.presentLayer.abstractions;
 
-import ru.pylaev.toDoProject.presentLayer.BaseInputGetter;
+import java.util.function.Supplier;
 
 public interface IRunnableControllerFactory extends IBaseControllerFactory {
-    BaseInputGetter getInputGetter();
+    Supplier<String> getInputGetter();
 }
