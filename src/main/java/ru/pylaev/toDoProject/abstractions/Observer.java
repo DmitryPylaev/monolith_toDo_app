@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.abstractions;
+package ru.pylaev.toDoProject.abstractions;
 
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 

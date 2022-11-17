@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.runnableUi.telegram;
+package ru.pylaev.toDoProject.presentLayer.view;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +11,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import ru.pylaev.toDoProject.ToDoMain;
-import ru.pylaev.toDoProject.presentLayer.runnableUi.CyclicPolling;
-import ru.pylaev.toDoProject.presentLayer.abstractions.IRunnableUi;
 
 @Component
-public class TelegramBotView extends TelegramLongPollingBot implements IRunnableUi {
-    @Getter public String userInput;
+public class TelegramBotView extends TelegramLongPollingBot implements IRunnableView {
+    @Getter private String userInput;
     private long chatId;
     @Getter private String botToken;
 
@@ -55,9 +53,5 @@ public class TelegramBotView extends TelegramLongPollingBot implements IRunnable
     @Override
     public void setNull() {
         userInput = null;
-    }
-
-    public String getNotEmptyInput() {
-        return CyclicPolling.getNotEmptyInput(this);
     }
 }

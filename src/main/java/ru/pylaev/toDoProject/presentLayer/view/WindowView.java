@@ -1,16 +1,14 @@
-package ru.pylaev.toDoProject.presentLayer.runnableUi.window;
+package ru.pylaev.toDoProject.presentLayer.view;
 
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
-import ru.pylaev.toDoProject.presentLayer.runnableUi.CyclicPolling;
-import ru.pylaev.toDoProject.presentLayer.abstractions.IRunnableUi;
 
 import javax.swing.*;
 import java.util.List;
 
 @Component
-public class WindowView implements IRunnableUi {
+public class WindowView implements IRunnableView {
     @Getter private final JTextField textField = new JTextField(72);
     private final JPanel panel = new JPanel();
     private final JFrame mainFrame = new JFrame();
@@ -48,10 +46,5 @@ public class WindowView implements IRunnableUi {
     @Override
     public void setNull() {
         this.userInput = null;
-    }
-
-    @Override
-    public String getNotEmptyInput() {
-        return CyclicPolling.getNotEmptyInput(this);
     }
 }

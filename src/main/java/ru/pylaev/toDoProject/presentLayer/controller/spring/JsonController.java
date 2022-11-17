@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.springUi;
+package ru.pylaev.toDoProject.presentLayer.controller.spring;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.BaseController;
-import ru.pylaev.toDoProject.presentLayer.abstractions.IBaseControllerFactory;
+import ru.pylaev.toDoProject.presentLayer.controller.BaseController;
+import ru.pylaev.toDoProject.presentLayer.factories.BaseUiFactory;
 
 import java.util.List;
 
 @org.springframework.stereotype.Controller
 public class JsonController extends BaseController {
     @Autowired
-    public JsonController(@Qualifier("baseControllerFactory") IBaseControllerFactory factory) {
+    public JsonController(@Qualifier("baseControllerFactory") BaseUiFactory factory) {
         super(factory);
     }
 
     @PostMapping("/postJson")
     public ResponseEntity<String> post(@RequestBody JsonInput jsonInput) {
-        respondControllerLogic.getRespond(jsonInput.getContent(), uiStateModel);
+        respondLogic.accept(jsonInput.getContent(), uiStateModel);
         return prepareResponseEntity(viewHandler.show());
     }
 

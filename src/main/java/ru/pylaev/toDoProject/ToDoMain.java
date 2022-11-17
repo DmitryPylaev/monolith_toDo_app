@@ -3,10 +3,10 @@ package ru.pylaev.toDoProject;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
-import ru.pylaev.toDoProject.presentLayer.runnableUi.BaseRunnableController;
-import ru.pylaev.toDoProject.presentLayer.runnableUi.console.ConsoleUiFactory;
-import ru.pylaev.toDoProject.presentLayer.runnableUi.console.ConsoleController;
-import ru.pylaev.toDoProject.presentLayer.runnableUi.window.WindowUiFactory;
+import ru.pylaev.toDoProject.presentLayer.controller.runnable.BaseRunnableController;
+import ru.pylaev.toDoProject.presentLayer.factories.ConsoleUiFactory;
+import ru.pylaev.toDoProject.presentLayer.controller.runnable.ConsoleController;
+import ru.pylaev.toDoProject.presentLayer.factories.WindowUiFactory;
 import ru.pylaev.util.CustomProperties;
 
 import java.util.concurrent.Executors;

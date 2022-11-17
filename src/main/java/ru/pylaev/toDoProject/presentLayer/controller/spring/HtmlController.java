@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.springUi;
+package ru.pylaev.toDoProject.presentLayer.controller.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.BaseController;
-import ru.pylaev.toDoProject.presentLayer.abstractions.IBaseControllerFactory;
+import ru.pylaev.toDoProject.presentLayer.controller.BaseController;
+import ru.pylaev.toDoProject.presentLayer.factories.BaseUiFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +21,7 @@ public class HtmlController extends BaseController {
     private String alertStyle;
 
     @Autowired
-    public HtmlController(@Qualifier("baseControllerFactory") IBaseControllerFactory factory) {
+    public HtmlController(@Qualifier("baseControllerFactory") BaseUiFactory factory) {
         super(factory);
     }
 
@@ -37,7 +37,7 @@ public class HtmlController extends BaseController {
 
     @PostMapping
     public String post(@RequestParam String userInput) {
-        respondControllerLogic.getRespond(userInput, uiStateModel);
+        respondLogic.accept(userInput, uiStateModel);
         return "redirect:/";
     }
 
