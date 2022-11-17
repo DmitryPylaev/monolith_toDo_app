@@ -1,9 +1,9 @@
 package ru.pylaev.toDoProject.presentLayer.controller;
 
+import ru.pylaev.toDoProject.abstractions.Observer;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.abstractions.Observer;
-import ru.pylaev.toDoProject.presentLayer.factories.BaseUiFactory;
+import ru.pylaev.toDoProject.presentLayer.factories.IBaseUiFactory;
 import ru.pylaev.toDoProject.presentLayer.view.UniversalViewHandler;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public abstract class BaseController implements Observer {
     protected BiConsumer<String, UiStateModel> respondLogic;
     protected BiConsumer<String, List<Task>> graphLogic;
 
-    public BaseController(BaseUiFactory factory) {
+    public BaseController(IBaseUiFactory factory) {
         this.viewHandler = factory.getViewHandler();
         this.uiStateModel = factory.getUiStateModel();
         this.respondLogic = factory.getRespondLogic();

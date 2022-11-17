@@ -15,7 +15,7 @@ import java.util.function.BiConsumer;
 @Scope("prototype")
 @AllArgsConstructor
 @Getter
-public class BaseUiFactory {
+public class BaseUiFactory implements IBaseUiFactory {
     private final UniversalViewHandler viewHandler;
     private final UiStateModel uiStateModel;
     private final BiConsumer<String, UiStateModel> respondLogic;
