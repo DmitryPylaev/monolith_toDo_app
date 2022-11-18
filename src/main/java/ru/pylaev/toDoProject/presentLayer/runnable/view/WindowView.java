@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.view;
+package ru.pylaev.toDoProject.presentLayer.runnable.view;
 
 import lombok.Getter;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.util.List;
 
 @Component
-public class WindowView implements IRunnableView {
+public class WindowView extends View {
     @Getter private final JTextField textField = new JTextField(72);
     private final JPanel panel = new JPanel();
     private final JFrame mainFrame = new JFrame();
@@ -26,6 +26,12 @@ public class WindowView implements IRunnableView {
         });
     }
 
+    @Override
+    public void setNull() {
+        this.userInput = null;
+    }
+
+    @Override
     public void display(String content) {
         panel.removeAll();
         panel.add(stringToJScrollPane(content));
@@ -41,10 +47,5 @@ public class WindowView implements IRunnableView {
         JList<String> jList = new JList<>(dlm);
         jList.setFixedCellWidth(790);
         return new JScrollPane(jList);
-    }
-
-    @Override
-    public void setNull() {
-        this.userInput = null;
     }
 }

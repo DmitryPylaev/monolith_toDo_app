@@ -12,8 +12,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import ru.pylaev.toDoProject.dataAccessLayer.DAO;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.controller.controllerLogic.MainRespondLogic;
-import ru.pylaev.toDoProject.presentLayer.view.UniversalViewHandler;
+import ru.pylaev.toDoProject.presentLayer.MainRespondLogic;
+import ru.pylaev.toDoProject.presentLayer.runnable.view.ConsoleView;
 import ru.pylaev.util.HeadlessSpringBootContextLoader;
 
 import java.util.ArrayList;
@@ -57,11 +57,11 @@ class UiStateModelServiceTest {
     void processOwnerIsOk () {
         var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
-        var actualView = new UniversalViewHandler();
+        var actualView = new ConsoleView();
         uiStateModel.addObserver(actualView);
 
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
-        var expectedView = new UniversalViewHandler();
+        var expectedView = new ConsoleView();
         expectedView.update(expectedMessage, tasks);
 
         respondLogic.accept("user", uiStateModel);
@@ -89,11 +89,11 @@ class UiStateModelServiceTest {
     void processAskNumberOk () {
         var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
-        var actualView = new UniversalViewHandler();
+        var actualView = new ConsoleView();
         uiStateModel.addObserver(actualView);
 
         String expectedMessage = LogicStep.ASK_STATUS.toString();
-        var expectedView = new UniversalViewHandler();
+        var expectedView = new ConsoleView();
         expectedView.update(expectedMessage, tasks);
 
         respondLogic.accept( "1", uiStateModel);
@@ -105,11 +105,11 @@ class UiStateModelServiceTest {
     void processAskNumberOutRange () {
         var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
-        var actualView = new UniversalViewHandler();
+        var actualView = new ConsoleView();
         uiStateModel.addObserver(actualView);
 
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
-        var expectedView = new UniversalViewHandler();
+        var expectedView = new ConsoleView();
         expectedView.update(expectedMessage, tasks);
 
         respondLogic.accept( "10", uiStateModel);
@@ -121,11 +121,11 @@ class UiStateModelServiceTest {
     void processAskNumberNull () {
         var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
-        var actualView = new UniversalViewHandler();
+        var actualView = new ConsoleView();
         uiStateModel.addObserver(actualView);
 
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
-        var expectedView = new UniversalViewHandler();
+        var expectedView = new ConsoleView();
         expectedView.update(expectedMessage, new ArrayList<>());
 
         respondLogic.accept( null, uiStateModel);
@@ -138,13 +138,13 @@ class UiStateModelServiceTest {
         var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
         uiStateModel.setLogicStep(LogicStep.ASK_NEW);
-        var actualView = new UniversalViewHandler();
+        var actualView = new ConsoleView();
         uiStateModel.addObserver(actualView);
 
         var task = new Task(33, "user", "печень и икра минтая (pollock liver and caviar)", "Wed Mar 25 16:01", "WAIT");
         tasks.add(task);
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
-        var expectedView = new UniversalViewHandler();
+        var expectedView = new ConsoleView();
         expectedView.update(expectedMessage, tasks);
 
         respondLogic.accept( "печень и икра минтая (pollock liver and caviar)", uiStateModel);
@@ -158,13 +158,13 @@ class UiStateModelServiceTest {
         uiStateModel.manageOwner("user");
         uiStateModel.setCurrentTaskIndex(1);
         uiStateModel.setLogicStep(LogicStep.ASK_STATUS);
-        var actualView = new UniversalViewHandler();
+        var actualView = new ConsoleView();
         uiStateModel.addObserver(actualView);
 
         var expectList = new ArrayList<>(tasks);
         expectList.set(0, new Task(3, "user", "помидоры (tomatoes)", "Wed Mar 25 16:01", "DONE"));
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
-        var expectedView = new UniversalViewHandler();
+        var expectedView = new ConsoleView();
         expectedView.update(expectedMessage, expectList);
 
         respondLogic.accept( "DONE", uiStateModel);
@@ -178,13 +178,13 @@ class UiStateModelServiceTest {
         uiStateModel.manageOwner("user");
         uiStateModel.setCurrentTaskIndex(3);
         uiStateModel.setLogicStep(LogicStep.ASK_STATUS);
-        var actualView = new UniversalViewHandler();
+        var actualView = new ConsoleView();
         uiStateModel.addObserver(actualView);
 
         var expectList = new ArrayList<>(tasks);
         expectList.remove(2);
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
-        var expectedView = new UniversalViewHandler();
+        var expectedView = new ConsoleView();
         expectedView.update(expectedMessage, expectList);
 
         respondLogic.accept("ARCH", uiStateModel);
@@ -196,11 +196,11 @@ class UiStateModelServiceTest {
     void processAskStatusInvalid () {
         var uiStateModel = new UiStateModel();
         uiStateModel.manageOwner("user");
-        var actualView = new UniversalViewHandler();
+        var actualView = new ConsoleView();
         uiStateModel.addObserver(actualView);
 
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
-        var expectedView = new UniversalViewHandler();
+        var expectedView = new ConsoleView();
         expectedView.update(expectedMessage, tasks);
 
         respondLogic.accept( "arc", uiStateModel);

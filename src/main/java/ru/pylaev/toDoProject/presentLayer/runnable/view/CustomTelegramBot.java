@@ -1,6 +1,7 @@
-package ru.pylaev.toDoProject.presentLayer.view;
+package ru.pylaev.toDoProject.presentLayer.runnable.view;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -13,13 +14,14 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import ru.pylaev.toDoProject.ToDoMain;
 
 @Component
-public class TelegramBotView extends TelegramLongPollingBot implements IRunnableView {
-    @Getter private String userInput;
+public class CustomTelegramBot extends TelegramLongPollingBot {
+    @Getter @Setter private String userInput;
     private long chatId;
     @Getter private String botToken;
+    @Getter private final String botUsername = ToDoMain.PROPERTIES.get("botName");
 
     @Autowired
-    public TelegramBotView(@Value("${chatId}") long chatId, @Value("${botToken}") String botToken){
+    public CustomTelegramBot(@Value("${chatId}") long chatId, @Value("${botToken}") String botToken){
         try {
             this.chatId = chatId;
             this.botToken = botToken;
@@ -36,9 +38,6 @@ public class TelegramBotView extends TelegramLongPollingBot implements IRunnable
         }
     }
 
-    @Override
-    public String getBotUsername() { return ToDoMain.PROPERTIES.get("botName"); }
-
     public void display(String message) {
         var sendMessage = new SendMessage();
         sendMessage.setChatId(String.valueOf(chatId));
@@ -48,10 +47,5 @@ public class TelegramBotView extends TelegramLongPollingBot implements IRunnable
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void setNull() {
-        userInput = null;
     }
 }

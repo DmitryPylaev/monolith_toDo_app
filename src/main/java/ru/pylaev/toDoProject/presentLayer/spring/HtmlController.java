@@ -1,35 +1,38 @@
-package ru.pylaev.toDoProject.presentLayer.controller.spring;
+package ru.pylaev.toDoProject.presentLayer.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pylaev.toDoProject.ToDoMain;
+import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.presentLayer.controller.BaseController;
-import ru.pylaev.toDoProject.presentLayer.factories.BaseUiFactory;
+import ru.pylaev.toDoProject.presentLayer.Controller;
+import ru.pylaev.toDoProject.presentLayer.MainRespondLogic;
+import ru.pylaev.util.ListToNumberingArrayConverter;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @org.springframework.stereotype.Controller
-public class HtmlController extends BaseController {
+public class HtmlController extends Controller {
     public final static String MAIN_STYLE = "margin-left:120px;width:1295px;";
     private String alertStyle;
+    private String[] arrTask;
+    private String message = ToDoMain.PROPERTIES.get("askOwner");
 
     @Autowired
-    public HtmlController(@Qualifier("baseControllerFactory") BaseUiFactory factory) {
-        super(factory);
+    public HtmlController(UiStateModel uiStateModel, MainRespondLogic respondLogic) {
+        super(uiStateModel, respondLogic);
     }
 
     @GetMapping
     public String get(Model model) {
         Map<String, Object> map = new HashMap<>();
-        map.put("message", viewHandler.getMessage());
-        map.put("tasks", viewHandler.getArrTask());
+        map.put("message", message);
+        map.put("tasks", arrTask);
         map.put("style", alertStyle);
         model.addAllAttributes(map);
         return "index";
@@ -43,7 +46,9 @@ public class HtmlController extends BaseController {
 
     @Override
     public void update(String message, List<Task> tasks) {
-        alertStyle = getAlertStyle(viewHandler.getArrTask());
+        this.message = message;
+        arrTask = ListToNumberingArrayConverter.convert(tasks);
+        alertStyle = getAlertStyle(arrTask);
     }
 
     public static String getAlertStyle(String[] tasks) {

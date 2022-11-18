@@ -1,4 +1,4 @@
-package ru.pylaev.toDoProject.presentLayer.controller.controllerLogic;
+package ru.pylaev.toDoProject.presentLayer;
 
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
