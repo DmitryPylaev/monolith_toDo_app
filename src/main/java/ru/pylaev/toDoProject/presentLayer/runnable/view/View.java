@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.ToDoMain;
-import ru.pylaev.toDoProject.abstractions.Observer;
+import ru.pylaev.toDoProject.presentLayer.Observer;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import ru.pylaev.util.ListToNumberingArrayConverter;
 

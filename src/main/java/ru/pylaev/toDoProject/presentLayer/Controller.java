@@ -1,6 +1,5 @@
 package ru.pylaev.toDoProject.presentLayer;
 
-import ru.pylaev.toDoProject.abstractions.Observer;
 import ru.pylaev.toDoProject.businessLogicLayer.UiStateModel;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
 

@@ -6,8 +6,7 @@ import lombok.Setter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.pylaev.toDoProject.dataAccessLayer.Task;
-import ru.pylaev.toDoProject.abstractions.Observable;
-import ru.pylaev.toDoProject.abstractions.Observer;
+import ru.pylaev.toDoProject.presentLayer.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +25,12 @@ public class UiStateModel implements Observable {
     @Setter private LogicStep logicStep = LogicStep.ASK_OWNER;
     @Setter private int currentTaskIndex;
 
+    @Override
     public void addObserver (Observer observer) {
         observers.add(observer);
     }
 
+    @Override
     public void notifyObservers (List<Task> tasks) {
         for (Observer observer:observers) {
             observer.update(logicStep.toString(), tasks);
