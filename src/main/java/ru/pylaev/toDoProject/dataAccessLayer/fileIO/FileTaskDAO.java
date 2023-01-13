@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,11 +24,6 @@ public class FileTaskDAO implements DAO {
 
     public FileTaskDAO(@Value("${filePath}") String path) {
         this.path = path;
-        try {
-            if (!Files.exists(Paths.get(path))) Files.createFile(Paths.get(path));
-        } catch (IOException e) {
-            System.out.println(ToDoMain.PROPERTIES.get("storageError"));
-        }
     }
 
     @Override
@@ -45,7 +41,7 @@ public class FileTaskDAO implements DAO {
         var tasks = findTasks("addAll", (t1, o1) -> true);
         boolean taskIsFound = false;
         long lastIndex = 0;
-        try (var objectOutputStream = new ObjectOutputStream(Files.newOutputStream(Paths.get(path)))) {
+        try (var objectOutputStream = new ObjectOutputStream(Files.newOutputStream(Paths.get(path), StandardOpenOption.CREATE))) {
             for (var taskItem : tasks) {
                 if (taskItem.getId() == task.getId()) {
                     taskItem.setStatus(task.getStatus());
@@ -64,17 +60,18 @@ public class FileTaskDAO implements DAO {
 
     private <T> List<Task> findTasks(T target, TaskElector<T> taskElector) {
         var result = new ArrayList<Task>();
-        try (var fileInputStream = new FileInputStream(path)) {
-            var objectInputStream = new ObjectInputStream(fileInputStream);
-            while (fileInputStream.available() != 0) {
-                var task = (Task) objectInputStream.readObject();
-                if (taskElector.elect(task, target)) {
-                    result.add(task);
+        if (Files.exists(Paths.get(path))) {
+            try (var fileInputStream = new FileInputStream(path)) {
+                var objectInputStream = new ObjectInputStream(fileInputStream);
+                while (fileInputStream.available() != 0) {
+                    var task = (Task) objectInputStream.readObject();
+                    if (taskElector.elect(task, target)) {
+                        result.add(task);
+                    }
                 }
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println(ToDoMain.PROPERTIES.get("storageError"));
             }
-        }
-        catch (IOException | ClassNotFoundException e) {
-            System.out.println(ToDoMain.PROPERTIES.get("storageError"));
         }
         return result;
     }
