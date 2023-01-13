@@ -1,9 +1,12 @@
 package ru.pylaev.toDoProject.dataAccessLayer.network;
 
-import com.google.gson.JsonParser;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.pylaev.toDoProject.ToDoMain;
 
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
@@ -45,8 +48,7 @@ public class CustomHttpClient {
     }
 
     private static String getRequestString(HttpURLConnection connection, String jsonElementName) throws IOException {
-        var jsonObj = JsonParser.parseReader(new InputStreamReader((InputStream) connection.getContent())).getAsJsonObject();
-        var jsonElement = jsonObj.get(jsonElementName);
-        return jsonElement.toString();
+        JsonNode parent= new ObjectMapper().readTree((InputStream) connection.getContent());
+        return parent.path(jsonElementName).toString();
     }
 }
