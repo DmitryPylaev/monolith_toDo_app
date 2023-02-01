@@ -5,6 +5,8 @@ import ru.pylaev.toDoProject.ToDoMain;
 import ru.pylaev.util.InputChecker;
 
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @AllArgsConstructor
 public enum LogicStep {
@@ -48,6 +50,7 @@ public enum LogicStep {
     };
 
     private final String content;
+    private final static Logger LOGGER = Logger.getLogger(LogicStep.class.getName());
 
     @Override
     public String toString() {return content;}
@@ -56,6 +59,7 @@ public enum LogicStep {
 
     private static int validateIndex(String userInput, int size) {
         if (size==0 || userInput.equals(ToDoMain.PROPERTIES.get("commandNew"))) {
+            LOGGER.log(Level.INFO, "Неверный ввод");
             return 0;
         }
         else if (!userInput.equals(ToDoMain.PROPERTIES.get("commandBack"))) {
