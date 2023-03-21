@@ -14,6 +14,7 @@ import java.util.Optional;
 @Primary
 public class DataBaseTaskDAO implements DAO {
     private final TaskSpringRepository taskSpringRepository;
+    private final UserSpringRepository userSpringRepository;
 
     @Override
     public synchronized List<Task> findByOwner(String owner) {

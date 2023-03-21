@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface TaskSpringRepository extends CrudRepository<Task, Long> {
     List<Task> findByOwner(String owner);
+//    List<Task> findByUserId(Long userId);
 }

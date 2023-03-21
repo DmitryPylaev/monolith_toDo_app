@@ -5,24 +5,36 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Table(name = "task")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Task implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_generator")
     @Setter private long id;
+
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "user_id", nullable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnore
+//    private User user;
+
+    @Column(name = "owner")
     private String owner;
+
+    @Column(name = "text")
     private String text;
+
+    @Column(name = "date")
     private String date;
+
+    @Column(name = "status")
     @Setter private String status;
 
     public Task (String owner, String text, String date, String status) {
