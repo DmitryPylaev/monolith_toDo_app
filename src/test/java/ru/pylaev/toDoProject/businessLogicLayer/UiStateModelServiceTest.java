@@ -37,9 +37,9 @@ class UiStateModelServiceTest {
 
     @BeforeEach
     void setUp() {
-        var task1 = new Task(3, "user", "помидоры (tomatoes)", "Wed Mar 25 16:01", "WAIT");
-        var task2 = new Task(11, "user", "гречка (buckwheat)", "Wed Mar 24 16:01", "WAIT");
-        var task3 = new Task(14, "user", "картошка (potatoes)", "Thu Mar 23 16:01", "DONE");
+        var task1 = new Task(3L, "помидоры (tomatoes)", "Wed Mar 25 16:01", "WAIT");
+        var task2 = new Task(11L, "гречка (buckwheat)", "Wed Mar 24 16:01", "WAIT");
+        var task3 = new Task(14L, "картошка (potatoes)", "Thu Mar 23 16:01", "DONE");
 
         tasks.clear();
         tasks.add(task1);
@@ -141,7 +141,7 @@ class UiStateModelServiceTest {
         var actualView = new ConsoleView();
         uiStateModel.addObserver(actualView);
 
-        var task = new Task(33, "user", "печень и икра минтая (pollock liver and caviar)", "Wed Mar 25 16:01", "WAIT");
+        var task = new Task(33L, "печень и икра минтая (pollock liver and caviar)", "Wed Mar 25 16:01", "WAIT");
         tasks.add(task);
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
         var expectedView = new ConsoleView();
@@ -162,7 +162,7 @@ class UiStateModelServiceTest {
         uiStateModel.addObserver(actualView);
 
         var expectList = new ArrayList<>(tasks);
-        expectList.set(0, new Task(3, "user", "помидоры (tomatoes)", "Wed Mar 25 16:01", "DONE"));
+        expectList.set(0, new Task(3L, "помидоры (tomatoes)", "Wed Mar 25 16:01", "DONE"));
         String expectedMessage = LogicStep.ASK_NUMBER.toString();
         var expectedView = new ConsoleView();
         expectedView.update(expectedMessage, expectList);

@@ -1,6 +1,5 @@
 package ru.pylaev.toDoProject.dataAccessLayer;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,36 +9,35 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user")
+@Table(name = "owner")
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-public class User implements Serializable {
+public class Owner implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "owner_generator")
     @Setter private long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "owner", unique = true)
+    private String owner;
 
-    public User(String name) {
-        this.name = name;
+    public Owner(String owner) {
+        this.owner = owner;
     }
 
     @Override
-    public String toString () { return name; }
+    public String toString () { return  owner; }
 
     @Override
     public boolean equals (Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User task = (User) o;
-        return Objects.equals(name, task.name);
+        Owner task = (Owner) o;
+        return Objects.equals(owner, task.owner);
     }
 
     @Override
     public int hashCode ( ) {
-        return name != null ? name.hashCode() : 0;
+        return owner.hashCode();
     }
 }
 

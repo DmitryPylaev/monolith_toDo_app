@@ -6,6 +6,5 @@ import ru.pylaev.toDoProject.dataAccessLayer.Task;
 import java.util.List;
 
 public interface TaskSpringRepository extends CrudRepository<Task, Long> {
-    List<Task> findByOwner(String owner);
-//    List<Task> findByUserId(Long userId);
+    List<Task> findByOwnerId(Long userId);
 }

@@ -29,7 +29,7 @@ public class TaskRepository {
 
     public synchronized int saveNewTask(String owner, String taskContent, String date, String status) {
         if (!taskContent.equals(ToDoMain.PROPERTIES.get("commandBack"))) {
-            taskDAO.save(new Task(owner, taskContent, date, status));
+            taskDAO.save(new Task(taskContent, date, status), owner);
             return 1;
         }
         return 0;
@@ -43,7 +43,7 @@ public class TaskRepository {
                     .getId())
                     .orElseThrow();
             task.setStatus(status);
-            taskDAO.save(task);
+            taskDAO.save(task, owner);
             return (getAll(owner).size()>0)?1:0;
         }
         return -1;

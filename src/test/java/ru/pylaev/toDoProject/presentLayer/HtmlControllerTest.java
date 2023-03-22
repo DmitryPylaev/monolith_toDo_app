@@ -51,9 +51,9 @@ class HtmlControllerTest {
 
     @Test
     void processUserInput() throws Exception {
-        var task1 = new Task(3, "user", "помидоры (tomatoes)", "Wed Mar 25 16:01", "WAIT");
-        var task2 = new Task(11, "user", "гречка (buckwheat)", "Wed Mar 24 16:01", "WAIT");
-        var task3 = new Task(14, "user", "картошка (potatoes)", "Thu Mar 23 16:01", "DONE");
+        var task1 = new Task(3L, "помидоры (tomatoes)", "Wed Mar 25 16:01", "WAIT");
+        var task2 = new Task(11L, "гречка (buckwheat)", "Wed Mar 24 16:01", "WAIT");
+        var task3 = new Task(14L, "картошка (potatoes)", "Thu Mar 23 16:01", "DONE");
 
         tasks.clear();
         tasks.add(task1);

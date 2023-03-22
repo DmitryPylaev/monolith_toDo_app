@@ -8,6 +8,8 @@ import java.util.Optional;
 @Component
 public interface DAO {
     List<Task> findByOwner(String owner);
-    void save (Task task);
+
+    void save(Task task, String owner);
+
     Optional<Task> findById(long id);
 }

@@ -1,9 +1,11 @@
 package ru.pylaev.toDoProject.dataAccessLayer;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,20 +15,17 @@ import java.util.Objects;
 @Table(name = "task")
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_generator")
     @Setter private long id;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private User user;
-
-    @Column(name = "owner")
-    private String owner;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "owner_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    @Setter
+    private Owner owner;
 
     @Column(name = "text")
     private String text;
@@ -37,8 +36,14 @@ public class Task implements Serializable {
     @Column(name = "status")
     @Setter private String status;
 
-    public Task (String owner, String text, String date, String status) {
-        this.owner = owner;
+    public Task (String text, String date, String status) {
+        this.text = text;
+        this.date = date.substring(0,16);
+        this.status = status;
+    }
+
+    public Task (Long id, String text, String date, String status) {
+        this.id = id;
         this.text = text;
         this.date = date.substring(0,16);
         this.status = status;
